@@ -23,6 +23,10 @@ async function getFiles(path: string): Promise<string[]> {
 
 interface OpenAPI {
   paths: Record<string, Record<string, any>>;
+  servers?: {
+    url: string;
+    variables?: Record<string, { default?: string; enum?: string[] }>;
+  }[];
 }
 
 const jsonFiles = await getFiles("./docs");
@@ -34,6 +38,27 @@ for (const filePath of jsonFiles) {
     "",
   );
 
+  const server = openapi.servers?.[0];
+  const { baseUrl, dynamicParams } = Object.entries(server?.variables || {})
+    .reduce<{
+      baseUrl: string;
+      dynamicParams: string[];
+    }>(
+      (acc, [key, { enum: enumValues }]) => {
+        if (enumValues && enumValues.length === 1) {
+          return {
+            ...acc,
+            baseUrl: acc.baseUrl.replace(`{${key}}`, enumValues[0]),
+          };
+        }
+        return {
+          ...acc,
+          dynamicParams: [...acc.dynamicParams, key],
+        };
+      },
+      { baseUrl: server?.url || "", dynamicParams: [] },
+    );
+
   for (const [path, methods] of Object.entries(openapi.paths)) {
     for (const [method, details] of Object.entries(methods)) {
       const operationId = `${transformPath(path).replace(/\//g, "_")}`;
@@ -43,12 +68,16 @@ for (const filePath of jsonFiles) {
       const outputDir = `loaders${folderPath}/${method.toUpperCase()}`;
       await Deno.mkdir(outputDir, { recursive: true });
 
-      const propsInterface = params.map((p: any) =>
-        `${toCamelCase(p.name)}?: ${transformType(p.schema.type)};`
-      ).join("\n");
+      const propsInterface = [
+        ...dynamicParams.map((param) => `${toCamelCase(param)}: string;`),
+        ...params.filter((p: any) => p.in !== "header").map((
+          p: any,
+        ) => `${toCamelCase(p.name)}?: ${transformType(p.schema.type)};`),
+        `headers?: Headers;`,
+      ].join("\n");
 
       const loaderCode = `import { AppContext } from "site/apps/site.ts";
-import getClient from "site/utils/getClient.ts";
+import { createHttpClient } from "apps/utils/http.ts";
 
 interface Props {
 ${propsInterface}
@@ -59,11 +88,16 @@ ${propsInterface}
  * @description ${description}
  */
 const loader = async (props: Props, _req: Request, _ctx: AppContext) => {
-  const client = getClient("${folderPath}");
+  const { headers, ${dynamicParams.map(toCamelCase).join(", ")} } = props
+  const client = createHttpClient({ base: \`${
+        baseUrl.replace(/{(\w+)}/g, "\${$1}")
+      }\`,
+        ...(headers ? {headers} : {}) });
+  // @ts-ignore ignore client untyped
   return await client["${method.toUpperCase()} ${
         transformPath(path)
       }"]({ ...props })
-    .then((r) => r.json())
+    .then((r: any) => r.json())
     .catch(() => null);
 };
 
