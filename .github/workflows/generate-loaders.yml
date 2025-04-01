@@ -1,0 +1,44 @@
+name: Gerar Loaders a partir do OpenAPI
+
+on:
+  push:
+    paths:
+      - 'docs/**/*.openapi.json'
+  pull_request:
+    paths:
+      - 'docs/**/*.openapi.json'
+
+jobs:
+  generate-loaders:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar o repositório
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}  # Garante checkout na branch correta
+
+      - name: Instalar Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Executar script para gerar loaders
+        run: deno task gen-loaders && deno task bundle
+
+      - name: Verificar mudanças nos arquivos
+        id: check_changes
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_ENV
+          else
+            echo "changed=true" >> $GITHUB_ENV
+          fi
+
+      - name: Commitar e enviar mudanças
+        if: env.changed == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Atualização automática dos loaders"
+          git push origin HEAD:${{ github.head_ref || github.ref_name }}
