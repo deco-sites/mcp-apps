@@ -1,12 +1,6 @@
 name: Gerar Loaders a partir do OpenAPI
 
-on:
-  push:
-    paths:
-      - 'docs/**/*.openapi.json'
-  pull_request:
-    paths:
-      - 'docs/**/*.openapi.json'
+on: pull_request
 
 jobs:
   generate-loaders:
