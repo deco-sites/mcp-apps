@@ -1,0 +1,1064 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "DatabricksWorkspaceAPI",
+    "description": "APIsformanagingDatabricksworkspaces,includingusers,clusters,jobs,notebooks,andmore.",
+    "version": "2.0.0",
+    "contact": {
+      "name": "DatabricksSupport",
+      "url": "https://docs.databricks.com/api/workspace/introduction"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{workspace-url}/api",
+      "variables": {
+        "workspace-url": {
+          "description": "YourDatabricksworkspaceURL",
+          "default": "your-workspace.cloud.databricks.com"
+        }
+      }
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Cluster": {
+        "type": "object",
+        "properties": {
+          "cluster_id": {
+            "type": "string"
+          },
+          "cluster_name": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "RUNNING",
+              "RESTARTING",
+              "RESIZING",
+              "TERMINATING",
+              "TERMINATED",
+              "ERROR"
+            ]
+          },
+          "creator_user_name": {
+            "type": "string"
+          },
+          "spark_version": {
+            "type": "string"
+          },
+          "node_type_id": {
+            "type": "string"
+          },
+          "driver_node_type_id": {
+            "type": "string"
+          },
+          "num_workers": {
+            "type": "integer"
+          },
+          "autoscale": {
+            "type": "object",
+            "properties": {
+              "min_workers": {
+                "type": "integer"
+              },
+              "max_workers": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "ClusterSpec": {
+        "type": "object",
+        "required": [
+          "cluster_name",
+          "spark_version",
+          "node_type_id"
+        ],
+        "properties": {
+          "cluster_name": {
+            "type": "string"
+          },
+          "spark_version": {
+            "type": "string"
+          },
+          "node_type_id": {
+            "type": "string"
+          },
+          "driver_node_type_id": {
+            "type": "string"
+          },
+          "num_workers": {
+            "type": "integer"
+          },
+          "autoscale": {
+            "type": "object",
+            "properties": {
+              "min_workers": {
+                "type": "integer"
+              },
+              "max_workers": {
+                "type": "integer"
+              }
+            }
+          },
+          "spark_conf": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "aws_attributes": {
+            "type": "object",
+            "properties": {
+              "first_on_demand": {
+                "type": "integer"
+              },
+              "availability": {
+                "type": "string",
+                "enum": [
+                  "SPOT",
+                  "ON_DEMAND",
+                  "SPOT_WITH_FALLBACK"
+                ]
+              },
+              "zone_id": {
+                "type": "string"
+              },
+              "instance_profile_arn": {
+                "type": "string"
+              }
+            }
+          },
+          "azure_attributes": {
+            "type": "object",
+            "properties": {
+              "availability": {
+                "type": "string",
+                "enum": [
+                  "SPOT",
+                  "ON_DEMAND",
+                  "SPOT_WITH_FALLBACK"
+                ]
+              },
+              "first_on_demand": {
+                "type": "integer"
+              }
+            }
+          },
+          "gcp_attributes": {
+            "type": "object",
+            "properties": {
+              "use_preemptible_executors": {
+                "type": "boolean"
+              },
+              "availability": {
+                "type": "string",
+                "enum": [
+                  "PREEMPTIBLE",
+                  "ON_DEMAND",
+                  "PREEMPTIBLE_WITH_FALLBACK"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Job": {
+        "type": "object",
+        "properties": {
+          "job_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "creator_user_name": {
+            "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/JobSettings"
+          }
+        }
+      },
+      "JobSettings": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "new_cluster": {
+            "$ref": "#/components/schemas/ClusterSpec"
+          },
+          "existing_cluster_id": {
+            "type": "string"
+          },
+          "notebook_task": {
+            "type": "object",
+            "properties": {
+              "notebook_path": {
+                "type": "string"
+              },
+              "base_parameters": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "spark_jar_task": {
+            "type": "object",
+            "properties": {
+              "main_class_name": {
+                "type": "string"
+              },
+              "parameters": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "spark_python_task": {
+            "type": "object",
+            "properties": {
+              "python_file": {
+                "type": "string"
+              },
+              "parameters": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "schedule": {
+            "type": "object",
+            "properties": {
+              "quartz_cron_expression": {
+                "type": "string"
+              },
+              "timezone_id": {
+                "type": "string"
+              }
+            }
+          },
+          "max_retries": {
+            "type": "integer"
+          },
+          "timeout_seconds": {
+            "type": "integer"
+          },
+          "email_notifications": {
+            "type": "object",
+            "properties": {
+              "on_start": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "on_success": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "on_failure": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "JobSpec": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "new_cluster": {
+            "$ref": "#/components/schemas/ClusterSpec"
+          },
+          "existing_cluster_id": {
+            "type": "string"
+          },
+          "notebook_task": {
+            "type": "object",
+            "properties": {
+              "notebook_path": {
+                "type": "string"
+              },
+              "base_parameters": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "spark_jar_task": {
+            "type": "object",
+            "properties": {
+              "main_class_name": {
+                "type": "string"
+              },
+              "parameters": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "spark_python_task": {
+            "type": "object",
+            "properties": {
+              "python_file": {
+                "type": "string"
+              },
+              "parameters": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "schedule": {
+            "type": "object",
+            "properties": {
+              "quartz_cron_expression": {
+                "type": "string"
+              },
+              "timezone_id": {
+                "type": "string"
+              }
+            }
+          },
+          "max_retries": {
+            "type": "integer"
+          },
+          "timeout_seconds": {
+            "type": "integer"
+          },
+          "email_notifications": {
+            "type": "object",
+            "properties": {
+              "on_start": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "on_success": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "on_failure": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "WorkspaceObject": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "object_type": {
+            "type": "string",
+            "enum": [
+              "NOTEBOOK",
+              "DIRECTORY",
+              "LIBRARY",
+              "FILE"
+            ]
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "SCALA",
+              "PYTHON",
+              "SQL",
+              "R"
+            ]
+          },
+          "object_id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "DBFSFile": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "is_dir": {
+            "type": "boolean"
+          },
+          "file_size": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "TokenInfo": {
+        "type": "object",
+        "properties": {
+          "token_id": {
+            "type": "string"
+          },
+          "creation_time": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "expiry_time": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "comment": {
+            "type": "string"
+          }
+        }
+      },
+      "SecretScope": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "backend_type": {
+            "type": "string",
+            "enum": [
+              "DATABRICKS",
+              "AZURE_KEYVAULT"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/2.0/clusters/list": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "summary": "Listallclusters",
+        "description": "Returnsinformationaboutallclustersintheworkspace",
+        "operationId": "listClusters",
+        "responses": {
+          "200": {
+            "description": "Successfuloperation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "clusters": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Cluster"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Badrequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/clusters/create": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "summary": "Createanewcluster",
+        "description": "CreatesanewDatabrickscluster",
+        "operationId": "createCluster",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClusterSpec"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfuloperation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cluster_id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Badrequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/jobs/list": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Listalljobs",
+        "description": "Returnsinformationaboutalljobsintheworkspace",
+        "operationId": "listJobs",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Themaximumnumberofjobstoreturn",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Theoffsettostartlistingfrom",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfuloperation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jobs": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Job"
+                      }
+                    },
+                    "has_more": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Badrequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/jobs/create": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Createanewjob",
+        "description": "CreatesanewDatabricksjob",
+        "operationId": "createJob",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobSpec"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfuloperation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "job_id": {
+                      "type": "integer",
+                      "format": "int64"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Badrequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/workspace/list": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "summary": "Listworkspacecontents",
+        "description": "Liststhecontentsofadirectoryintheworkspace",
+        "operationId": "listWorkspace",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "Thepathofthedirectorytolist",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfuloperation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "objects": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/WorkspaceObject"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Badrequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/workspace/export": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "summary": "Exportaworkspaceobject",
+        "description": "Exportsanotebookorfilefromtheworkspace",
+        "operationId": "exportWorkspace",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "Thepathofthenotebookorfiletoexport",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Theformatoftheexportedfile",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "SOURCE",
+                "HTML",
+                "JUPYTER",
+                "DBC"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfuloperation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "content": {
+                      "type": "string",
+                      "format": "base64"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Badrequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/workspace/import": {
+      "post": {
+        "tags": [
+          "Workspace"
+        ],
+        "summary": "Importaworkspaceobject",
+        "description": "Importsanotebookorfileintotheworkspace",
+        "operationId": "importWorkspace",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "path",
+                  "content",
+                  "format"
+                ],
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "description": "Thepathwheretheimportedfilewillbestored"
+                  },
+                  "content": {
+                    "type": "string",
+                    "format": "base64",
+                    "description": "Thebase64-encodedcontentoftheimportedfile"
+                  },
+                  "format": {
+                    "type": "string",
+                    "enum": [
+                      "SOURCE",
+                      "HTML",
+                      "JUPYTER",
+                      "DBC"
+                    ],
+                    "description": "Theformatoftheimportedfile"
+                  },
+                  "language": {
+                    "type": "string",
+                    "enum": [
+                      "SCALA",
+                      "PYTHON",
+                      "SQL",
+                      "R"
+                    ],
+                    "description": "Thelanguageoftheimportednotebook"
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "description": "Whethertooverwriteafileifitexists"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfuloperation"
+          },
+          "400": {
+            "description": "Badrequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/dbfs/list": {
+      "get": {
+        "tags": [
+          "DBFS"
+        ],
+        "summary": "ListDBFSdirectorycontents",
+        "description": "ListsthecontentsofadirectoryinDBFS",
+        "operationId": "listDBFS",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "Thepathofthedirectorytolist",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfuloperation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DBFSFile"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Badrequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/dbfs/put": {
+      "post": {
+        "tags": [
+          "DBFS"
+        ],
+        "summary": "UploadafiletoDBFS",
+        "description": "UploadsafiletoDBFS",
+        "operationId": "putDBFS",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "path",
+                  "contents"
+                ],
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "description": "Thepathwherethefilewillbestored"
+                  },
+                  "contents": {
+                    "type": "string",
+                    "format": "base64",
+                    "description": "Thebase64-encodedcontentofthefile"
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "description": "Whethertooverwriteafileifitexists"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfuloperation"
+          },
+          "400": {
+            "description": "Badrequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/token/create": {
+      "post": {
+        "tags": [
+          "Tokens"
+        ],
+        "summary": "Createanewpersonalaccesstoken",
+        "description": "Createsanewpersonalaccesstokenforauthentication",
+        "operationId": "createToken",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "comment": {
+                    "type": "string",
+                    "description": "Commentdescribingthetoken"
+                  },
+                  "lifetime_seconds": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Lifetimeofthetokeninseconds"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfuloperation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token_value": {
+                      "type": "string"
+                    },
+                    "token_info": {
+                      "$ref": "#/components/schemas/TokenInfo"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Badrequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/secrets/scopes/list": {
+      "get": {
+        "tags": [
+          "Secrets"
+        ],
+        "summary": "Listsecretscopes",
+        "description": "Listsallsecretscopesintheworkspace",
+        "operationId": "listSecretScopes",
+        "responses": {
+          "200": {
+            "description": "Successfuloperation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "scopes": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SecretScope"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Badrequest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

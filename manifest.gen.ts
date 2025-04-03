@@ -18,6 +18,33 @@ import * as $$$10 from "./loaders/vtex/api/GET/pricingTables.ts";
 import * as $$$11 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
 import * as $$$12 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
 import * as $$$13 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
+import * as $$$15 from "./loaders/vtex/catalog/GET/apiCatalogSellerPortalBrands:brandId.ts";
+import * as $$$14 from "./loaders/vtex/catalog/GET/apiCatalogSellerPortalBrands.ts";
+import * as $$$16 from "./loaders/vtex/catalog/GET/apiCatalogSellerPortalCategoryTree.ts";
+import * as $$$17 from "./loaders/vtex/catalog/GET/apiCatalogSellerPortalCategoryTreeCategories:categoryId.ts";
+import * as $$$18 from "./loaders/vtex/catalog/GET/apiCatalogSellerPortalProducts:param.ts";
+import * as $$$19 from "./loaders/vtex/catalog/GET/apiCatalogSellerPortalProducts:productId.ts";
+import * as $$$20 from "./loaders/vtex/catalog/GET/apiCatalogSellerPortalProducts:productIdDescription.ts";
+import * as $$$21 from "./loaders/vtex/catalog/GET/apiCatalogSellerPortalSkusIds.ts";
+import * as $$$22 from "./loaders/vtex/catalog/GET/apiCatalogSellerPortalSkusSearch.ts";
+import * as $$$23 from "./loaders/vtex/catalog/POST/apiCatalogSellerPortalBrands.ts";
+import * as $$$24 from "./loaders/vtex/catalog/POST/apiCatalogSellerPortalCategoryTreeCategories.ts";
+import * as $$$25 from "./loaders/vtex/catalog/POST/apiCatalogSellerPortalProducts.ts";
+import * as $$$26 from "./loaders/vtex/catalog/PUT/apiCatalogSellerPortalBrands:brandId.ts";
+import * as $$$27 from "./loaders/vtex/catalog/PUT/apiCatalogSellerPortalCategoryTree.ts";
+import * as $$$28 from "./loaders/vtex/catalog/PUT/apiCatalogSellerPortalProducts:productId.ts";
+import * as $$$29 from "./loaders/vtex/catalog/PUT/apiCatalogSellerPortalProducts:productIdDescription.ts";
+import * as $$$30 from "./loaders/vtex/test/GET/2.0ClustersList.ts";
+import * as $$$31 from "./loaders/vtex/test/GET/2.0DbfsList.ts";
+import * as $$$32 from "./loaders/vtex/test/GET/2.0JobsList.ts";
+import * as $$$33 from "./loaders/vtex/test/GET/2.0SecretsScopesList.ts";
+import * as $$$34 from "./loaders/vtex/test/GET/2.0WorkspaceExport.ts";
+import * as $$$35 from "./loaders/vtex/test/GET/2.0WorkspaceList.ts";
+import * as $$$36 from "./loaders/vtex/test/POST/2.0ClustersCreate.ts";
+import * as $$$37 from "./loaders/vtex/test/POST/2.0DbfsPut.ts";
+import * as $$$38 from "./loaders/vtex/test/POST/2.0JobsCreate.ts";
+import * as $$$39 from "./loaders/vtex/test/POST/2.0TokenCreate.ts";
+import * as $$$40 from "./loaders/vtex/test/POST/2.0WorkspaceImport.ts";
 
 const manifest = {
   "loaders": {
@@ -38,6 +65,44 @@ const manifest = {
       $$$11,
     "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$12,
     "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$13,
+    "site/loaders/vtex/catalog/GET/apiCatalogSellerPortalBrands:brandId.ts":
+      $$$15,
+    "site/loaders/vtex/catalog/GET/apiCatalogSellerPortalBrands.ts": $$$14,
+    "site/loaders/vtex/catalog/GET/apiCatalogSellerPortalCategoryTree.ts":
+      $$$16,
+    "site/loaders/vtex/catalog/GET/apiCatalogSellerPortalCategoryTreeCategories:categoryId.ts":
+      $$$17,
+    "site/loaders/vtex/catalog/GET/apiCatalogSellerPortalProducts:param.ts":
+      $$$18,
+    "site/loaders/vtex/catalog/GET/apiCatalogSellerPortalProducts:productId.ts":
+      $$$19,
+    "site/loaders/vtex/catalog/GET/apiCatalogSellerPortalProducts:productIdDescription.ts":
+      $$$20,
+    "site/loaders/vtex/catalog/GET/apiCatalogSellerPortalSkusIds.ts": $$$21,
+    "site/loaders/vtex/catalog/GET/apiCatalogSellerPortalSkusSearch.ts": $$$22,
+    "site/loaders/vtex/catalog/POST/apiCatalogSellerPortalBrands.ts": $$$23,
+    "site/loaders/vtex/catalog/POST/apiCatalogSellerPortalCategoryTreeCategories.ts":
+      $$$24,
+    "site/loaders/vtex/catalog/POST/apiCatalogSellerPortalProducts.ts": $$$25,
+    "site/loaders/vtex/catalog/PUT/apiCatalogSellerPortalBrands:brandId.ts":
+      $$$26,
+    "site/loaders/vtex/catalog/PUT/apiCatalogSellerPortalCategoryTree.ts":
+      $$$27,
+    "site/loaders/vtex/catalog/PUT/apiCatalogSellerPortalProducts:productId.ts":
+      $$$28,
+    "site/loaders/vtex/catalog/PUT/apiCatalogSellerPortalProducts:productIdDescription.ts":
+      $$$29,
+    "site/loaders/vtex/test/GET/2.0ClustersList.ts": $$$30,
+    "site/loaders/vtex/test/GET/2.0DbfsList.ts": $$$31,
+    "site/loaders/vtex/test/GET/2.0JobsList.ts": $$$32,
+    "site/loaders/vtex/test/GET/2.0SecretsScopesList.ts": $$$33,
+    "site/loaders/vtex/test/GET/2.0WorkspaceExport.ts": $$$34,
+    "site/loaders/vtex/test/GET/2.0WorkspaceList.ts": $$$35,
+    "site/loaders/vtex/test/POST/2.0ClustersCreate.ts": $$$36,
+    "site/loaders/vtex/test/POST/2.0DbfsPut.ts": $$$37,
+    "site/loaders/vtex/test/POST/2.0JobsCreate.ts": $$$38,
+    "site/loaders/vtex/test/POST/2.0TokenCreate.ts": $$$39,
+    "site/loaders/vtex/test/POST/2.0WorkspaceImport.ts": $$$40,
   },
   "apps": {
     "site/apps/deco/website.ts": $$$$$$$$$$$0,
