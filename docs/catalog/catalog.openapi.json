@@ -1,0 +1,315 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Databricks Workspace API",
+    "description": "The Databricks Workspace API allows programmatic access to workspaces, notebooks, repos, libraries, and other workspace resources.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://{workspace-url}/api",
+      "variables": {
+        "workspace-url": {
+          "description": "Your Databricks workspace URL"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/2.0/workspace/list": {
+      "get": {
+        "summary": "List workspace objects",
+        "description": "This API lists the contents of a workspace path",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The absolute path of the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed workspace objects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceObjectList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/workspace/get-status": {
+      "get": {
+        "summary": "Get workspace object status",
+        "description": "This API gets the status of a workspace object",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The absolute path of the notebook or directory",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved workspace object status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceObjectInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/workspace/mkdirs": {
+      "post": {
+        "summary": "Create a directory",
+        "description": "Creates the specified directory and necessary parent directories if they do not exist",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "description": "The absolute path of the directory"
+                  }
+                },
+                "required": [
+                  "path"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Directory created successfully"
+          }
+        }
+      }
+    },
+    "/2.0/workspace/import": {
+      "post": {
+        "summary": "Import a notebook or file",
+        "description": "Imports a notebook or file",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "description": "The absolute path where the object will be imported"
+                  },
+                  "format": {
+                    "type": "string",
+                    "description": "The format of the file to be imported",
+                    "enum": [
+                      "SOURCE",
+                      "HTML",
+                      "JUPYTER",
+                      "DBC",
+                      "AUTO"
+                    ]
+                  },
+                  "language": {
+                    "type": "string",
+                    "description": "The language of the notebook",
+                    "enum": [
+                      "SCALA",
+                      "PYTHON",
+                      "SQL",
+                      "R"
+                    ]
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "The base64-encoded content of the object to import"
+                  },
+                  "overwrite": {
+                    "type": "boolean",
+                    "description": "Whether to overwrite an existing object"
+                  }
+                },
+                "required": [
+                  "path",
+                  "format",
+                  "content"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully imported file or notebook"
+          }
+        }
+      }
+    },
+    "/2.0/workspace/export": {
+      "get": {
+        "summary": "Export a notebook or file",
+        "description": "Exports a notebook or file",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The absolute path of the notebook or file to export",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The format to export the notebook or file as",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "SOURCE",
+                "HTML",
+                "JUPYTER",
+                "DBC"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully exported file or notebook",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "content": {
+                      "type": "string",
+                      "description": "The base64-encoded content of the exported notebook or file"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/2.0/workspace/delete": {
+      "post": {
+        "summary": "Delete a workspace object",
+        "description": "Deletes a workspace object (notebook, file, or directory)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "description": "The absolute path of the object to delete"
+                  },
+                  "recursive": {
+                    "type": "boolean",
+                    "description": "Whether to delete the object recursively (for directories)"
+                  }
+                },
+                "required": [
+                  "path"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully deleted workspace object"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "WorkspaceObjectInfo": {
+        "type": "object",
+        "properties": {
+          "object_id": {
+            "type": "integer",
+            "description": "Unique identifier for the workspace object"
+          },
+          "object_type": {
+            "type": "string",
+            "description": "Type of workspace object",
+            "enum": [
+              "NOTEBOOK",
+              "DIRECTORY",
+              "LIBRARY",
+              "FILE",
+              "REPO"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "description": "Absolute path of the workspace object"
+          },
+          "language": {
+            "type": "string",
+            "description": "Programming language of the notebook",
+            "enum": [
+              "SCALA",
+              "PYTHON",
+              "SQL",
+              "R"
+            ]
+          }
+        }
+      },
+      "WorkspaceObjectList": {
+        "type": "object",
+        "properties": {
+          "objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkspaceObjectInfo"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "token",
+        "description": "Enter your Databricks Personal Access Token (PAT)"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
