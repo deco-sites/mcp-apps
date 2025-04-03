@@ -4,40 +4,53 @@
 
 import * as $$$$$$$$$$$0 from "./apps/deco/website.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$0 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
-import * as $$$1 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$2 from "./loaders/vtex/api/GET/pricingConfig.ts";
-import * as $$$3 from "./loaders/vtex/api/GET/pricingMigration.ts";
-import * as $$$5 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$4 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
-import * as $$$6 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
-import * as $$$7 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
-import * as $$$9 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$8 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
-import * as $$$10 from "./loaders/vtex/api/GET/pricingTables.ts";
-import * as $$$11 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$12 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$13 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
+import * as $$$0 from "./loaders/catalog/catalog/GET/2.0WorkspaceExport.ts";
+import * as $$$1 from "./loaders/catalog/catalog/GET/2.0WorkspaceGetStatus.ts";
+import * as $$$2 from "./loaders/catalog/catalog/GET/2.0WorkspaceList.ts";
+import * as $$$3 from "./loaders/catalog/catalog/POST/2.0WorkspaceDelete.ts";
+import * as $$$4 from "./loaders/catalog/catalog/POST/2.0WorkspaceImport.ts";
+import * as $$$5 from "./loaders/catalog/catalog/POST/2.0WorkspaceMkdirs.ts";
+import * as $$$6 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
+import * as $$$7 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$8 from "./loaders/vtex/api/GET/pricingConfig.ts";
+import * as $$$9 from "./loaders/vtex/api/GET/pricingMigration.ts";
+import * as $$$11 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$10 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
+import * as $$$12 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
+import * as $$$13 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
+import * as $$$15 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$14 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
+import * as $$$16 from "./loaders/vtex/api/GET/pricingTables.ts";
+import * as $$$17 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$18 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$19 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
 
 const manifest = {
   "loaders": {
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$0,
+    "site/loaders/catalog/catalog/GET/2.0WorkspaceExport.ts": $$$0,
+    "site/loaders/catalog/catalog/GET/2.0WorkspaceGetStatus.ts": $$$1,
+    "site/loaders/catalog/catalog/GET/2.0WorkspaceList.ts": $$$2,
+    "site/loaders/catalog/catalog/POST/2.0WorkspaceDelete.ts": $$$3,
+    "site/loaders/catalog/catalog/POST/2.0WorkspaceImport.ts": $$$4,
+    "site/loaders/catalog/catalog/POST/2.0WorkspaceMkdirs.ts": $$$5,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$6,
     "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$1,
-    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$2,
-    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$3,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$5,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$4,
-    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$6,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
       $$$7,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts": $$$9,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$8,
-    "site/loaders/vtex/api/GET/pricingTables.ts": $$$10,
+    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$8,
+    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$9,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$11,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$10,
+    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$12,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
+      $$$13,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$15,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$14,
+    "site/loaders/vtex/api/GET/pricingTables.ts": $$$16,
     "site/loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$11,
-    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$12,
-    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$13,
+      $$$17,
+    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$18,
+    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$19,
   },
   "apps": {
     "site/apps/deco/website.ts": $$$$$$$$$$$0,
