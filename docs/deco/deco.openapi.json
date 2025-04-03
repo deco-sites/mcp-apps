@@ -1,0 +1,306 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "deco.cx API",
+    "description": "API for deco.cx, a collaborative digital experience platform for e-commerce",
+    "version": "1.0.0",
+    "contact": {
+      "name": "deco.cx Support",
+      "url": "https://docs.deco.cx"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.deco.cx",
+      "description": "deco.cx API server"
+    }
+  ],
+  "paths": {
+    "/sites": {
+      "get": {
+        "summary": "Get all sites",
+        "description": "Returns a list of all sites",
+        "operationId": "getSites",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Site"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new site",
+        "description": "Creates a new site on the platform",
+        "operationId": "createSite",
+        "requestBody": {
+          "description": "Site object to be created",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SiteCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Site created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Site"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sections": {
+      "get": {
+        "summary": "Get all sections",
+        "description": "Returns a list of all available sections",
+        "operationId": "getSections",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Section"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apps": {
+      "get": {
+        "summary": "Get all apps",
+        "description": "Returns a list of all available apps",
+        "operationId": "getApps",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/App"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workflows": {
+      "get": {
+        "summary": "Get all workflows",
+        "description": "Returns a list of all available workflows",
+        "operationId": "getWorkflows",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Workflow"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Site": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the site"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the site"
+          },
+          "domain": {
+            "type": "string",
+            "description": "Domain associated with the site"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Section"
+            },
+            "description": "Sections used in the site"
+          },
+          "pages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Page"
+            },
+            "description": "Pages in the site"
+          },
+          "apps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/App"
+            },
+            "description": "Apps integrated with the site"
+          }
+        }
+      },
+      "SiteCreate": {
+        "type": "object",
+        "required": [
+          "name",
+          "domain"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the site"
+          },
+          "domain": {
+            "type": "string",
+            "description": "Domain for the site"
+          },
+          "template": {
+            "type": "string",
+            "description": "Optional template to use for the site"
+          }
+        }
+      },
+      "Section": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the section"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the section"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of section (UI, Data, etc.)"
+          },
+          "schema": {
+            "type": "object",
+            "description": "JSON schema defining the section's properties"
+          }
+        }
+      },
+      "Page": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the page"
+          },
+          "path": {
+            "type": "string",
+            "description": "URL path for the page"
+          },
+          "title": {
+            "type": "string",
+            "description": "Page title"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs of sections used on this page"
+          }
+        }
+      },
+      "App": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the app"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the app"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ecommerce",
+              "cms",
+              "analytics",
+              "marketing",
+              "other"
+            ],
+            "description": "Type of app"
+          },
+          "configuration": {
+            "type": "object",
+            "description": "App configuration details"
+          }
+        }
+      },
+      "Workflow": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the workflow"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the workflow"
+          },
+          "trigger": {
+            "type": "string",
+            "description": "Event that triggers the workflow"
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Type of action"
+                },
+                "config": {
+                  "type": "object",
+                  "description": "Configuration for the action"
+                }
+              }
+            },
+            "description": "Actions performed by this workflow"
+          }
+        }
+      }
+    }
+  }
+}
