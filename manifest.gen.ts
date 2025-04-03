@@ -4,40 +4,100 @@
 
 import * as $$$$$$$$$$$0 from "./apps/deco/website.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$0 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
-import * as $$$1 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$2 from "./loaders/vtex/api/GET/pricingConfig.ts";
-import * as $$$3 from "./loaders/vtex/api/GET/pricingMigration.ts";
-import * as $$$5 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$4 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
-import * as $$$6 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
-import * as $$$7 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
-import * as $$$9 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$8 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
-import * as $$$10 from "./loaders/vtex/api/GET/pricingTables.ts";
-import * as $$$11 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$12 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$13 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
+import * as $$$0 from "./loaders/elevenLabs/elevenLabs/DELETE/history:historyItemId.ts";
+import * as $$$1 from "./loaders/elevenLabs/elevenLabs/DELETE/samples:voiceId:sampleId.ts";
+import * as $$$2 from "./loaders/elevenLabs/elevenLabs/DELETE/voices:voiceId.ts";
+import * as $$$4 from "./loaders/elevenLabs/elevenLabs/GET/history:historyItemId.ts";
+import * as $$$3 from "./loaders/elevenLabs/elevenLabs/GET/history.ts";
+import * as $$$5 from "./loaders/elevenLabs/elevenLabs/GET/models.ts";
+import * as $$$7 from "./loaders/elevenLabs/elevenLabs/GET/samples:voiceId:sampleIdAudio.ts";
+import * as $$$6 from "./loaders/elevenLabs/elevenLabs/GET/samples:voiceId.ts";
+import * as $$$8 from "./loaders/elevenLabs/elevenLabs/GET/user.ts";
+import * as $$$10 from "./loaders/elevenLabs/elevenLabs/GET/voices:voiceId.ts";
+import * as $$$9 from "./loaders/elevenLabs/elevenLabs/GET/voices.ts";
+import * as $$$11 from "./loaders/elevenLabs/elevenLabs/PARAMETERS/history:historyItemId.ts";
+import * as $$$13 from "./loaders/elevenLabs/elevenLabs/PARAMETERS/samples:voiceId:sampleId.ts";
+import * as $$$14 from "./loaders/elevenLabs/elevenLabs/PARAMETERS/samples:voiceId:sampleIdAudio.ts";
+import * as $$$12 from "./loaders/elevenLabs/elevenLabs/PARAMETERS/samples:voiceId.ts";
+import * as $$$15 from "./loaders/elevenLabs/elevenLabs/PARAMETERS/textToSpeech:voiceId.ts";
+import * as $$$16 from "./loaders/elevenLabs/elevenLabs/PARAMETERS/textToSpeech:voiceIdStream.ts";
+import * as $$$17 from "./loaders/elevenLabs/elevenLabs/PARAMETERS/voices:voiceId.ts";
+import * as $$$18 from "./loaders/elevenLabs/elevenLabs/PARAMETERS/voicesSettings:voiceId.ts";
+import * as $$$19 from "./loaders/elevenLabs/elevenLabs/POST/historyDownload.ts";
+import * as $$$20 from "./loaders/elevenLabs/elevenLabs/POST/samples:voiceId.ts";
+import * as $$$21 from "./loaders/elevenLabs/elevenLabs/POST/textToSpeech:voiceId.ts";
+import * as $$$22 from "./loaders/elevenLabs/elevenLabs/POST/textToSpeech:voiceIdStream.ts";
+import * as $$$23 from "./loaders/elevenLabs/elevenLabs/POST/voices.ts";
+import * as $$$24 from "./loaders/elevenLabs/elevenLabs/POST/voicesSettings:voiceId.ts";
+import * as $$$25 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
+import * as $$$26 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$27 from "./loaders/vtex/api/GET/pricingConfig.ts";
+import * as $$$28 from "./loaders/vtex/api/GET/pricingMigration.ts";
+import * as $$$30 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$29 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
+import * as $$$31 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
+import * as $$$32 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
+import * as $$$34 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$33 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
+import * as $$$35 from "./loaders/vtex/api/GET/pricingTables.ts";
+import * as $$$36 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$37 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$38 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
 
 const manifest = {
   "loaders": {
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$0,
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
+    "site/loaders/elevenLabs/elevenLabs/DELETE/history:historyItemId.ts": $$$0,
+    "site/loaders/elevenLabs/elevenLabs/DELETE/samples:voiceId:sampleId.ts":
       $$$1,
-    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$2,
-    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$3,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$5,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$4,
-    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$6,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
+    "site/loaders/elevenLabs/elevenLabs/DELETE/voices:voiceId.ts": $$$2,
+    "site/loaders/elevenLabs/elevenLabs/GET/history:historyItemId.ts": $$$4,
+    "site/loaders/elevenLabs/elevenLabs/GET/history.ts": $$$3,
+    "site/loaders/elevenLabs/elevenLabs/GET/models.ts": $$$5,
+    "site/loaders/elevenLabs/elevenLabs/GET/samples:voiceId:sampleIdAudio.ts":
       $$$7,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts": $$$9,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$8,
-    "site/loaders/vtex/api/GET/pricingTables.ts": $$$10,
-    "site/loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts":
+    "site/loaders/elevenLabs/elevenLabs/GET/samples:voiceId.ts": $$$6,
+    "site/loaders/elevenLabs/elevenLabs/GET/user.ts": $$$8,
+    "site/loaders/elevenLabs/elevenLabs/GET/voices:voiceId.ts": $$$10,
+    "site/loaders/elevenLabs/elevenLabs/GET/voices.ts": $$$9,
+    "site/loaders/elevenLabs/elevenLabs/PARAMETERS/history:historyItemId.ts":
       $$$11,
-    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$12,
-    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$13,
+    "site/loaders/elevenLabs/elevenLabs/PARAMETERS/samples:voiceId:sampleId.ts":
+      $$$13,
+    "site/loaders/elevenLabs/elevenLabs/PARAMETERS/samples:voiceId:sampleIdAudio.ts":
+      $$$14,
+    "site/loaders/elevenLabs/elevenLabs/PARAMETERS/samples:voiceId.ts": $$$12,
+    "site/loaders/elevenLabs/elevenLabs/PARAMETERS/textToSpeech:voiceId.ts":
+      $$$15,
+    "site/loaders/elevenLabs/elevenLabs/PARAMETERS/textToSpeech:voiceIdStream.ts":
+      $$$16,
+    "site/loaders/elevenLabs/elevenLabs/PARAMETERS/voices:voiceId.ts": $$$17,
+    "site/loaders/elevenLabs/elevenLabs/PARAMETERS/voicesSettings:voiceId.ts":
+      $$$18,
+    "site/loaders/elevenLabs/elevenLabs/POST/historyDownload.ts": $$$19,
+    "site/loaders/elevenLabs/elevenLabs/POST/samples:voiceId.ts": $$$20,
+    "site/loaders/elevenLabs/elevenLabs/POST/textToSpeech:voiceId.ts": $$$21,
+    "site/loaders/elevenLabs/elevenLabs/POST/textToSpeech:voiceIdStream.ts":
+      $$$22,
+    "site/loaders/elevenLabs/elevenLabs/POST/voices.ts": $$$23,
+    "site/loaders/elevenLabs/elevenLabs/POST/voicesSettings:voiceId.ts": $$$24,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$25,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$26,
+    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$27,
+    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$28,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$30,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$29,
+    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$31,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
+      $$$32,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$34,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$33,
+    "site/loaders/vtex/api/GET/pricingTables.ts": $$$35,
+    "site/loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$36,
+    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$37,
+    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$38,
   },
   "apps": {
     "site/apps/deco/website.ts": $$$$$$$$$$$0,
