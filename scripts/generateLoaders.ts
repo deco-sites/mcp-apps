@@ -70,9 +70,9 @@ for (const filePath of jsonFiles) {
 
       const propsInterface = [
         ...dynamicParams.map((param) => `${toCamelCase(param)}: string;`),
-        ...params.filter((p: any) => p.in !== "header").map((
+        ...params.filter((p: any) => p.in && p.in !== "header" && p.name).map((
           p: any,
-        ) => `${toCamelCase(p.name)}?: ${transformType(p.schema.type)};`),
+        ) => `${toCamelCase(p.name)}?: ${transformType(p.schema?.type)};`),
         `headers?: Headers;`,
       ].join("\n");
 
