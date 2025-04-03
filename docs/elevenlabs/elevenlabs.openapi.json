@@ -1,0 +1,419 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ElevenLabs API",
+    "description": "ElevenLabs provides state of the art text to speech voice generation and voice cloning APIs.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.elevenlabs.io/v1"
+    }
+  ],
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "xi-api-key"
+      }
+    },
+    "schemas": {
+      "Voice": {
+        "type": "object",
+        "properties": {
+          "voice_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "settings": {
+            "type": "object",
+            "properties": {
+              "stability": {
+                "type": "number"
+              },
+              "similarity_boost": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "TextToSpeechRequest": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "model_id": {
+            "type": "string"
+          },
+          "voice_settings": {
+            "type": "object",
+            "properties": {
+              "stability": {
+                "type": "number"
+              },
+              "similarity_boost": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "required": [
+          "text"
+        ]
+      },
+      "VoiceSettings": {
+        "type": "object",
+        "properties": {
+          "stability": {
+            "type": "number"
+          },
+          "similarity_boost": {
+            "type": "number"
+          }
+        }
+      },
+      "Model": {
+        "type": "object",
+        "properties": {
+          "model_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "can_be_finetuned": {
+            "type": "boolean"
+          },
+          "token_cost_factor": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/text-to-speech/{voice_id}": {
+      "post": {
+        "summary": "Text to speech",
+        "description": "Converts text to speech using a voice of your choice and returns audio.",
+        "operationId": "textToSpeech",
+        "parameters": [
+          {
+            "name": "voice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Voice ID to be used"
+          },
+          {
+            "name": "optimize_streaming_latency",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            "description": "Optimize streaming latency (0-4)"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextToSpeechRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Audio data",
+            "content": {
+              "audio/mpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text-to-speech/{voice_id}/stream": {
+      "post": {
+        "summary": "Text to speech stream",
+        "description": "Converts text to speech using a voice of your choice and streams the audio.",
+        "operationId": "textToSpeechStream",
+        "parameters": [
+          {
+            "name": "voice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Voice ID to be used"
+          },
+          {
+            "name": "optimize_streaming_latency",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            "description": "Optimize streaming latency (0-4)"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextToSpeechRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Audio stream",
+            "content": {
+              "audio/mpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/voices": {
+      "get": {
+        "summary": "Get voices",
+        "description": "Gets a list of all available voices for a user.",
+        "operationId": "getVoices",
+        "responses": {
+          "200": {
+            "description": "List of voices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "voices": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Voice"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/voices/{voice_id}": {
+      "get": {
+        "summary": "Get voice",
+        "description": "Gets information about a specific voice.",
+        "operationId": "getVoice",
+        "parameters": [
+          {
+            "name": "voice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Voice ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Voice details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Voice"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete voice",
+        "description": "Deletes a voice by its ID.",
+        "operationId": "deleteVoice",
+        "parameters": [
+          {
+            "name": "voice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Voice ID to be deleted"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Voice deleted successfully"
+          }
+        }
+      }
+    },
+    "/voices/settings/{voice_id}": {
+      "get": {
+        "summary": "Get voice settings",
+        "description": "Gets the settings for a specific voice.",
+        "operationId": "getVoiceSettings",
+        "parameters": [
+          {
+            "name": "voice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Voice ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Voice settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceSettings"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models": {
+      "get": {
+        "summary": "Get models",
+        "description": "Gets a list of available models.",
+        "operationId": "getModels",
+        "responses": {
+          "200": {
+            "description": "List of models",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "models": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Model"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/subscription": {
+      "get": {
+        "summary": "Get user subscription info",
+        "description": "Gets information about the user's subscription.",
+        "operationId": "getUserSubscription",
+        "responses": {
+          "200": {
+            "description": "User subscription information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tier": {
+                      "type": "string"
+                    },
+                    "character_count": {
+                      "type": "integer"
+                    },
+                    "character_limit": {
+                      "type": "integer"
+                    },
+                    "can_extend_character_limit": {
+                      "type": "boolean"
+                    },
+                    "allowed_to_extend_character_limit": {
+                      "type": "boolean"
+                    },
+                    "next_character_count_reset_unix": {
+                      "type": "integer"
+                    },
+                    "voice_limit": {
+                      "type": "integer"
+                    },
+                    "professional_voice_limit": {
+                      "type": "integer"
+                    },
+                    "can_extend_voice_limit": {
+                      "type": "boolean"
+                    },
+                    "can_use_instant_voice_cloning": {
+                      "type": "boolean"
+                    },
+                    "can_use_professional_voice_cloning": {
+                      "type": "boolean"
+                    },
+                    "currency": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
