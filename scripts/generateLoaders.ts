@@ -90,7 +90,8 @@ ${propsInterface}
 const loader = async (props: Props, _req: Request, _ctx: AppContext) => {
   const { headers, ${dynamicParams.map(toCamelCase).join(", ")} } = props
   const client = createHttpClient({ base: \`${
-        baseUrl.replace(/{(\w+)}/g, "\${$1}")
+        baseUrl.replace(/{([\w-]+)}/g, (_match, variable) =>
+          `$\\{${toCamelCase(variable)}}`)
       }\`,
         ...(headers ? {headers} : {}) });
   // @ts-ignore ignore client untyped
