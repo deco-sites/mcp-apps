@@ -1,0 +1,525 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ElevenLabs API",
+    "description": "The ElevenLabs API allows you to convert text to speech, clone voices, and use text-to-speech in various languages.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.elevenlabs.io/v1"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "name": "xi-api-key",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
+  "paths": {
+    "/text-to-speech/{voice_id}": {
+      "post": {
+        "summary": "Text to Speech",
+        "description": "Converts text to speech using a specific voice and returns audio.",
+        "parameters": [
+          {
+            "name": "voice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Voice ID to use for the TTS request"
+          },
+          {
+            "name": "optimize_streaming_latency",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ]
+            },
+            "description": "Optimize streaming latency (0-4). Higher values reduce latency at the cost of quality."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "The text to convert to speech"
+                  },
+                  "model_id": {
+                    "type": "string",
+                    "description": "The model ID to use for the TTS request"
+                  },
+                  "voice_settings": {
+                    "type": "object",
+                    "properties": {
+                      "stability": {
+                        "type": "number",
+                        "description": "Stability for the voice (0-1)"
+                      },
+                      "similarity_boost": {
+                        "type": "number",
+                        "description": "Similarity boost for the voice (0-1)"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Audio content in the requested format",
+            "content": {
+              "audio/mpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/voices": {
+      "get": {
+        "summary": "Get Voices",
+        "description": "Gets a list of all available voices for the user.",
+        "responses": {
+          "200": {
+            "description": "List of voices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "voices": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "voice_id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "category": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/voices/add": {
+      "post": {
+        "summary": "Add Voice",
+        "description": "Add a new voice to your collection of voices.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the voice"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "A description of the voice"
+                  },
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "description": "Audio files to add to the voice"
+                  }
+                },
+                "required": [
+                  "name",
+                  "files"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Voice added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "voice_id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/voices/{voice_id}": {
+      "get": {
+        "summary": "Get Voice",
+        "description": "Gets information about a specific voice.",
+        "parameters": [
+          {
+            "name": "voice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Voice ID to get information about"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Voice information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "voice_id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "category": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Voice not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Voice",
+        "description": "Deletes a specific voice.",
+        "parameters": [
+          {
+            "name": "voice_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Voice ID to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Voice deleted successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Voice not found"
+          }
+        }
+      }
+    },
+    "/models": {
+      "get": {
+        "summary": "Get Models",
+        "description": "Gets a list of available models.",
+        "responses": {
+          "200": {
+            "description": "List of models",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "models": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "model_id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/user/subscription": {
+      "get": {
+        "summary": "Get User Subscription",
+        "description": "Gets information about the user's subscription.",
+        "responses": {
+          "200": {
+            "description": "User subscription information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tier": {
+                      "type": "string"
+                    },
+                    "character_count": {
+                      "type": "integer"
+                    },
+                    "character_limit": {
+                      "type": "integer"
+                    },
+                    "next_character_reset_unix": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/history": {
+      "get": {
+        "summary": "Get History",
+        "description": "Gets the user's history.",
+        "parameters": [
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of items to return per page"
+          },
+          {
+            "name": "start_after_history_item_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Start after a specific history item ID for pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "History items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "history": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "history_item_id": {
+                            "type": "string"
+                          },
+                          "request_id": {
+                            "type": "string"
+                          },
+                          "voice_id": {
+                            "type": "string"
+                          },
+                          "text": {
+                            "type": "string"
+                          },
+                          "date_unix": {
+                            "type": "integer"
+                          },
+                          "character_count_change_from": {
+                            "type": "integer"
+                          },
+                          "character_count_change_to": {
+                            "type": "integer"
+                          },
+                          "content_type": {
+                            "type": "string"
+                          },
+                          "settings": {
+                            "type": "object"
+                          }
+                        }
+                      }
+                    },
+                    "last_history_item_id": {
+                      "type": "string"
+                    },
+                    "has_more": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/history/{history_item_id}/audio": {
+      "get": {
+        "summary": "Get Audio From History",
+        "description": "Gets the audio of a history item.",
+        "parameters": [
+          {
+            "name": "history_item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "History item ID to get audio for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audio content",
+            "content": {
+              "audio/mpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "History item not found"
+          }
+        }
+      }
+    },
+    "/history/{history_item_id}": {
+      "delete": {
+        "summary": "Delete History Item",
+        "description": "Deletes a history item.",
+        "parameters": [
+          {
+            "name": "history_item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "History item ID to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "History item deleted successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "History item not found"
+          }
+        }
+      }
+    }
+  }
+}
