@@ -4,40 +4,129 @@
 
 import * as $$$$$$$$$$$0 from "./apps/deco/website.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$0 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
-import * as $$$1 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$2 from "./loaders/vtex/api/GET/pricingConfig.ts";
-import * as $$$3 from "./loaders/vtex/api/GET/pricingMigration.ts";
-import * as $$$5 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$4 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
-import * as $$$6 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
-import * as $$$7 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
-import * as $$$9 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$8 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
-import * as $$$10 from "./loaders/vtex/api/GET/pricingTables.ts";
-import * as $$$11 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$12 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$13 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
+import * as $$$0 from "./loaders/Omie/Omie/POST/contabilDepartamentos_.ts";
+import * as $$$1 from "./loaders/Omie/Omie/POST/contabilLancamento_.ts";
+import * as $$$2 from "./loaders/Omie/Omie/POST/contabilPlanodecontas_.ts";
+import * as $$$3 from "./loaders/Omie/Omie/POST/crmContas_.ts";
+import * as $$$4 from "./loaders/Omie/Omie/POST/crmOportunidades_.ts";
+import * as $$$5 from "./loaders/Omie/Omie/POST/crmTarefas_.ts";
+import * as $$$6 from "./loaders/Omie/Omie/POST/estoqueConsulta_.ts";
+import * as $$$7 from "./loaders/Omie/Omie/POST/estoqueLocal_.ts";
+import * as $$$8 from "./loaders/Omie/Omie/POST/estoqueMovestoque_.ts";
+import * as $$$9 from "./loaders/Omie/Omie/POST/estoquePosestoque_.ts";
+import * as $$$10 from "./loaders/Omie/Omie/POST/financasCadastro_.ts";
+import * as $$$11 from "./loaders/Omie/Omie/POST/financasContapagar_.ts";
+import * as $$$12 from "./loaders/Omie/Omie/POST/financasContareceber_.ts";
+import * as $$$13 from "./loaders/Omie/Omie/POST/financasLancentrada_.ts";
+import * as $$$14 from "./loaders/Omie/Omie/POST/financasMf_.ts";
+import * as $$$15 from "./loaders/Omie/Omie/POST/financasPesquisartitulos_.ts";
+import * as $$$16 from "./loaders/Omie/Omie/POST/financasPing_.ts";
+import * as $$$17 from "./loaders/Omie/Omie/POST/geralCategorias_.ts";
+import * as $$$18 from "./loaders/Omie/Omie/POST/geralClientes_.ts";
+import * as $$$19 from "./loaders/Omie/Omie/POST/geralClientetag_.ts";
+import * as $$$20 from "./loaders/Omie/Omie/POST/geralContacorrente_.ts";
+import * as $$$21 from "./loaders/Omie/Omie/POST/geralDepartamentos_.ts";
+import * as $$$22 from "./loaders/Omie/Omie/POST/geralEmpresas_.ts";
+import * as $$$23 from "./loaders/Omie/Omie/POST/geralEtapas_.ts";
+import * as $$$24 from "./loaders/Omie/Omie/POST/geralProjetos_.ts";
+import * as $$$25 from "./loaders/Omie/Omie/POST/geralTransportadoras_.ts";
+import * as $$$26 from "./loaders/Omie/Omie/POST/geralVendedores_.ts";
+import * as $$$27 from "./loaders/Omie/Omie/POST/produtosCaracteristicas_.ts";
+import * as $$$28 from "./loaders/Omie/Omie/POST/produtosEstruturas_.ts";
+import * as $$$29 from "./loaders/Omie/Omie/POST/produtosFamilias_.ts";
+import * as $$$30 from "./loaders/Omie/Omie/POST/produtosFator_.ts";
+import * as $$$31 from "./loaders/Omie/Omie/POST/produtosMalotes_.ts";
+import * as $$$32 from "./loaders/Omie/Omie/POST/produtosNcm_.ts";
+import * as $$$33 from "./loaders/Omie/Omie/POST/produtosOrcamento_.ts";
+import * as $$$35 from "./loaders/Omie/Omie/POST/produtosPedido_.ts";
+import * as $$$36 from "./loaders/Omie/Omie/POST/produtosPedidocompraestoque_.ts";
+import * as $$$34 from "./loaders/Omie/Omie/POST/produtosPedidoVenda_.ts";
+import * as $$$37 from "./loaders/Omie/Omie/POST/produtosPesquisa_.ts";
+import * as $$$38 from "./loaders/Omie/Omie/POST/produtosProdser_.ts";
+import * as $$$39 from "./loaders/Omie/Omie/POST/produtosTabelaprecos_.ts";
+import * as $$$40 from "./loaders/Omie/Omie/POST/produtosUnidade_.ts";
+import * as $$$41 from "./loaders/Omie/Omie/POST/servicosManutencao_.ts";
+import * as $$$42 from "./loaders/Omie/Omie/POST/servicosOsp_.ts";
+import * as $$$43 from "./loaders/Omie/Omie/POST/servicosServico_.ts";
+import * as $$$44 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
+import * as $$$45 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$46 from "./loaders/vtex/api/GET/pricingConfig.ts";
+import * as $$$47 from "./loaders/vtex/api/GET/pricingMigration.ts";
+import * as $$$49 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$48 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
+import * as $$$50 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
+import * as $$$51 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
+import * as $$$53 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$52 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
+import * as $$$54 from "./loaders/vtex/api/GET/pricingTables.ts";
+import * as $$$55 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$56 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$57 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
 
 const manifest = {
   "loaders": {
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$0,
+    "site/loaders/Omie/Omie/POST/contabilDepartamentos_.ts": $$$0,
+    "site/loaders/Omie/Omie/POST/contabilLancamento_.ts": $$$1,
+    "site/loaders/Omie/Omie/POST/contabilPlanodecontas_.ts": $$$2,
+    "site/loaders/Omie/Omie/POST/crmContas_.ts": $$$3,
+    "site/loaders/Omie/Omie/POST/crmOportunidades_.ts": $$$4,
+    "site/loaders/Omie/Omie/POST/crmTarefas_.ts": $$$5,
+    "site/loaders/Omie/Omie/POST/estoqueConsulta_.ts": $$$6,
+    "site/loaders/Omie/Omie/POST/estoqueLocal_.ts": $$$7,
+    "site/loaders/Omie/Omie/POST/estoqueMovestoque_.ts": $$$8,
+    "site/loaders/Omie/Omie/POST/estoquePosestoque_.ts": $$$9,
+    "site/loaders/Omie/Omie/POST/financasCadastro_.ts": $$$10,
+    "site/loaders/Omie/Omie/POST/financasContapagar_.ts": $$$11,
+    "site/loaders/Omie/Omie/POST/financasContareceber_.ts": $$$12,
+    "site/loaders/Omie/Omie/POST/financasLancentrada_.ts": $$$13,
+    "site/loaders/Omie/Omie/POST/financasMf_.ts": $$$14,
+    "site/loaders/Omie/Omie/POST/financasPesquisartitulos_.ts": $$$15,
+    "site/loaders/Omie/Omie/POST/financasPing_.ts": $$$16,
+    "site/loaders/Omie/Omie/POST/geralCategorias_.ts": $$$17,
+    "site/loaders/Omie/Omie/POST/geralClientes_.ts": $$$18,
+    "site/loaders/Omie/Omie/POST/geralClientetag_.ts": $$$19,
+    "site/loaders/Omie/Omie/POST/geralContacorrente_.ts": $$$20,
+    "site/loaders/Omie/Omie/POST/geralDepartamentos_.ts": $$$21,
+    "site/loaders/Omie/Omie/POST/geralEmpresas_.ts": $$$22,
+    "site/loaders/Omie/Omie/POST/geralEtapas_.ts": $$$23,
+    "site/loaders/Omie/Omie/POST/geralProjetos_.ts": $$$24,
+    "site/loaders/Omie/Omie/POST/geralTransportadoras_.ts": $$$25,
+    "site/loaders/Omie/Omie/POST/geralVendedores_.ts": $$$26,
+    "site/loaders/Omie/Omie/POST/produtosCaracteristicas_.ts": $$$27,
+    "site/loaders/Omie/Omie/POST/produtosEstruturas_.ts": $$$28,
+    "site/loaders/Omie/Omie/POST/produtosFamilias_.ts": $$$29,
+    "site/loaders/Omie/Omie/POST/produtosFator_.ts": $$$30,
+    "site/loaders/Omie/Omie/POST/produtosMalotes_.ts": $$$31,
+    "site/loaders/Omie/Omie/POST/produtosNcm_.ts": $$$32,
+    "site/loaders/Omie/Omie/POST/produtosOrcamento_.ts": $$$33,
+    "site/loaders/Omie/Omie/POST/produtosPedido_.ts": $$$35,
+    "site/loaders/Omie/Omie/POST/produtosPedidocompraestoque_.ts": $$$36,
+    "site/loaders/Omie/Omie/POST/produtosPedidoVenda_.ts": $$$34,
+    "site/loaders/Omie/Omie/POST/produtosPesquisa_.ts": $$$37,
+    "site/loaders/Omie/Omie/POST/produtosProdser_.ts": $$$38,
+    "site/loaders/Omie/Omie/POST/produtosTabelaprecos_.ts": $$$39,
+    "site/loaders/Omie/Omie/POST/produtosUnidade_.ts": $$$40,
+    "site/loaders/Omie/Omie/POST/servicosManutencao_.ts": $$$41,
+    "site/loaders/Omie/Omie/POST/servicosOsp_.ts": $$$42,
+    "site/loaders/Omie/Omie/POST/servicosServico_.ts": $$$43,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$44,
     "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$1,
-    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$2,
-    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$3,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$5,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$4,
-    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$6,
+      $$$45,
+    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$46,
+    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$47,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$49,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$48,
+    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$50,
     "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
-      $$$7,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts": $$$9,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$8,
-    "site/loaders/vtex/api/GET/pricingTables.ts": $$$10,
+      $$$51,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$53,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$52,
+    "site/loaders/vtex/api/GET/pricingTables.ts": $$$54,
     "site/loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$11,
-    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$12,
-    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$13,
+      $$$55,
+    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$56,
+    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$57,
   },
   "apps": {
     "site/apps/deco/website.ts": $$$$$$$$$$$0,
