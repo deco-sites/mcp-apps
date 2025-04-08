@@ -1,0 +1,664 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Omie API",
+    "description": "Integração com o sistema Omie",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://app.omie.com.br/api/v1"
+    }
+  ],
+  "paths": {
+    "/produtos/cadastro/": {
+      "post": {
+        "summary": "API de Cadastro de Produtos",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar os produtos em seu cadastro.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string",
+                    "description": "Nome do método a ser executado"
+                  },
+                  "app_key": {
+                    "type": "string",
+                    "description": "Chave de acesso da aplicação"
+                  },
+                  "app_secret": {
+                    "type": "string",
+                    "description": "Chave secreta da aplicação"
+                  },
+                  "param": {
+                    "type": "array",
+                    "description": "Parâmetros da requisição",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/departamentos/": {
+      "post": {
+        "summary": "API de Departamentos",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar departamentos cadastrados.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/familias/": {
+      "post": {
+        "summary": "API de Famílias",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar famílias de produtos cadastradas.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/categorias/": {
+      "post": {
+        "summary": "API de Categorias",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar categorias de produtos cadastradas.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/ncm/": {
+      "post": {
+        "summary": "API de NCM",
+        "description": "Esta API permite que você pesquise a lista de NCMs através de um filtro específico.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/tabelaprecos/": {
+      "post": {
+        "summary": "API de Tabela de Preços",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar tabelas de preços cadastradas.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/caracteristicas/": {
+      "post": {
+        "summary": "API de Características de Produtos",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar características de produtos.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/produtoscomplementos/": {
+      "post": {
+        "summary": "API de Produtos Complementares",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar produtos complementares.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/clientes/": {
+      "post": {
+        "summary": "API de Clientes",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar clientes em seu cadastro.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/vendedores/": {
+      "post": {
+        "summary": "API de Vendedores",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar vendedores.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/projetos/": {
+      "post": {
+        "summary": "API de Projetos",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar projetos.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/contacorrente/": {
+      "post": {
+        "summary": "API de Conta Corrente",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar contas correntes.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/pedido/": {
+      "post": {
+        "summary": "API de Pedido de Venda",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar pedidos de venda.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/pedidocompra/": {
+      "post": {
+        "summary": "API de Pedido de Compra",
+        "description": "Esta API permite que você efetue operações de incluir, alterar, excluir e pesquisar pedidos de compra.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "apiKeys": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKeys": []
+    }
+  ]
+}
