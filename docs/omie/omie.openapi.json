@@ -1,0 +1,835 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Omie API",
+    "description": "Documentação da API Omie para integração com sistemas externos",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://app.omie.com.br/api/v1",
+      "description": "Servidor de produção"
+    }
+  ],
+  "paths": {
+    "/geral/categorias/": {
+      "post": {
+        "tags": [
+          "Categorias"
+        ],
+        "summary": "Operações de categorias",
+        "description": "Endpoint para gerenciar categorias",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/geral/clientes/": {
+      "post": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Operações de clientes",
+        "description": "Endpoint para gerenciar clientes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/geral/departamentos/": {
+      "post": {
+        "tags": [
+          "Departamentos"
+        ],
+        "summary": "Operações de departamentos",
+        "description": "Endpoint para gerenciar departamentos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/geral/empresas/": {
+      "post": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Operações de empresas",
+        "description": "Endpoint para gerenciar empresas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/familias/": {
+      "post": {
+        "tags": [
+          "Famílias"
+        ],
+        "summary": "Operações de famílias",
+        "description": "Endpoint para gerenciar famílias de produtos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/ncm/": {
+      "post": {
+        "tags": [
+          "NCM"
+        ],
+        "summary": "Operações de NCM",
+        "description": "Endpoint para gerenciar códigos NCM",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/pedido/": {
+      "post": {
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Operações de pedidos",
+        "description": "Endpoint para gerenciar pedidos de produtos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/pedidocompra/": {
+      "post": {
+        "tags": [
+          "Pedidos de Compra"
+        ],
+        "summary": "Operações de pedidos de compra",
+        "description": "Endpoint para gerenciar pedidos de compra",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/tabelaprecos/": {
+      "post": {
+        "tags": [
+          "Tabelas de Preços"
+        ],
+        "summary": "Operações de tabelas de preços",
+        "description": "Endpoint para gerenciar tabelas de preços",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/geral/parcelas/": {
+      "post": {
+        "tags": [
+          "Parcelas"
+        ],
+        "summary": "Operações de parcelas",
+        "description": "Endpoint para gerenciar parcelas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/geral/projetos/": {
+      "post": {
+        "tags": [
+          "Projetos"
+        ],
+        "summary": "Operações de projetos",
+        "description": "Endpoint para gerenciar projetos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/caracteristicas/": {
+      "post": {
+        "tags": [
+          "Características de Produtos"
+        ],
+        "summary": "Operações de características de produtos",
+        "description": "Endpoint para gerenciar características de produtos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/estrutura/": {
+      "post": {
+        "tags": [
+          "Estrutura de Produtos"
+        ],
+        "summary": "Operações de estrutura de produtos",
+        "description": "Endpoint para gerenciar estrutura de produtos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/formpagvendas/": {
+      "post": {
+        "tags": [
+          "Formas de Pagamento - Vendas"
+        ],
+        "summary": "Operações de formas de pagamento para vendas",
+        "description": "Endpoint para gerenciar formas de pagamento para vendas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/impostos/": {
+      "post": {
+        "tags": [
+          "Impostos"
+        ],
+        "summary": "Operações de impostos",
+        "description": "Endpoint para gerenciar impostos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/contador/": {
+      "post": {
+        "tags": [
+          "Contador"
+        ],
+        "summary": "Operações de contador",
+        "description": "Endpoint para gerenciar contador",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/produtofornecedor/": {
+      "post": {
+        "tags": [
+          "Produto-Fornecedor"
+        ],
+        "summary": "Operações de relacionamento produto-fornecedor",
+        "description": "Endpoint para gerenciar relacionamento entre produtos e fornecedores",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/produto/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Operações de produtos",
+        "description": "Endpoint para gerenciar produtos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/servico/": {
+      "post": {
+        "tags": [
+          "Serviços"
+        ],
+        "summary": "Operações de serviços",
+        "description": "Endpoint para gerenciar serviços",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/transportadoras/": {
+      "post": {
+        "tags": [
+          "Transportadoras"
+        ],
+        "summary": "Operações de transportadoras",
+        "description": "Endpoint para gerenciar transportadoras",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/unidade/": {
+      "post": {
+        "tags": [
+          "Unidades"
+        ],
+        "summary": "Operações de unidades",
+        "description": "Endpoint para gerenciar unidades",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/vendedor/": {
+      "post": {
+        "tags": [
+          "Vendedores"
+        ],
+        "summary": "Operações de vendedores",
+        "description": "Endpoint para gerenciar vendedores",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/prazopagto/": {
+      "post": {
+        "tags": [
+          "Prazos de Pagamento"
+        ],
+        "summary": "Operações de prazos de pagamento",
+        "description": "Endpoint para gerenciar prazos de pagamento",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/local/": {
+      "post": {
+        "tags": [
+          "Locais de Estoque"
+        ],
+        "summary": "Operações de locais de estoque",
+        "description": "Endpoint para gerenciar locais de estoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/cheque/": {
+      "post": {
+        "tags": [
+          "Cheques"
+        ],
+        "summary": "Operações de cheques",
+        "description": "Endpoint para gerenciar cheques",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/produtos/imagem/": {
+      "post": {
+        "tags": [
+          "Imagens"
+        ],
+        "summary": "Operações de imagens",
+        "description": "Endpoint para gerenciar imagens",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/estoque/consulta/": {
+      "post": {
+        "tags": [
+          "Consulta de Estoque"
+        ],
+        "summary": "Operações de consulta de estoque",
+        "description": "Endpoint para consultar estoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/estoque/movimento/": {
+      "post": {
+        "tags": [
+          "Movimento de Estoque"
+        ],
+        "summary": "Operações de movimento de estoque",
+        "description": "Endpoint para gerenciar movimentos de estoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/faturamento/conta/": {
+      "post": {
+        "tags": [
+          "Contas"
+        ],
+        "summary": "Operações de contas",
+        "description": "Endpoint para gerenciar contas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/financas/contapagar/": {
+      "post": {
+        "tags": [
+          "Contas a Pagar"
+        ],
+        "summary": "Operações de contas a pagar",
+        "description": "Endpoint para gerenciar contas a pagar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/financas/contareceber/": {
+      "post": {
+        "tags": [
+          "Contas a Receber"
+        ],
+        "summary": "Operações de contas a receber",
+        "description": "Endpoint para gerenciar contas a receber",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/financas/movimentos/": {
+      "post": {
+        "tags": [
+          "Movimentos Financeiros"
+        ],
+        "summary": "Operações de movimentos financeiros",
+        "description": "Endpoint para gerenciar movimentos financeiros",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/financas/pesquisartitulos/": {
+      "post": {
+        "tags": [
+          "Pesquisa de Títulos"
+        ],
+        "summary": "Operações de pesquisa de títulos",
+        "description": "Endpoint para pesquisar títulos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/faturamento/nfbase/": {
+      "post": {
+        "tags": [
+          "NF Base"
+        ],
+        "summary": "Operações de nota fiscal base",
+        "description": "Endpoint para gerenciar notas fiscais base",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    },
+    "/faturamento/nfconsultar/": {
+      "post": {
+        "tags": [
+          "Consultar NF"
+        ],
+        "summary": "Operações de consulta de notas fiscais",
+        "description": "Endpoint para consultar notas fiscais",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ]
+}
