@@ -1,0 +1,1264 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Omie API",
+    "description": "API para integração com o sistema Omie",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://app.omie.com.br/api/v1"
+    }
+  ],
+  "paths": {
+    "/produtos/familias/": {
+      "post": {
+        "summary": "Operações com Famílias de Produtos",
+        "operationId": "FamiliaProduto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string",
+                    "description": "Nome do método a ser chamado"
+                  },
+                  "app_key": {
+                    "type": "string",
+                    "description": "Chave de aplicação"
+                  },
+                  "app_secret": {
+                    "type": "string",
+                    "description": "Chave secreta de aplicação"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    },
+                    "description": "Parâmetros específicos do método"
+                  }
+                },
+                "required": [
+                  "call",
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/departamentos/": {
+      "post": {
+        "summary": "Operações com Departamentos",
+        "operationId": "Departamento",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/empresas/": {
+      "post": {
+        "summary": "Operações com Empresas",
+        "operationId": "EmpresasPorUsuario",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/projetos/": {
+      "post": {
+        "summary": "Operações com Projetos",
+        "operationId": "Projetos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/etapas/": {
+      "post": {
+        "summary": "Operações com Etapas de um Projeto",
+        "operationId": "Etapas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/contacorrente/": {
+      "post": {
+        "summary": "Operações com Contas Correntes",
+        "operationId": "ContaCorrente",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/ncm/": {
+      "post": {
+        "summary": "Operações com NCM",
+        "operationId": "NCM",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/pesquisa/": {
+      "post": {
+        "summary": "Pesquisa de Produtos",
+        "operationId": "PesquisaProdutos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/caracteristicas/": {
+      "post": {
+        "summary": "Operações com Características",
+        "operationId": "CaracteristicaProduto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/tabelaprecos/": {
+      "post": {
+        "summary": "Operações com Tabelas de Preço",
+        "operationId": "TabelaPreco",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/estruturas/": {
+      "post": {
+        "summary": "Operações com Estruturas",
+        "operationId": "EstruturaProduto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/prodser/": {
+      "post": {
+        "summary": "Operações com Produtos/Serviços",
+        "operationId": "ProdutoServico",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/unidade/": {
+      "post": {
+        "summary": "Operações com Unidades",
+        "operationId": "UnidadeProduto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/fator/": {
+      "post": {
+        "summary": "Operações com Fatores de Conversão entre Unidades",
+        "operationId": "FatorConversaoUnidade",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/malotes/": {
+      "post": {
+        "summary": "Operações com Malotes",
+        "operationId": "Malote",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/pedido/": {
+      "post": {
+        "summary": "Operações com Pedidos de Compra",
+        "operationId": "PedidoCompra",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estoque/local/": {
+      "post": {
+        "summary": "Operações com Locais de Estoque",
+        "operationId": "LocalEstoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estoque/posestoque/": {
+      "post": {
+        "summary": "Operações com Posição de Estoque",
+        "operationId": "PosicaoEstoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estoque/movestoque/": {
+      "post": {
+        "summary": "Operações com Movimentações de Estoque",
+        "operationId": "MovimentoEstoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estoque/consulta/": {
+      "post": {
+        "summary": "Consulta movimentações de estoque",
+        "operationId": "ConsultaEstoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/clientes/": {
+      "post": {
+        "summary": "Operações com Clientes",
+        "operationId": "Clientes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/clientetag/": {
+      "post": {
+        "summary": "Operações com Tags de Clientes",
+        "operationId": "ClienteTag",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/categorias/": {
+      "post": {
+        "summary": "Operações com Categorias de Clientes",
+        "operationId": "CategoriaCliente",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/transportadoras/": {
+      "post": {
+        "summary": "Operações com Transportadoras",
+        "operationId": "Transportadoras",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/vendedores/": {
+      "post": {
+        "summary": "Operações com Vendedores",
+        "operationId": "Vendedores",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/servicos/servico/": {
+      "post": {
+        "summary": "Operações com Serviços",
+        "operationId": "Servicos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/servicos/osp/": {
+      "post": {
+        "summary": "Operações com Pedidos de Serviço",
+        "operationId": "OrdemServico",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/servicos/manutencao/": {
+      "post": {
+        "summary": "Operações com Manutenções",
+        "operationId": "Manutencao",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/pedido_venda/": {
+      "post": {
+        "summary": "Operações com Pedidos de Venda",
+        "operationId": "PedidoVenda",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/orcamento/": {
+      "post": {
+        "summary": "Operações com Orçamentos",
+        "operationId": "Orcamento",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/pedidocompraestoque/": {
+      "post": {
+        "summary": "Operações com Pedidos de Compra (Estoque)",
+        "operationId": "PedidoCompraEstoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/contapagar/": {
+      "post": {
+        "summary": "Operações com Contas a Pagar",
+        "operationId": "ContaPagar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/contareceber/": {
+      "post": {
+        "summary": "Operações com Contas a Receber",
+        "operationId": "ContaReceber",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/mf/": {
+      "post": {
+        "summary": "Operações com Movimento Financeiro",
+        "operationId": "MovimentoFinanceiro",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/pesquisartitulos/": {
+      "post": {
+        "summary": "Pesquisa de Títulos",
+        "operationId": "PesquisarTitulos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/lancentrada/": {
+      "post": {
+        "summary": "Operações com Lançamento de Entrada",
+        "operationId": "LancamentoEntrada",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/ping/": {
+      "post": {
+        "summary": "Teste de Conexão",
+        "operationId": "PingAPI",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/cadastro/": {
+      "post": {
+        "summary": "Operações com Cadastro de Títulos",
+        "operationId": "CadastroTitulos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crm/contas/": {
+      "post": {
+        "summary": "Operações com Contas no CRM",
+        "operationId": "ContaCRM",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crm/oportunidades/": {
+      "post": {
+        "summary": "Operações com Oportunidades no CRM",
+        "operationId": "OportunidadeCRM",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crm/tarefas/": {
+      "post": {
+        "summary": "Operações com Tarefas no CRM",
+        "operationId": "TarefaCRM",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contabil/lancamento/": {
+      "post": {
+        "summary": "Operações com Lançamentos Contábeis",
+        "operationId": "LancamentoContabil",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contabil/planodecontas/": {
+      "post": {
+        "summary": "Operações com Plano de Contas",
+        "operationId": "PlanoContas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contabil/departamentos/": {
+      "post": {
+        "summary": "Operações com Departamentos Contábeis",
+        "operationId": "DepartamentoContabil",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OmieRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "OmieRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do método a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta de aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros específicos do método"
+          }
+        },
+        "required": [
+          "call",
+          "app_key",
+          "app_secret",
+          "param"
+        ]
+      }
+    }
+  }
+}
