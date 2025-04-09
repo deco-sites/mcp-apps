@@ -1,0 +1,851 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Omie API",
+    "description": "API para integração com o sistema Omie",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://app.omie.com.br/api/v1"
+    }
+  ],
+  "paths": {
+    "/geral/categorias/": {
+      "post": {
+        "tags": [
+          "Geral"
+        ],
+        "summary": "Categorias / Departamentos",
+        "description": "Operações para gerenciar categorias/departamentos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/departamentos/": {
+      "post": {
+        "tags": [
+          "Geral"
+        ],
+        "summary": "Departamentos",
+        "description": "Operações para gerenciar departamentos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/ncm/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Códigos NCM",
+        "description": "Operações para gerenciar códigos NCM",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/tiposdeproduto/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Tipos de Produto",
+        "description": "Operações para gerenciar os tipos de produto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/tabelaprecos/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Tabelas de Preço",
+        "description": "Operações para gerenciar tabelas de preço",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/unidade/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Unidades",
+        "description": "Operações para gerenciar unidades de medida para os produtos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/familias/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Famílias",
+        "description": "Operações para gerenciar famílias de produtos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/cadastro/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Cadastro de Produtos",
+        "description": "Operações para cadastro e consulta de produtos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/pedido/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Pedido de Compra",
+        "description": "Operações para gerenciar os pedidos de compra",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/contaestoque/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Movimento de Estoque",
+        "description": "Operações para integração do estoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/ajusteestoque/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Ajuste de Estoque",
+        "description": "Operações para gerenciar ajustes de estoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/estoque/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Posição de Estoque",
+        "description": "Operações para obter a posição do estoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/local/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Locais de Estoque",
+        "description": "Operações para gerenciar os locais de estoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/clientes/": {
+      "post": {
+        "tags": [
+          "Clientes e Fornecedores"
+        ],
+        "summary": "Clientes",
+        "description": "Operações com Clientes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/fornecedores/": {
+      "post": {
+        "tags": [
+          "Clientes e Fornecedores"
+        ],
+        "summary": "Fornecedores",
+        "description": "Operações com Fornecedores",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/clientesfornecedores/": {
+      "post": {
+        "tags": [
+          "Clientes e Fornecedores"
+        ],
+        "summary": "Clientes e Fornecedores",
+        "description": "Operações com Clientes e Fornecedores",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/vendedores/": {
+      "post": {
+        "tags": [
+          "Clientes e Fornecedores"
+        ],
+        "summary": "Vendedores",
+        "description": "Operações com Vendedores",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/servicos/tabelaprecos/": {
+      "post": {
+        "tags": [
+          "Serviços"
+        ],
+        "summary": "Tabelas de Preço",
+        "description": "Operações para gerenciar tabelas de preço",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/servicos/cadastro/": {
+      "post": {
+        "tags": [
+          "Serviços"
+        ],
+        "summary": "Códigos de Serviços",
+        "description": "Operações para gerenciar códigos de serviço",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/servicos/servicos/": {
+      "post": {
+        "tags": [
+          "Serviços"
+        ],
+        "summary": "Ordem de Serviço",
+        "description": "Operações para gerenciar Ordens de Serviço",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/servicos/nfse/": {
+      "post": {
+        "tags": [
+          "Serviços"
+        ],
+        "summary": "NFSe",
+        "description": "Operações para gerenciar NFSe - Nota Fiscal de Serviços Eletrônica",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/pedidovendaproduto/": {
+      "post": {
+        "tags": [
+          "Vendas"
+        ],
+        "summary": "Pedido de Venda - Produtos",
+        "description": "Operações para gerenciar pedidos de venda de produtos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/nfconsultar/": {
+      "post": {
+        "tags": [
+          "Vendas"
+        ],
+        "summary": "NF-e",
+        "description": "Operações para consultar notas fiscais eletrônicas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/nfbaixar/": {
+      "post": {
+        "tags": [
+          "Vendas"
+        ],
+        "summary": "NF-e - Download de XMLs",
+        "description": "Operações para baixar XMLs de notas fiscais",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/orcamento/": {
+      "post": {
+        "tags": [
+          "Vendas"
+        ],
+        "summary": "Orçamentos",
+        "description": "Operações para gerenciar orçamentos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/contacorrente/": {
+      "post": {
+        "tags": [
+          "Financeiro"
+        ],
+        "summary": "Contas Correntes",
+        "description": "Operações para gerenciar contas correntes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/financas/contapagar/": {
+      "post": {
+        "tags": [
+          "Financeiro"
+        ],
+        "summary": "Contas a Pagar",
+        "description": "Operações para gerenciar contas a pagar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/financas/contareceber/": {
+      "post": {
+        "tags": [
+          "Financeiro"
+        ],
+        "summary": "Contas a Receber",
+        "description": "Operações para gerenciar contas a receber",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/financas/movimentofinanceiro/": {
+      "post": {
+        "tags": [
+          "Financeiro"
+        ],
+        "summary": "Movimentos Financeiros",
+        "description": "Operações para gerenciar movimentos financeiros",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/financas/lancamentoscontabeis/": {
+      "post": {
+        "tags": [
+          "Financeiro"
+        ],
+        "summary": "Lançamentos Contábeis",
+        "description": "Operações para gerenciar lançamentos contábeis",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/logins/": {
+      "post": {
+        "tags": [
+          "Geral"
+        ],
+        "summary": "Login (Usuários)",
+        "description": "Operações para gerenciar usuários",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/empresas/": {
+      "post": {
+        "tags": [
+          "Geral"
+        ],
+        "summary": "Empresas",
+        "description": "Operações para gerenciar empresas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/cidades/": {
+      "post": {
+        "tags": [
+          "Geral"
+        ],
+        "summary": "Cidades",
+        "description": "Operações para gerenciar cidades",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/projetos/": {
+      "post": {
+        "tags": [
+          "Geral"
+        ],
+        "summary": "Projetos",
+        "description": "Operações para gerenciar projetos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/estoque/consulta/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Consulta de Estoque",
+        "description": "Operações para consultar estoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "api_key"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ]
+}
