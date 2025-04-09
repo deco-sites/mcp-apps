@@ -1,0 +1,637 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "iFood API",
+    "description": "API de integração com o iFood",
+    "version": "1.0.0",
+    "contact": {
+      "name": "iFood Developer Portal",
+      "url": "https://developer.ifood.com.br"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://merchant-api.ifood.com.br",
+      "description": "Ambiente de produção"
+    },
+    {
+      "url": "https://merchant-api.ifood-sandbox.com.br",
+      "description": "Ambiente de sandbox"
+    }
+  ],
+  "paths": {
+    "/authentication/v1.0/oauth/token": {
+      "post": {
+        "summary": "Autenticação",
+        "description": "Endpoint para obter token de acesso",
+        "operationId": "getToken",
+        "tags": [
+          "Autenticação"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "client_id": {
+                    "type": "string",
+                    "description": "Cliente ID fornecido pelo iFood"
+                  },
+                  "client_secret": {
+                    "type": "string",
+                    "description": "Cliente Secret fornecido pelo iFood"
+                  },
+                  "grant_type": {
+                    "type": "string",
+                    "enum": [
+                      "client_credentials"
+                    ],
+                    "default": "client_credentials"
+                  }
+                },
+                "required": [
+                  "client_id",
+                  "client_secret",
+                  "grant_type"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token de acesso gerado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": {
+                      "type": "string"
+                    },
+                    "token_type": {
+                      "type": "string",
+                      "example": "bearer"
+                    },
+                    "expires_in": {
+                      "type": "integer",
+                      "example": 3600
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciais inválidas"
+          }
+        }
+      }
+    },
+    "/v1.0/events:polling": {
+      "get": {
+        "summary": "Buscar eventos por polling",
+        "description": "Endpoint para buscar eventos por polling",
+        "operationId": "getEventsByPolling",
+        "tags": [
+          "Eventos"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de eventos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/v1.0/events/acknowledgment": {
+      "post": {
+        "summary": "Confirmar eventos",
+        "description": "Endpoint para confirmar o recebimento de eventos",
+        "operationId": "acknowledgeEvents",
+        "tags": [
+          "Eventos"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Eventos confirmados com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/v1.0/orders/{id}": {
+      "get": {
+        "summary": "Buscar detalhes do pedido",
+        "description": "Endpoint para buscar detalhes de um pedido específico",
+        "operationId": "getOrderDetails",
+        "tags": [
+          "Pedidos"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do pedido"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do pedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Pedido não encontrado"
+          }
+        }
+      }
+    },
+    "/v1.0/orders/{id}/confirm": {
+      "post": {
+        "summary": "Confirmar pedido",
+        "description": "Endpoint para confirmar um pedido",
+        "operationId": "confirmOrder",
+        "tags": [
+          "Pedidos"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do pedido"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Pedido confirmado com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Pedido não encontrado"
+          }
+        }
+      }
+    },
+    "/v1.0/orders/{id}/readyToPickup": {
+      "post": {
+        "summary": "Pedido pronto para retirada",
+        "description": "Endpoint para sinalizar que o pedido está pronto para retirada",
+        "operationId": "orderReadyToPickup",
+        "tags": [
+          "Pedidos"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do pedido"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Pedido marcado como pronto para retirada"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Pedido não encontrado"
+          }
+        }
+      }
+    },
+    "/v1.0/orders/{id}/dispatch": {
+      "post": {
+        "summary": "Despachar pedido",
+        "description": "Endpoint para despachar um pedido",
+        "operationId": "dispatchOrder",
+        "tags": [
+          "Pedidos"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do pedido"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Pedido despachado com sucesso"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Pedido não encontrado"
+          }
+        }
+      }
+    },
+    "/v1.0/orders/{id}/requestCancellation": {
+      "post": {
+        "summary": "Solicitar cancelamento",
+        "description": "Endpoint para solicitar o cancelamento de um pedido",
+        "operationId": "requestOrderCancellation",
+        "tags": [
+          "Pedidos"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID do pedido"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cancellationCode": {
+                    "type": "string",
+                    "description": "Código de cancelamento"
+                  },
+                  "details": {
+                    "type": "string",
+                    "description": "Detalhes do cancelamento"
+                  }
+                },
+                "required": [
+                  "cancellationCode"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Solicitação de cancelamento enviada"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "404": {
+            "description": "Pedido não encontrado"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID único do evento"
+          },
+          "code": {
+            "type": "string",
+            "description": "Código do evento",
+            "enum": [
+              "PLACED",
+              "CONFIRMED",
+              "CANCELLED",
+              "DISPATCH",
+              "CONCLUDED"
+            ]
+          },
+          "correlationId": {
+            "type": "string",
+            "description": "ID de correlação (geralmente o ID do pedido)"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data de criação do evento"
+          }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID do pedido"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Número de referência do pedido"
+          },
+          "shortReference": {
+            "type": "string",
+            "description": "Número de referência curto"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data de criação do pedido"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "DELIVERY",
+              "TAKEOUT"
+            ],
+            "description": "Tipo do pedido"
+          },
+          "merchant": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "ID do merchant"
+              },
+              "name": {
+                "type": "string",
+                "description": "Nome do merchant"
+              }
+            }
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "type": "string",
+                  "description": "Método de pagamento"
+                },
+                "prepaid": {
+                  "type": "boolean",
+                  "description": "Indicador se o pagamento foi pré-pago"
+                },
+                "value": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "Valor do pagamento"
+                }
+              }
+            }
+          },
+          "customer": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Nome do cliente"
+              },
+              "phone": {
+                "type": "string",
+                "description": "Telefone do cliente"
+              },
+              "documentNumber": {
+                "type": "string",
+                "description": "Número do documento do cliente"
+              }
+            }
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "ID do item"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Nome do item"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "description": "Quantidade do item"
+                },
+                "price": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "Preço unitário do item"
+                },
+                "subItems": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "ID do sub-item"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Nome do sub-item"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "description": "Quantidade do sub-item"
+                      },
+                      "price": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Preço unitário do sub-item"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "total": {
+            "type": "object",
+            "properties": {
+              "subTotal": {
+                "type": "number",
+                "format": "double",
+                "description": "Subtotal do pedido"
+              },
+              "deliveryFee": {
+                "type": "number",
+                "format": "double",
+                "description": "Taxa de entrega"
+              },
+              "benefits": {
+                "type": "number",
+                "format": "double",
+                "description": "Valor de benefícios/descontos"
+              },
+              "orderAmount": {
+                "type": "number",
+                "format": "double",
+                "description": "Valor total do pedido"
+              }
+            }
+          },
+          "delivery": {
+            "type": "object",
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "DEFAULT",
+                  "TAKEOUT"
+                ],
+                "description": "Modo de entrega"
+              },
+              "deliveredBy": {
+                "type": "string",
+                "enum": [
+                  "IFOOD",
+                  "MERCHANT"
+                ],
+                "description": "Responsável pela entrega"
+              },
+              "address": {
+                "type": "object",
+                "properties": {
+                  "formattedAddress": {
+                    "type": "string",
+                    "description": "Endereço formatado"
+                  },
+                  "streetName": {
+                    "type": "string",
+                    "description": "Nome da rua"
+                  },
+                  "streetNumber": {
+                    "type": "string",
+                    "description": "Número"
+                  },
+                  "complement": {
+                    "type": "string",
+                    "description": "Complemento"
+                  },
+                  "neighborhood": {
+                    "type": "string",
+                    "description": "Bairro"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "Cidade"
+                  },
+                  "state": {
+                    "type": "string",
+                    "description": "Estado"
+                  },
+                  "postalCode": {
+                    "type": "string",
+                    "description": "CEP"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
