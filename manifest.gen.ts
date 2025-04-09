@@ -4,40 +4,65 @@
 
 import * as $$$$$$$$$$$0 from "./apps/deco/website.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$0 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
-import * as $$$1 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$2 from "./loaders/vtex/api/GET/pricingConfig.ts";
-import * as $$$3 from "./loaders/vtex/api/GET/pricingMigration.ts";
-import * as $$$5 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$4 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
-import * as $$$6 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
-import * as $$$7 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
-import * as $$$9 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$8 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
-import * as $$$10 from "./loaders/vtex/api/GET/pricingTables.ts";
-import * as $$$11 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$12 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$13 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
+import * as $$$0 from "./loaders/Ifood developer merchant API/Ifood developer merchant API/GET/v1.0Events:polling.ts";
+import * as $$$1 from "./loaders/Ifood developer merchant API/Ifood developer merchant API/GET/v1.0Orders:id.ts";
+import * as $$$2 from "./loaders/Ifood developer merchant API/Ifood developer merchant API/POST/authenticationV1.0OauthToken.ts";
+import * as $$$3 from "./loaders/Ifood developer merchant API/Ifood developer merchant API/POST/v1.0EventsAcknowledgment.ts";
+import * as $$$4 from "./loaders/Ifood developer merchant API/Ifood developer merchant API/POST/v1.0Orders:idConfirm.ts";
+import * as $$$5 from "./loaders/Ifood developer merchant API/Ifood developer merchant API/POST/v1.0Orders:idDispatch.ts";
+import * as $$$6 from "./loaders/Ifood developer merchant API/Ifood developer merchant API/POST/v1.0Orders:idReadyToPickup.ts";
+import * as $$$7 from "./loaders/Ifood developer merchant API/Ifood developer merchant API/POST/v1.0Orders:idRequestCancellation.ts";
+import * as $$$8 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
+import * as $$$9 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$10 from "./loaders/vtex/api/GET/pricingConfig.ts";
+import * as $$$11 from "./loaders/vtex/api/GET/pricingMigration.ts";
+import * as $$$13 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$12 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
+import * as $$$14 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
+import * as $$$15 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
+import * as $$$17 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$16 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
+import * as $$$18 from "./loaders/vtex/api/GET/pricingTables.ts";
+import * as $$$19 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$20 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$21 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
 
 const manifest = {
   "loaders": {
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$0,
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
+    "site/loaders/Ifood developer merchant API/Ifood developer merchant API/GET/v1.0Events:polling.ts":
+      $$$0,
+    "site/loaders/Ifood developer merchant API/Ifood developer merchant API/GET/v1.0Orders:id.ts":
       $$$1,
-    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$2,
-    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$3,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$5,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$4,
-    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$6,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
+    "site/loaders/Ifood developer merchant API/Ifood developer merchant API/POST/authenticationV1.0OauthToken.ts":
+      $$$2,
+    "site/loaders/Ifood developer merchant API/Ifood developer merchant API/POST/v1.0EventsAcknowledgment.ts":
+      $$$3,
+    "site/loaders/Ifood developer merchant API/Ifood developer merchant API/POST/v1.0Orders:idConfirm.ts":
+      $$$4,
+    "site/loaders/Ifood developer merchant API/Ifood developer merchant API/POST/v1.0Orders:idDispatch.ts":
+      $$$5,
+    "site/loaders/Ifood developer merchant API/Ifood developer merchant API/POST/v1.0Orders:idReadyToPickup.ts":
+      $$$6,
+    "site/loaders/Ifood developer merchant API/Ifood developer merchant API/POST/v1.0Orders:idRequestCancellation.ts":
       $$$7,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts": $$$9,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$8,
-    "site/loaders/vtex/api/GET/pricingTables.ts": $$$10,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$8,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$9,
+    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$10,
+    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$11,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$13,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$12,
+    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$14,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
+      $$$15,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$17,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$16,
+    "site/loaders/vtex/api/GET/pricingTables.ts": $$$18,
     "site/loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$11,
-    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$12,
-    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$13,
+      $$$19,
+    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$20,
+    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$21,
   },
   "apps": {
     "site/apps/deco/website.ts": $$$$$$$$$$$0,
