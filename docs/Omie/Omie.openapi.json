@@ -1,0 +1,748 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Omie API",
+    "description": "API para integração com o sistema Omie de gestão empresarial.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Suporte Omie",
+      "url": "https://developer.omie.com.br"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://app.omie.com.br/api/v1"
+    }
+  ],
+  "paths": {
+    "/produtos/nfce/": {
+      "post": {
+        "tags": [
+          "NFC-e"
+        ],
+        "summary": "Operações de NFC-e",
+        "description": "Permite gerenciar operações relacionadas às NFC-e.",
+        "operationId": "nfce",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "CancelarNFCe",
+                "ConsultarNFCe",
+                "EmitirNFCe",
+                "InutilizarNFCe"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string",
+                    "description": "Chave de aplicação"
+                  },
+                  "app_secret": {
+                    "type": "string",
+                    "description": "Chave secreta de aplicação"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    },
+                    "description": "Parâmetros específicos da chamada"
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na requisição"
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/geral/clientes/": {
+      "post": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Operações de clientes",
+        "description": "Permite gerenciar operações relacionadas aos clientes.",
+        "operationId": "clientes",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AlterarCliente",
+                "ConsultarCliente",
+                "ExcluirCliente",
+                "IncluirCliente",
+                "ListarClientes",
+                "UpsertCliente"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string",
+                    "description": "Chave de aplicação"
+                  },
+                  "app_secret": {
+                    "type": "string",
+                    "description": "Chave secreta de aplicação"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    },
+                    "description": "Parâmetros específicos da chamada"
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/departamentos/": {
+      "post": {
+        "tags": [
+          "Departamentos"
+        ],
+        "summary": "Operações de departamentos",
+        "description": "Permite gerenciar operações relacionadas aos departamentos.",
+        "operationId": "departamentos",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ListarDepartamentos"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/categorias/": {
+      "post": {
+        "tags": [
+          "Categorias de Produtos"
+        ],
+        "summary": "Operações de categorias de produtos",
+        "operationId": "categorias",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ListarCategorias"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/pesquisar/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Operações de produtos",
+        "operationId": "produtos",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PesquisarProdutos"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/cadastro/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Operações de cadastro de produtos",
+        "operationId": "cadastroProdutos",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AlterarProduto",
+                "ConsultarProduto",
+                "ExcluirProduto",
+                "IncluirProduto",
+                "ListarProdutos",
+                "UpsertProduto"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/familias/": {
+      "post": {
+        "tags": [
+          "Famílias de Produtos"
+        ],
+        "summary": "Operações de famílias de produtos",
+        "operationId": "familiasProdutos",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ListarFamilias"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          }
+        }
+      }
+    },
+    "/geral/vendedores/": {
+      "post": {
+        "tags": [
+          "Vendedores"
+        ],
+        "summary": "Operações de vendedores",
+        "operationId": "vendedores",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ListarVendedores"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          }
+        }
+      }
+    },
+    "/geral/empresas/": {
+      "post": {
+        "tags": [
+          "Empresas"
+        ],
+        "summary": "Operações de empresas",
+        "operationId": "empresas",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ConsultarEmpresa"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          }
+        }
+      }
+    },
+    "/geral/parcelas/": {
+      "post": {
+        "tags": [
+          "Parcelas"
+        ],
+        "summary": "Operações de parcelas",
+        "operationId": "parcelas",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ListarParcelas"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          }
+        }
+      }
+    },
+    "/geral/etapas/": {
+      "post": {
+        "tags": [
+          "Etapas"
+        ],
+        "summary": "Operações de etapas",
+        "operationId": "etapas",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ListarEtapas"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/pedido/": {
+      "post": {
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Operações de pedidos",
+        "operationId": "pedidos",
+        "parameters": [
+          {
+            "name": "call",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AlterarPedidoVenda",
+                "ConsultarPedidoVenda",
+                "ExcluirPedidoVenda",
+                "IncluirPedidoVenda",
+                "ListarPedidosVenda",
+                "StatusPedidoVenda",
+                "TrocarEtapaPedidoVenda",
+                "UpsertPedidoVenda"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "app_key"
+      },
+      "ApiSecretAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "app_secret"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": [],
+      "ApiSecretAuth": []
+    }
+  ]
+}
