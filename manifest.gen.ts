@@ -4,40 +4,59 @@
 
 import * as $$$$$$$$$$$0 from "./apps/deco/website.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$0 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
-import * as $$$1 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$2 from "./loaders/vtex/api/GET/pricingConfig.ts";
-import * as $$$3 from "./loaders/vtex/api/GET/pricingMigration.ts";
-import * as $$$5 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$4 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
-import * as $$$6 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
-import * as $$$7 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
-import * as $$$9 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$8 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
-import * as $$$10 from "./loaders/vtex/api/GET/pricingTables.ts";
-import * as $$$11 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$12 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$13 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
+import * as $$$0 from "./loaders/bling/bling/DELETE/contatos:id.ts";
+import * as $$$2 from "./loaders/bling/bling/GET/contatos:id.ts";
+import * as $$$1 from "./loaders/bling/bling/GET/contatos.ts";
+import * as $$$3 from "./loaders/bling/bling/GET/produtos.ts";
+import * as $$$4 from "./loaders/bling/bling/GET/vendas.ts";
+import * as $$$5 from "./loaders/bling/bling/POST/contatos.ts";
+import * as $$$6 from "./loaders/bling/bling/POST/produtos.ts";
+import * as $$$7 from "./loaders/bling/bling/POST/vendas.ts";
+import * as $$$8 from "./loaders/bling/bling/PUT/contatos:id.ts";
+import * as $$$9 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
+import * as $$$10 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$11 from "./loaders/vtex/api/GET/pricingConfig.ts";
+import * as $$$12 from "./loaders/vtex/api/GET/pricingMigration.ts";
+import * as $$$14 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$13 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
+import * as $$$15 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
+import * as $$$16 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
+import * as $$$18 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$17 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
+import * as $$$19 from "./loaders/vtex/api/GET/pricingTables.ts";
+import * as $$$20 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$21 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$22 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
 
 const manifest = {
   "loaders": {
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$0,
+    "site/loaders/bling/bling/DELETE/contatos:id.ts": $$$0,
+    "site/loaders/bling/bling/GET/contatos:id.ts": $$$2,
+    "site/loaders/bling/bling/GET/contatos.ts": $$$1,
+    "site/loaders/bling/bling/GET/produtos.ts": $$$3,
+    "site/loaders/bling/bling/GET/vendas.ts": $$$4,
+    "site/loaders/bling/bling/POST/contatos.ts": $$$5,
+    "site/loaders/bling/bling/POST/produtos.ts": $$$6,
+    "site/loaders/bling/bling/POST/vendas.ts": $$$7,
+    "site/loaders/bling/bling/PUT/contatos:id.ts": $$$8,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$9,
     "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$1,
-    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$2,
-    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$3,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$5,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$4,
-    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$6,
+      $$$10,
+    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$11,
+    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$12,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$14,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$13,
+    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$15,
     "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
-      $$$7,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts": $$$9,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$8,
-    "site/loaders/vtex/api/GET/pricingTables.ts": $$$10,
+      $$$16,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$18,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$17,
+    "site/loaders/vtex/api/GET/pricingTables.ts": $$$19,
     "site/loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$11,
-    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$12,
-    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$13,
+      $$$20,
+    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$21,
+    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$22,
   },
   "apps": {
     "site/apps/deco/website.ts": $$$$$$$$$$$0,
