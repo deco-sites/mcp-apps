@@ -1,0 +1,4517 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Fila Zero V2 - Ticketing",
+    "description": "Ticketing API",
+    "contact": {
+      "name": "Fila Zero",
+      "url": "https://filazero.com.br",
+      "email": "atendimento@filazero.com.br"
+    },
+    "version": "v2"
+  },
+  "servers": [
+    {
+      "url": "https://api.filazero.net/v2/ticketing"
+    }
+  ],
+  "paths": {
+    "/api/V1/Ticketing/EventDetail": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "EventId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDetailViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/EventsList": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "regionId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "isHome",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "eventname",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventsListViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/EventsCategory": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventCategory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/EventsRegions": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventRegion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/EventsRecommendations": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "quantity",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventCard"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/SectorsLayout": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "EventId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SessionId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SectorsLayoutViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GatesLayout": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "EventId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SessionId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GatesLayoutViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/SetVariation": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "EventId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SessionId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetTicketPromotionVariation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GetDeliveries": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "EventId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SessionId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeliveryViewModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GetAvailableHours": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "dayOfWeek",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "deliveryId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeliveryHourOptionViewModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GetPromoCode": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "promoCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PromoCodeViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/SetOrder": {
+      "post": {
+        "tags": [
+          "Ticketing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderViewModel"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponseViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/SetOrderConfirmation": {
+      "post": {
+        "tags": [
+          "Ticketing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderConfirmationViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderConfirmationViewModel"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderConfirmationViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponseViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GetOrderPayment": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "orderToken",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderGetPaymentViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/SearchSeats": {
+      "post": {
+        "tags": [
+          "Ticketing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchSeatsViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchSeatsViewModel"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchSeatsViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchSeatsResponseViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GetOrderDetail": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderDetailViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/SetPresenteeCaptcha": {
+      "post": {
+        "tags": [
+          "Ticketing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PresenteeCaptchaViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PresenteeCaptchaViewModel"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/PresenteeCaptchaViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponseViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/UploadSelfie": {
+      "post": {
+        "tags": [
+          "Ticketing"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GetFeatures": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "EventId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SessionId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FeaturesModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/ListEventsAndSessions": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventSessionViewModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/SetOrderCallback": {
+      "post": {
+        "tags": [
+          "Ticketing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderCallbackViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderCallbackViewModel"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderCallbackViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/SetOrderReturn": {
+      "post": {
+        "tags": [
+          "Ticketing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderReturnViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderReturnViewModel"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderReturnViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/SetOrderPixCallback": {
+      "post": {
+        "tags": [
+          "Ticketing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderPixCallbackViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderPixCallbackViewModel"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderPixCallbackViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/EventDates": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/Places": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "regionId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventPlace"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GetPurchaseHistory": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderPurchase"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GetTickets": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderTicketsViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/PostSchedulePayments": {
+      "post": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/OrderById": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderDetailViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/UpdateUser": {
+      "post": {
+        "tags": [
+          "Ticketing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserViewModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserViewModel"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserViewModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GetLocations": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Location"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GatesTicketing": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "EventId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SessionId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GatesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GetTicket": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "ticketId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderTicketViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/CheckCaptcha": {
+      "post": {
+        "tags": [
+          "Ticketing"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecaptchaRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecaptchaRequest"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/RecaptchaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/V1/Ticketing/GetVenueDetail": {
+      "get": {
+        "tags": [
+          "Ticketing"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VenueDetailViewModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EventDetailViewModel": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "$ref": "#/components/schemas/EventViewModel"
+          },
+          "sessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionsViewModel"
+            },
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "shortDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "beginDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageDetail": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageMobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageTicket": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "showTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "mapUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "showTermsLink": {
+            "type": "boolean"
+          },
+          "venueId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "venueName": {
+            "type": "string",
+            "nullable": true
+          },
+          "sponsorImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "showSeatMap": {
+            "type": "boolean"
+          },
+          "zipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "neighborhood": {
+            "type": "string",
+            "nullable": true
+          },
+          "channelPartnershipId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPartnershipActive": {
+            "type": "boolean"
+          },
+          "channelToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerLogo": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isSaleOnline": {
+            "type": "boolean"
+          },
+          "isSoldOut": {
+            "type": "boolean"
+          },
+          "ingressoNacionalPartnertId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasLockers": {
+            "type": "boolean"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "accessPoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "showPolicy": {
+            "type": "string",
+            "nullable": true
+          },
+          "faqs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Faq"
+            },
+            "nullable": true
+          },
+          "sectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectorsViewModel"
+            },
+            "nullable": true
+          },
+          "restrictionsItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RestrictionItemViewModel"
+            },
+            "nullable": true
+          },
+          "servicesIncluded": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceIncludedViewModel"
+            },
+            "nullable": true
+          },
+          "deliveryRules": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "terms": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "imageUpSell": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageEventPass": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageBanner": {
+            "type": "string",
+            "nullable": true
+          },
+          "regionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "regionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "placeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "capacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "datePercentage": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageTicketPdf": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAceitaIN": {
+            "type": "boolean"
+          },
+          "isEventDateRange": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SessionsViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "hasSaleBegunDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "hasOnlineSales": {
+            "type": "boolean"
+          },
+          "hasSaleBegun": {
+            "type": "boolean"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "sessionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sessionDateFinish": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "hasPhysicalDelivery": {
+            "type": "boolean"
+          },
+          "sectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventSectorViewModel"
+            },
+            "nullable": true
+          },
+          "hasLockers": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventSectorViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sectorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "idSectorFZ": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idSessionFZ": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currentGateway": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isNumerated": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "tax": {
+            "type": "number",
+            "format": "double"
+          },
+          "discount": {
+            "type": "number",
+            "format": "double"
+          },
+          "finalPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "sectorType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "stock": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "gateId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPresale": {
+            "type": "boolean"
+          },
+          "presaleToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "gatewayMap": {
+            "type": "string",
+            "nullable": true
+          },
+          "eventSectorLayout": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventSectorLayout"
+            },
+            "nullable": true
+          },
+          "sectorGate": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerSellLimit": {
+            "type": "string",
+            "nullable": true
+          },
+          "halfPriceReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "maxQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "halfPrice": {
+            "type": "boolean"
+          },
+          "promotionPrices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PromotionPrice"
+            },
+            "nullable": true
+          },
+          "socialInfo": {
+            "$ref": "#/components/schemas/SocialInfo"
+          },
+          "seatMapUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasOwnSector": {
+            "type": "boolean"
+          },
+          "isEnabled3DLayout": {
+            "type": "boolean"
+          },
+          "url3DLayout": {
+            "type": "string",
+            "nullable": true
+          },
+          "viewFromSeat": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventSectorLayout": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idSector": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idLayout": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idLayoutMeapro": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isNumerated": {
+            "type": "boolean"
+          },
+          "hasSubtitle": {
+            "type": "boolean"
+          },
+          "isVisible": {
+            "type": "boolean"
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PromotionPrice": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "promoCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isHalfPrice": {
+            "type": "boolean"
+          },
+          "discount": {
+            "type": "number",
+            "format": "double"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "tax": {
+            "type": "number",
+            "format": "double"
+          },
+          "discountManual": {
+            "type": "number",
+            "format": "double"
+          },
+          "finalPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "socialMedia": {
+            "type": "string",
+            "nullable": true
+          },
+          "customDocumentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "customDocumentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasCustomDocument": {
+            "type": "boolean"
+          },
+          "minDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "maxDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SocialInfo": {
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "profileList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SocialProfile"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SocialProfile": {
+        "type": "object",
+        "properties": {
+          "profile": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "finalPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "stock": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minPurchase": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxPurchase": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "isLimitPurchase": {
+            "type": "boolean"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageDetail": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Faq": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "question": {
+            "type": "string",
+            "nullable": true
+          },
+          "answer": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SectorsViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorGate": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessPoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "isNumerated": {
+            "type": "boolean"
+          },
+          "isVisible": {
+            "type": "boolean"
+          },
+          "mainSectorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RestrictionItemViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAllow": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceIncludedViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventsListViewModel": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventCard"
+            },
+            "nullable": true
+          },
+          "currentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "perPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventCard": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "beginDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageDetail": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageMobile": {
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "finalPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "showTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "venueId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "venueName": {
+            "type": "string",
+            "nullable": true
+          },
+          "channelPartnershipId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPartnershipActive": {
+            "type": "boolean"
+          },
+          "channelToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "regionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "placeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "regionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasPartner": {
+            "type": "boolean"
+          },
+          "partnerLogo": {
+            "type": "string",
+            "nullable": true
+          },
+          "partnerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "sessionList": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "nullable": true
+          },
+          "imageUpSell": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageEventPass": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageBanner": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSoldOut": {
+            "type": "boolean"
+          },
+          "hasLockers": {
+            "type": "boolean"
+          },
+          "datePercentage": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAceitaIN": {
+            "type": "boolean"
+          },
+          "isEventDateRange": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventCategory": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "homePriority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isDefaultCategory": {
+            "type": "boolean"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventRegion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "acronym": {
+            "type": "string",
+            "nullable": true
+          },
+          "homePriority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SectorsLayoutViewModel": {
+        "type": "object",
+        "properties": {
+          "eventName": {
+            "type": "string",
+            "nullable": true
+          },
+          "sessionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "venueName": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageDetailUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "locationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageMap": {
+            "type": "string",
+            "nullable": true
+          },
+          "seatMapHtmlUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "sessionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "sectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectorsLayoutSectorViewModel"
+            },
+            "nullable": true
+          },
+          "hasNumeratedSeats": {
+            "type": "boolean"
+          },
+          "hasLockers": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SectorsLayoutSectorViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "gate": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "tax": {
+            "type": "number",
+            "format": "double"
+          },
+          "finalPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "isNumerated": {
+            "type": "boolean"
+          },
+          "promotionPrices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PromotionPrice"
+            },
+            "nullable": true
+          },
+          "promotionPriceToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GatesLayoutViewModel": {
+        "type": "object",
+        "properties": {
+          "eventName": {
+            "type": "string",
+            "nullable": true
+          },
+          "venueName": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageDetailUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "sessionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "imageMap": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectorsGateViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SectorsGateViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "gate": {
+            "type": "string",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SetTicketPromotionVariation": {
+        "type": "object",
+        "properties": {
+          "sectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SetSector"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SetSector": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "gate": {
+            "type": "string",
+            "nullable": true
+          },
+          "isNumerated": {
+            "type": "boolean"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "halfPriceReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "promotions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SetPromotion"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SetPromotion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "isHalfPrice": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "allowedDatesTimes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeliveryDateOptionsViewModel"
+            },
+            "nullable": true
+          },
+          "partner": {
+            "$ref": "#/components/schemas/DeliveryPartner"
+          },
+          "hasLocation": {
+            "type": "boolean"
+          },
+          "hasAddressRegistration": {
+            "type": "boolean"
+          },
+          "localList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeliveryLocation"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryDateOptionsViewModel": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "localizedDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "dayOfWeek": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "availableHours": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeliveryHourOptionViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryHourOptionViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "finishTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAvailable": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryPartner": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "logo": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPartner": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryLocation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "neighborhood": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDefault": {
+            "type": "boolean"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PromoCodeViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sessionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "discount": {
+            "type": "number",
+            "format": "double"
+          },
+          "isFixedDiscount": {
+            "type": "boolean"
+          },
+          "isOrderDiscount": {
+            "type": "boolean"
+          },
+          "isAvailable": {
+            "type": "boolean"
+          },
+          "minQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "promotionPriceToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "socialMediaProfileId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasCustomDocument": {
+            "type": "boolean"
+          },
+          "customDocumentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "customDocumentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "minDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "maxDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SetOrderViewModel": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "order": {
+            "$ref": "#/components/schemas/OrderViewModel"
+          },
+          "payment": {
+            "$ref": "#/components/schemas/PaymentViewModel"
+          },
+          "paymentType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "promocodeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "promoCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "promocodeDiscount": {
+            "type": "number",
+            "format": "double"
+          },
+          "installments": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "affiliateId": {
+            "type": "string",
+            "nullable": true
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderViewModel": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sessionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currencyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "paymentCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "delivery": {
+            "$ref": "#/components/schemas/DeliveryInfoViewModel"
+          },
+          "tickets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketViewModel"
+            },
+            "nullable": true
+          },
+          "isMobile": {
+            "type": "boolean"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemOrder"
+            },
+            "nullable": true
+          },
+          "lockers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemOrder"
+            },
+            "nullable": true
+          },
+          "presentees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PresenteeViewModel"
+            },
+            "nullable": true
+          },
+          "socialMedia": {
+            "$ref": "#/components/schemas/SocialMediaViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryInfoViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "addressLine": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressComplement": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressNeighborhood": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressState": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressCountry": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressZipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "deliveryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "locationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hourId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dayOfWeek": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "seatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "blockId": {
+            "type": "string",
+            "nullable": true
+          },
+          "rowId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isNumerated": {
+            "type": "boolean"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "promotionPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "promotionDiscount": {
+            "type": "number",
+            "format": "double"
+          },
+          "promotionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "halfPrice": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "gateId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "gate": {
+            "type": "string",
+            "nullable": true
+          },
+          "seatLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "mapPoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "string",
+            "nullable": true
+          },
+          "customDocument": {
+            "type": "string",
+            "nullable": true
+          },
+          "customDocumentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "halfPriceReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "tax": {
+            "type": "number",
+            "format": "double"
+          },
+          "finalPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "seatRow": {
+            "type": "string",
+            "nullable": true
+          },
+          "seat": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCustomSeat": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemOrder": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isLocker": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PresenteeViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "ticketId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "halfPriceReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "customDocument": {
+            "type": "string",
+            "nullable": true
+          },
+          "customDocumentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "selfie": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkedCaptcha": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SocialMediaViewModel": {
+        "type": "object",
+        "properties": {
+          "socialId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "socialDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "discount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentViewModel": {
+        "type": "object",
+        "properties": {
+          "cardNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardHolderName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardCVV": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardExpiryMonth": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardExpiryYear": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardBrand": {
+            "type": "string",
+            "nullable": true
+          },
+          "ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "browserFingerPrint": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "installments": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isBoleto": {
+            "type": "boolean"
+          },
+          "isPIX": {
+            "type": "boolean"
+          },
+          "isMobile": {
+            "type": "boolean"
+          },
+          "isIdentify": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserViewModel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "surname": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "gender": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressComplement": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressNeighborhood": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressState": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressCountry": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressZipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAnonymous": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderResponseViewModel": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "orderCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isValid": {
+            "type": "boolean"
+          },
+          "payment": {
+            "$ref": "#/components/schemas/PaymentResponseViewModel"
+          },
+          "ticketList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketResponseViewModel"
+            },
+            "nullable": true
+          },
+          "pendingId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          },
+          "integrationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "boletoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "billetNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "boletoText": {
+            "type": "string",
+            "nullable": true
+          },
+          "dueDateBoleto": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pixImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "pixKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "pixLimitDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pixCopyPast": {
+            "type": "string",
+            "nullable": true
+          },
+          "pixPaymentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "presenteesIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketPresenteeResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentResponseViewModel": {
+        "type": "object",
+        "properties": {
+          "creditCard": {
+            "type": "string",
+            "nullable": true
+          },
+          "creditCardFinalNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "installments": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketResponseViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "gate": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "isHalfPrice": {
+            "type": "boolean"
+          },
+          "seatName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TicketPresenteeResponse": {
+        "type": "object",
+        "properties": {
+          "ticketId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "presenteeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SetOrderConfirmationViewModel": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "documentToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "browserFingerPrint": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderGetPaymentViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "orderCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "installments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstallmentViewModel"
+            },
+            "nullable": true
+          },
+          "pendingPressenteeCaptcha": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InstallmentViewModel": {
+        "type": "object",
+        "properties": {
+          "installmentNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchSeatsViewModel": {
+        "type": "object",
+        "properties": {
+          "sectorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "promotionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sessionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isTogether": {
+            "type": "boolean"
+          },
+          "bestSit": {
+            "type": "boolean"
+          },
+          "rowId": {
+            "type": "string",
+            "nullable": true
+          },
+          "isHalfPrice": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchSeatsResponseViewModel": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "tickets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TicketViewModel"
+            },
+            "nullable": true
+          },
+          "tooMany": {
+            "type": "boolean"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderDetailViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "orderCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "limitDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "discount": {
+            "type": "number",
+            "format": "double"
+          },
+          "deliveryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "pending": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "event": {
+            "$ref": "#/components/schemas/OrderEventViewModel"
+          },
+          "session": {
+            "$ref": "#/components/schemas/OrderSessionViewModel"
+          },
+          "tickets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderTicketViewModel"
+            },
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItemViewModel"
+            },
+            "nullable": true
+          },
+          "lockers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItemViewModel"
+            },
+            "nullable": true
+          },
+          "paymentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "delivery": {
+            "$ref": "#/components/schemas/OrderDeliveryViewModel"
+          },
+          "user": {
+            "$ref": "#/components/schemas/OrderUserViewModel"
+          },
+          "billetNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "boletoText": {
+            "type": "string",
+            "nullable": true
+          },
+          "dueDateBoleto": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "boletoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "pixImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "pixKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "pixLimitDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pixCopyPast": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasPresentee": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderEventViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "beginDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "imageDetailUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageTicket": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageTicketPdf": {
+            "type": "string",
+            "nullable": true
+          },
+          "locationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderSessionViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderTicketViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "orderId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "seatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isNumerated": {
+            "type": "boolean"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "promotionPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "promotionDiscount": {
+            "type": "number",
+            "format": "double"
+          },
+          "promotionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "halfPrice": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "gate": {
+            "type": "string",
+            "nullable": true
+          },
+          "seatName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketId": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticketStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "seatLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "presentee": {
+            "$ref": "#/components/schemas/PresenteeViewModel"
+          },
+          "halfPriceReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCustomSeat": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderItemViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "orderId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderDeliveryViewModel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "addressLine": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressComplement": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressNeighborhood": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressState": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressCountry": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressZipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "finishTime": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderUserViewModel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "surname": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "gender": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressComplement": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressNeighborhood": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressState": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressCountry": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressZipCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PresenteeCaptchaViewModel": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "presenteeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FeaturesModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "eventId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sessionId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventSessionViewModel": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventName": {
+            "type": "string",
+            "nullable": true
+          },
+          "sessionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sessionDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SetOrderCallbackViewModel": {
+        "type": "object",
+        "properties": {
+          "merchantId": {
+            "type": "string",
+            "nullable": true
+          },
+          "merchantOrderId": {
+            "type": "string",
+            "nullable": true
+          },
+          "changeType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "recurrentPaymentId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SetOrderReturnViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SetOrderPixCallbackViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "pixId": {
+            "type": "string",
+            "nullable": true
+          },
+          "pixStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingId": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "string",
+            "nullable": true
+          },
+          "transactionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "qrCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "qrImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "msg": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventPlace": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "regionId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderPurchase": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "orderCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "discount": {
+            "type": "number",
+            "format": "double"
+          },
+          "deliveryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "pending": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "event": {
+            "$ref": "#/components/schemas/OrderEventViewModel"
+          },
+          "tickets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderTicketViewModel"
+            },
+            "nullable": true
+          },
+          "paymentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "delivery": {
+            "$ref": "#/components/schemas/OrderDeliveryViewModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderTicketsViewModel": {
+        "type": "object",
+        "properties": {
+          "tickets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderTicketViewModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateUserViewModel": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "surname": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "gender": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressComplement": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressNeighborhood": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressState": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressCountry": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressZipCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GatesResponse": {
+        "type": "object",
+        "properties": {
+          "gates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Gate"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Gate": {
+        "type": "object",
+        "properties": {
+          "gate": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "sectors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecaptchaRequest": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseStatus": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VenueDetailViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "neighborhood": {
+            "type": "string",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "mapUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "accessPoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "showPolicy": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "capacity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "faqs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Faq"
+            },
+            "nullable": true
+          },
+          "restrictionsItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RestrictionItemViewModel"
+            },
+            "nullable": true
+          },
+          "servicesIncluded": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceIncludedViewModel"
+            },
+            "nullable": true
+          },
+          "terms": {
+            "type": "string",
+            "nullable": true
+          },
+          "regionId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "placeId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
