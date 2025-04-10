@@ -1,0 +1,481 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "VTEX API",
+    "description": "VTEX API Reference Documentation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://{accountName}.{environment}.com.br",
+      "variables": {
+        "accountName": {
+          "description": "Your VTEX account name",
+          "default": "youraccount"
+        },
+        "environment": {
+          "description": "VTEX environment",
+          "default": "vtexcommercestable"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/api/catalog/pvt/product/{productId}": {
+      "get": {
+        "summary": "Get Product",
+        "description": "Get product information by ID",
+        "operationId": "getProduct",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Product ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        },
+        "security": [
+          {
+            "appKey": [],
+            "appToken": []
+          }
+        ]
+      }
+    },
+    "/api/catalog/pvt/product": {
+      "post": {
+        "summary": "Create Product",
+        "description": "Create a new product",
+        "operationId": "createProduct",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Product created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": [
+          {
+            "appKey": [],
+            "appToken": []
+          }
+        ]
+      }
+    },
+    "/api/checkout/pub/orderForm": {
+      "get": {
+        "summary": "Get Order Form",
+        "description": "Get the order form configuration",
+        "operationId": "getOrderForm",
+        "responses": {
+          "200": {
+            "description": "Order form retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderForm"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/checkout/pub/orderForm/{orderFormId}/items": {
+      "post": {
+        "summary": "Add Item to Cart",
+        "description": "Add an item to the shopping cart",
+        "operationId": "addItemToCart",
+        "parameters": [
+          {
+            "name": "orderFormId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Order Form ID"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CartItemRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Item added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderForm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 123
+          },
+          "name": {
+            "type": "string",
+            "example": "Sample Product"
+          },
+          "departmentId": {
+            "type": "integer",
+            "example": 1
+          },
+          "categoryId": {
+            "type": "integer",
+            "example": 2
+          },
+          "brandId": {
+            "type": "integer",
+            "example": 3
+          },
+          "linkId": {
+            "type": "string",
+            "example": "sample-product"
+          },
+          "refId": {
+            "type": "string",
+            "example": "REF123"
+          },
+          "isVisible": {
+            "type": "boolean",
+            "example": true
+          },
+          "description": {
+            "type": "string",
+            "example": "Product description here"
+          },
+          "descriptionShort": {
+            "type": "string",
+            "example": "Short description"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "keywords": {
+            "type": "string",
+            "example": "sample,product,test"
+          },
+          "title": {
+            "type": "string",
+            "example": "Sample Product Title"
+          },
+          "taxCode": {
+            "type": "string",
+            "example": "TAX123"
+          },
+          "metaTagDescription": {
+            "type": "string",
+            "example": "Meta tag description"
+          },
+          "supplierId": {
+            "type": "integer",
+            "example": 1
+          },
+          "showWithoutStock": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "ProductRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "departmentId",
+          "categoryId",
+          "brandId",
+          "linkId"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Sample Product"
+          },
+          "departmentId": {
+            "type": "integer",
+            "example": 1
+          },
+          "categoryId": {
+            "type": "integer",
+            "example": 2
+          },
+          "brandId": {
+            "type": "integer",
+            "example": 3
+          },
+          "linkId": {
+            "type": "string",
+            "example": "sample-product"
+          },
+          "refId": {
+            "type": "string",
+            "example": "REF123"
+          },
+          "isVisible": {
+            "type": "boolean",
+            "example": true
+          },
+          "description": {
+            "type": "string",
+            "example": "Product description here"
+          },
+          "descriptionShort": {
+            "type": "string",
+            "example": "Short description"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "keywords": {
+            "type": "string",
+            "example": "sample,product,test"
+          },
+          "title": {
+            "type": "string",
+            "example": "Sample Product Title"
+          },
+          "taxCode": {
+            "type": "string",
+            "example": "TAX123"
+          },
+          "metaTagDescription": {
+            "type": "string",
+            "example": "Meta tag description"
+          },
+          "supplierId": {
+            "type": "integer",
+            "example": 1
+          },
+          "showWithoutStock": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "OrderForm": {
+        "type": "object",
+        "properties": {
+          "orderFormId": {
+            "type": "string",
+            "example": "123456abcdef"
+          },
+          "salesChannel": {
+            "type": "string",
+            "example": "1"
+          },
+          "loggedIn": {
+            "type": "boolean",
+            "example": false
+          },
+          "isCheckedIn": {
+            "type": "boolean",
+            "example": false
+          },
+          "storePreferencesData": {
+            "type": "object",
+            "properties": {
+              "countryCode": {
+                "type": "string",
+                "example": "BRA"
+              },
+              "currencyCode": {
+                "type": "string",
+                "example": "BRL"
+              },
+              "currencySymbol": {
+                "type": "string",
+                "example": "R$"
+              },
+              "currencyLocale": {
+                "type": "integer",
+                "example": 1046
+              }
+            }
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            }
+          },
+          "totalizers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "Items"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Items Total"
+                },
+                "value": {
+                  "type": "number",
+                  "example": 15000
+                }
+              }
+            }
+          },
+          "value": {
+            "type": "number",
+            "example": 15000
+          }
+        }
+      },
+      "CartItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "123"
+          },
+          "name": {
+            "type": "string",
+            "example": "Sample Product"
+          },
+          "skuName": {
+            "type": "string",
+            "example": "Red Small"
+          },
+          "price": {
+            "type": "number",
+            "example": 10000
+          },
+          "listPrice": {
+            "type": "number",
+            "example": 15000
+          },
+          "quantity": {
+            "type": "integer",
+            "example": 1
+          },
+          "imageUrl": {
+            "type": "string",
+            "example": "https://example.com/image.jpg"
+          },
+          "detailUrl": {
+            "type": "string",
+            "example": "/product/p"
+          },
+          "sellingPrice": {
+            "type": "number",
+            "example": 10000
+          },
+          "availability": {
+            "type": "string",
+            "example": "available"
+          }
+        }
+      },
+      "CartItemRequest": {
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "quantity"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "123"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "seller": {
+                  "type": "string",
+                  "example": "1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "appKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-VTEX-API-AppKey"
+      },
+      "appToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-VTEX-API-AppToken"
+      }
+    }
+  }
+}
