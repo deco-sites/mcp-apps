@@ -1,0 +1,4962 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Ticketing API",
+    "description": "Ticketing API",
+    "termsOfService": "https://www.filazero.net",
+    "contact": {
+      "name": "FilaZero",
+      "url": "https://www.filazero.net",
+      "email": "contato@filazero.com.br"
+    },
+    "license": {
+      "name": "License",
+      "url": "https://www.filazero.net"
+    },
+    "version": "v2"
+  },
+  "servers": [
+    {
+      "url": "https://api.filazero.net/v2/ticketing"
+    }
+  ],
+  "paths": {
+    "/api/Agenda": {
+      "get": {
+        "tags": [
+          "Agenda"
+        ],
+        "summary": "Retorna uma lista de agendas",
+        "description": "Retorna uma lista de agendas",
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "datahora",
+            "in": "query",
+            "description": "Retorna agendas para esta data",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "disponiveis",
+            "in": "query",
+            "description": "Retorna apenas agendas disponíveis",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "ativo",
+            "in": "query",
+            "description": "Retorna apenas agendas ativas ou não",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "servico",
+            "in": "query",
+            "description": "Retorna agendas para este serviço",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "especialidade",
+            "in": "query",
+            "description": "Retorna agendas que estão vinculadas a esta especialidade",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "funcionario",
+            "in": "query",
+            "description": "Retorna agendas para o funcionário",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "unidade",
+            "in": "query",
+            "description": "Retorna agendas para a unidade",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Count",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Fields",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AgendaVM"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Agenda"
+        ],
+        "summary": "Cria uma agenda",
+        "description": "Cria uma agenda",
+        "operationId": "post",
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Agenda/{id}": {
+      "get": {
+        "tags": [
+          "Agenda"
+        ],
+        "summary": "Retorna agenda por seu ID",
+        "description": "Retorna agenda por seu ID",
+        "operationId": "get_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaVM"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Agenda"
+        ],
+        "summary": "Altera uma agenda",
+        "description": "Altera uma agenda",
+        "operationId": "put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgendaUM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgendaVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Agenda"
+        ],
+        "summary": "Altera uma agenda",
+        "description": "Altera uma agenda",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Agenda/GerarAgenda": {
+      "post": {
+        "tags": [
+          "Agenda"
+        ],
+        "summary": "Gera agendas à partir de um array de requisições",
+        "description": "Gera agendas à partir de um array de requisições",
+        "operationId": "gerarAgenda",
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GerarAgendaRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AgendaVM"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Agenda/BuscaAgendas": {
+      "post": {
+        "tags": [
+          "Agenda"
+        ],
+        "summary": "Retorna uma lista de agendas",
+        "description": "Retorna uma lista de agendas",
+        "operationId": "buscaAgendas",
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuscaAgendaRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AgendaVM"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Atendimento/{id}/Remarcar": {
+      "post": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Remarca o atendimento",
+        "description": "Remarca o atendimento",
+        "operationId": "remarcar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do agendamento",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Modelo",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemarcacaoRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtendimentoVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Atendimento": {
+      "get": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Retorna uma lista de atendimentos",
+        "description": "Retorna uma lista de atendimentos",
+        "operationId": "get_2",
+        "parameters": [
+          {
+            "name": "agenda",
+            "in": "query",
+            "description": "ID da agenda",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "especialidade",
+            "in": "query",
+            "description": "ID da especialidade",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "unidade",
+            "in": "query",
+            "description": "ID da unidade",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "funcionario",
+            "in": "query",
+            "description": "ID do funcionário",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "data",
+            "in": "query",
+            "description": "Data",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "empresa",
+            "in": "query",
+            "description": "Empresa",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "cidadao",
+            "in": "query",
+            "description": "Cidadão",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "dataInicial",
+            "in": "query",
+            "description": "Data inicial",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "dataFinal",
+            "in": "query",
+            "description": "Data final",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "codValidacao",
+            "in": "query",
+            "description": "Código de validação",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "codTicket",
+            "in": "query",
+            "description": "Código do ticket",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Count",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Fields",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AtendimentoVM"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Cria uma atendimento",
+        "description": "Cria uma atendimento",
+        "operationId": "post_1",
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AtendimentoRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtendimentoVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Atendimento/{id}": {
+      "get": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Retorna atendimento por seu ID",
+        "description": "Retorna atendimento por seu ID",
+        "operationId": "get_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtendimentoVM"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Altera uma atendimento",
+        "description": "Altera uma atendimento",
+        "operationId": "put_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AtendimentoUM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtendimentoVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Altera uma atendimento",
+        "description": "Altera uma atendimento",
+        "operationId": "delete_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Atendimento/{id}/Cancelar": {
+      "post": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Cancela o atendimento",
+        "description": "Cancela o atendimento",
+        "operationId": "cancelar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do atendimento",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelamentoRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtendimentoVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Atendimento/{id}/Status": {
+      "post": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Altera status de um atendimento",
+        "description": "Altera status de um atendimento",
+        "operationId": "alterarStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do atendimento",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtendimentoVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Atendimento/BuscarPorCodValidacao": {
+      "post": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Retorna atendimento pelo seu código de validação",
+        "description": "Retorna atendimento pelo seu código de validação",
+        "operationId": "buscarPorCodValidacao",
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuscarPorCodValidacaoRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtendimentoVM"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Atendimento/{id}/RespostasForm": {
+      "get": {
+        "tags": [
+          "Atendimento"
+        ],
+        "summary": "Retorna respostas do formulário do atendimento",
+        "description": "Retorna respostas do formulário do atendimento",
+        "operationId": "respostasForm",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do atendimento",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtendimentoFormVM"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Especialidade": {
+      "get": {
+        "tags": [
+          "Especialidade"
+        ],
+        "summary": "Retorna uma lista de especialidades",
+        "description": "Retorna uma lista de especialidades",
+        "operationId": "get_4",
+        "parameters": [
+          {
+            "name": "servico",
+            "in": "query",
+            "description": "Serviço",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "unidade",
+            "in": "query",
+            "description": "Unidade",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nome",
+            "in": "query",
+            "description": "Nome da especialidade",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ativo",
+            "in": "query",
+            "description": "Especialidade ativa",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Count",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Fields",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EspecialidadeVM"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Especialidade"
+        ],
+        "summary": "Cria uma especialidade",
+        "description": "Cria uma especialidade",
+        "operationId": "post_2",
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EspecialidadeRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EspecialidadeVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Especialidade/{id}": {
+      "get": {
+        "tags": [
+          "Especialidade"
+        ],
+        "summary": "Retorna especialidade por seu ID",
+        "description": "Retorna especialidade por seu ID",
+        "operationId": "get_5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EspecialidadeVM"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Especialidade"
+        ],
+        "summary": "Altera uma especialidade",
+        "description": "Altera uma especialidade",
+        "operationId": "put_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EspecialidadeUM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EspecialidadeVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Especialidade"
+        ],
+        "summary": "Altera uma especialidade",
+        "description": "Altera uma especialidade",
+        "operationId": "delete_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Formulario": {
+      "get": {
+        "tags": [
+          "Formulario"
+        ],
+        "summary": "Retorna uma lista de formulario",
+        "description": "Retorna uma lista de formulario",
+        "operationId": "get_6",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "description": "Nome",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ativo",
+            "in": "query",
+            "description": "ativo",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Count",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Fields",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FormularioVM"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Formulario"
+        ],
+        "summary": "Cria um formulário",
+        "description": "Cria um formulário",
+        "operationId": "post_3",
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormularioRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormularioVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Formulario/{id}": {
+      "get": {
+        "tags": [
+          "Formulario"
+        ],
+        "summary": "Retorna formulário por seu ID",
+        "description": "Retorna formulário por seu ID",
+        "operationId": "get_7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormularioVM"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Formulario"
+        ],
+        "summary": "Altera um formulario",
+        "description": "Altera um formulario",
+        "operationId": "put_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormularioUM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormularioVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Formulario"
+        ],
+        "summary": "Altera um formulario",
+        "description": "Altera um formulario",
+        "operationId": "delete_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Formulario/{id}/Servico": {
+      "post": {
+        "tags": [
+          "Formulario"
+        ],
+        "summary": "Vincula um serviço ao formulário",
+        "description": "Vincula um serviço ao formulário",
+        "operationId": "vincularServico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do formulário",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormularioServicoRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormularioServicoVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Formulario/{id}/Servico/{id2}": {
+      "delete": {
+        "tags": [
+          "Formulario"
+        ],
+        "summary": "Remove vínculo de serviço com formulário",
+        "description": "Remove vínculo de serviço com formulário",
+        "operationId": "desvincularServico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do formulário",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "id2",
+            "in": "path",
+            "description": "ID do serviço",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Funcionario": {
+      "get": {
+        "tags": [
+          "Funcionario"
+        ],
+        "summary": "Retorna uma lista de funcionários",
+        "description": "Retorna uma lista de funcionários",
+        "operationId": "get_8",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "nome",
+            "in": "query",
+            "description": "nome",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "especialidade",
+            "in": "query",
+            "description": "especialidade",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "servico",
+            "in": "query",
+            "description": "serviço",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "unidade",
+            "in": "query",
+            "description": "unidade",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ativo",
+            "in": "query",
+            "description": "ativo",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Count",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Fields",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FuncionarioVM"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Funcionario"
+        ],
+        "summary": "Cria um funcionário",
+        "description": "Cria um funcionário",
+        "operationId": "post_4",
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FuncionarioRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FuncionarioVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Funcionario/{id}": {
+      "get": {
+        "tags": [
+          "Funcionario"
+        ],
+        "summary": "Retorna funcionário por seu ID",
+        "description": "Retorna funcionário por seu ID",
+        "operationId": "get_9",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FuncionarioVM"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Funcionario"
+        ],
+        "summary": "Altera um funcionário",
+        "description": "Altera um funcionário",
+        "operationId": "put_4",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FuncionarioUM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FuncionarioVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Funcionario"
+        ],
+        "summary": "Altera um funcionário",
+        "description": "Altera um funcionário",
+        "operationId": "delete_4",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Funcionario/{id}/Especialidade": {
+      "post": {
+        "tags": [
+          "Funcionario"
+        ],
+        "summary": "Vincula uma especialidade ao funcionário",
+        "description": "Vincula uma especialidade ao funcionário",
+        "operationId": "vincularEspecialidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do funcionario",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FuncionarioEspecialidadeRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FuncionarioEspecialidadeVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Funcionario/{id}/Especialidade/{id2}": {
+      "delete": {
+        "tags": [
+          "Funcionario"
+        ],
+        "summary": "Remove vínculo de especiaidade com funcionário",
+        "description": "Remove vínculo de especiaidade com funcionário",
+        "operationId": "desvincularEspecialidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do funcionário",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "id2",
+            "in": "path",
+            "description": "ID da especialidade",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Funcionario/{id}/Unidade": {
+      "post": {
+        "tags": [
+          "Funcionario"
+        ],
+        "summary": "Vincula uma unidade ao funcionário",
+        "description": "Vincula uma unidade ao funcionário",
+        "operationId": "vincularUnidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do funcionario",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FuncionarioUnidadeRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FuncionarioUnidadeVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Funcionario/{id}/Unidade/{id2}": {
+      "delete": {
+        "tags": [
+          "Funcionario"
+        ],
+        "summary": "Remove vínculo de unidade com funcionário",
+        "description": "Remove vínculo de unidade com funcionário",
+        "operationId": "desvincularUnidade",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do funcionário",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "id2",
+            "in": "path",
+            "description": "ID da unidade",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Funcionario/{id}/Servico": {
+      "post": {
+        "tags": [
+          "Funcionario"
+        ],
+        "summary": "Vincula um serviço ao funcionário",
+        "description": "Vincula um serviço ao funcionário",
+        "operationId": "vincularServico_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do funcionario",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FuncionarioServicoRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FuncionarioServicoVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Funcionario/{id}/Servico/{id2}": {
+      "delete": {
+        "tags": [
+          "Funcionario"
+        ],
+        "summary": "Remove vínculo de serviço com funcionário",
+        "description": "Remove vínculo de serviço com funcionário",
+        "operationId": "desvincularServico_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do funcionário",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "id2",
+            "in": "path",
+            "description": "ID do serviço",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Servico": {
+      "get": {
+        "tags": [
+          "Servico"
+        ],
+        "summary": "Retorna uma lista de servicos",
+        "description": "Retorna uma lista de servicos",
+        "operationId": "get_10",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "description": "Nome",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ativo",
+            "in": "query",
+            "description": "Ativo",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "unidade",
+            "in": "query",
+            "description": "unidade",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Count",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Fields",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServicoVM"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Servico"
+        ],
+        "summary": "Cria um Servico",
+        "description": "Cria um Servico",
+        "operationId": "post_5",
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicoRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicoVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Servico/{id}": {
+      "get": {
+        "tags": [
+          "Servico"
+        ],
+        "summary": "Retorna serviço por seu ID",
+        "description": "Retorna serviço por seu ID",
+        "operationId": "get_11",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicoVM"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Servico"
+        ],
+        "summary": "Altera um serviço",
+        "description": "Altera um serviço",
+        "operationId": "put_5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicoUM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicoVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Servico"
+        ],
+        "summary": "Altera um serviço",
+        "description": "Altera um serviço",
+        "operationId": "delete_5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Servico/{id}/Unidade": {
+      "post": {
+        "tags": [
+          "Servico"
+        ],
+        "summary": "Vincula o serviço a uma unidade",
+        "description": "Vincula o serviço a uma unidade",
+        "operationId": "vincularUnidade_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do serviço",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicoUnidadeRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicoUnidadeVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Servico/{id}/Unidade/{id2}": {
+      "delete": {
+        "tags": [
+          "Servico"
+        ],
+        "summary": "Remove vínculo de serviço com unidade",
+        "description": "Remove vínculo de serviço com unidade",
+        "operationId": "desvincularUnidade_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do serviço",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "id2",
+            "in": "path",
+            "description": "ID da unidade",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Servico/{id}/Formulario": {
+      "get": {
+        "tags": [
+          "Servico"
+        ],
+        "summary": "Retorna o formulário vinculado ao serviço",
+        "description": "Retorna o formulário vinculado ao serviço",
+        "operationId": "getFormulario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do serviço",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormularioVM"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Unidade": {
+      "get": {
+        "tags": [
+          "Unidade"
+        ],
+        "summary": "Retorna uma lista de unidades",
+        "description": "Retorna uma lista de unidades",
+        "operationId": "get_12",
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "description": "Nome",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ativo",
+            "in": "query",
+            "description": "Unidade ativa",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Count",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "Fields",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UnidadeVM"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Unidade"
+        ],
+        "summary": "Cria uma unidade",
+        "description": "Cria uma unidade",
+        "operationId": "post_6",
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnidadeRM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnidadeVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    },
+    "/api/Unidade/{id}": {
+      "get": {
+        "tags": [
+          "Unidade"
+        ],
+        "summary": "Retorna unidade por seu ID",
+        "description": "Retorna unidade por seu ID",
+        "operationId": "get_13",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnidadeVM"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Unidade"
+        ],
+        "summary": "Altera uma unidade",
+        "description": "Altera uma unidade",
+        "operationId": "put_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de requisição",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnidadeUM"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnidadeVM"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Unidade"
+        ],
+        "summary": "Altera uma unidade",
+        "description": "Altera uma unidade",
+        "operationId": "delete_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AgendaRM": {
+        "required": [
+          "dataHoraFim",
+          "dataHoraInicio",
+          "funcionarioId",
+          "servicoId"
+        ],
+        "type": "object",
+        "properties": {
+          "servicoId": {
+            "type": "integer",
+            "description": "ID do serviço",
+            "format": "int32"
+          },
+          "unidadeId": {
+            "type": "integer",
+            "description": "ID da unidade",
+            "nullable": true,
+            "format": "int32"
+          },
+          "funcionarioId": {
+            "type": "integer",
+            "description": "ID do funcionário",
+            "format": "int32"
+          },
+          "dataHoraInicio": {
+            "type": "string",
+            "description": "Data de início",
+            "format": "date-time"
+          },
+          "dataHoraFim": {
+            "type": "string",
+            "description": "Data de fim",
+            "format": "date-time"
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaUM": {
+        "type": "object",
+        "properties": {
+          "servicoId": {
+            "type": "integer",
+            "description": "ID do serviço",
+            "format": "int32"
+          },
+          "unidadeId": {
+            "type": "integer",
+            "description": "ID da unidade",
+            "nullable": true,
+            "format": "int32"
+          },
+          "funcionarioId": {
+            "type": "integer",
+            "description": "ID do funcionário",
+            "format": "int32"
+          },
+          "dataHoraInicio": {
+            "type": "string",
+            "description": "Data de início",
+            "format": "date-time"
+          },
+          "dataHoraFim": {
+            "type": "string",
+            "description": "Data de fim",
+            "format": "date-time"
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgendaVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID da agenda",
+            "format": "int32"
+          },
+          "servicoId": {
+            "type": "integer",
+            "description": "ID do serviço",
+            "format": "int32"
+          },
+          "servicoNome": {
+            "type": "string",
+            "description": "Nome do serviço",
+            "nullable": true
+          },
+          "unidadeId": {
+            "type": "integer",
+            "description": "ID da unidade",
+            "nullable": true,
+            "format": "int32"
+          },
+          "unidadeNome": {
+            "type": "string",
+            "description": "Nome da unidade",
+            "nullable": true
+          },
+          "funcionarioId": {
+            "type": "integer",
+            "description": "ID do funcionário",
+            "format": "int32"
+          },
+          "funcionarioNome": {
+            "type": "string",
+            "description": "Nome do funcionário",
+            "nullable": true
+          },
+          "dataHoraInicio": {
+            "type": "string",
+            "description": "Data e hora de início",
+            "format": "date-time"
+          },
+          "dataHoraFim": {
+            "type": "string",
+            "description": "Data e hora de fim",
+            "format": "date-time"
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          },
+          "valorCancelamento": {
+            "type": "number",
+            "description": "Valor de cancelamento",
+            "nullable": true,
+            "format": "double"
+          },
+          "tempoAtendimento": {
+            "type": "integer",
+            "description": "Tempo de atendimento em minutos",
+            "nullable": true,
+            "format": "int32"
+          },
+          "empresaId": {
+            "type": "integer",
+            "description": "Id da empresa",
+            "format": "int32"
+          },
+          "agendado": {
+            "type": "boolean",
+            "description": "Flag indicando se agenda esta agendada"
+          },
+          "cidadaoNome": {
+            "type": "string",
+            "description": "Nome do cidadão",
+            "nullable": true
+          },
+          "especialidadeId": {
+            "type": "integer",
+            "description": "ID da especialidade",
+            "nullable": true,
+            "format": "int32"
+          },
+          "especialidadeNome": {
+            "type": "string",
+            "description": "Nome da especialidade",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AtendimentoFormConfiguracaoVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id",
+            "format": "int32"
+          },
+          "respostaObrigatoria": {
+            "type": "boolean",
+            "description": "Resposta obrigatoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AtendimentoFormPerguntaVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id",
+            "format": "int32"
+          },
+          "pergunta": {
+            "type": "string",
+            "description": "Pergunta",
+            "nullable": true
+          },
+          "tipoPergunta": {
+            "type": "integer",
+            "description": "Tipo de pergunta",
+            "format": "int32"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Opções para respostas de multipla escolha",
+            "nullable": true
+          },
+          "configuracao": {
+            "$ref": "#/components/schemas/AtendimentoFormConfiguracaoVM"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AtendimentoFormRespostaVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id",
+            "format": "int32"
+          },
+          "perguntaId": {
+            "type": "integer",
+            "description": "Id da pergunta",
+            "format": "int32"
+          },
+          "resposta": {
+            "type": "string",
+            "description": "Resposta",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AtendimentoFormVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id",
+            "format": "int32"
+          },
+          "formId": {
+            "type": "integer",
+            "description": "Id do formulário",
+            "format": "int32"
+          },
+          "nomeFormulario": {
+            "type": "string",
+            "description": "Nome do formulário",
+            "nullable": true
+          },
+          "atendimentoId": {
+            "type": "integer",
+            "description": "ID do atendimento",
+            "format": "int32"
+          },
+          "perguntas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AtendimentoFormPerguntaVM"
+            },
+            "description": "Perguntas",
+            "nullable": true
+          },
+          "respostas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AtendimentoFormRespostaVM"
+            },
+            "description": "Respostas",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AtendimentoRM": {
+        "required": [
+          "agendaId",
+          "cidadao"
+        ],
+        "type": "object",
+        "properties": {
+          "agendaId": {
+            "type": "integer",
+            "description": "ID da agenda",
+            "format": "int32"
+          },
+          "cidadao": {
+            "$ref": "#/components/schemas/CidadaoRequest"
+          },
+          "atendimentoFormVM": {
+            "$ref": "#/components/schemas/AtendimentoFormVM"
+          },
+          "observacao": {
+            "type": "string",
+            "description": "Observação",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AtendimentoUM": {
+        "type": "object",
+        "properties": {
+          "agendaId": {
+            "type": "integer",
+            "description": "ID da agenda",
+            "format": "int32"
+          },
+          "cidadaoId": {
+            "type": "integer",
+            "description": "ID do cidadão",
+            "format": "int32"
+          },
+          "statusId": {
+            "type": "integer",
+            "description": "ID do status",
+            "format": "int32"
+          },
+          "funcionarioId": {
+            "type": "integer",
+            "description": "ID do funcionário",
+            "format": "int32"
+          },
+          "formId": {
+            "type": "integer",
+            "description": "ID do formulário",
+            "format": "int32"
+          },
+          "observacao": {
+            "type": "string",
+            "description": "Observação",
+            "nullable": true
+          },
+          "ticketCodigo": {
+            "type": "string",
+            "description": "Código do ticket",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AtendimentoVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do atendimento",
+            "format": "int32"
+          },
+          "agendaId": {
+            "type": "integer",
+            "description": "ID da agenda",
+            "format": "int32"
+          },
+          "cidadaoId": {
+            "type": "integer",
+            "description": "ID do cidadão",
+            "format": "int32"
+          },
+          "cidadao": {
+            "$ref": "#/components/schemas/CidadaoVM"
+          },
+          "statusId": {
+            "type": "integer",
+            "description": "ID do status",
+            "format": "int32"
+          },
+          "statusDescricao": {
+            "type": "string",
+            "description": "Descrição do status",
+            "nullable": true
+          },
+          "dataCriacao": {
+            "type": "string",
+            "description": "Data de criação",
+            "format": "date-time"
+          },
+          "dataMarcacao": {
+            "type": "string",
+            "description": "Data de marcação do atendimento",
+            "format": "date-time"
+          },
+          "dataHoraInicio": {
+            "type": "string",
+            "description": "Data e hora de início",
+            "format": "date-time"
+          },
+          "dataHoraFim": {
+            "type": "string",
+            "description": "Data e hora de fim",
+            "format": "date-time"
+          },
+          "funcionarioId": {
+            "type": "integer",
+            "description": "ID do funcionário",
+            "format": "int32"
+          },
+          "funcionarioNome": {
+            "type": "string",
+            "description": "Nome do funcionáio",
+            "nullable": true
+          },
+          "unidadeId": {
+            "type": "integer",
+            "description": "ID da unidade",
+            "nullable": true,
+            "format": "int32"
+          },
+          "unidadeNome": {
+            "type": "string",
+            "description": "Nome da unidade",
+            "nullable": true
+          },
+          "servicoId": {
+            "type": "integer",
+            "description": "ID do serviço",
+            "format": "int32"
+          },
+          "servicoNome": {
+            "type": "string",
+            "description": "Nome do serviço",
+            "nullable": true
+          },
+          "formId": {
+            "type": "integer",
+            "description": "ID do formulário",
+            "nullable": true,
+            "format": "int32"
+          },
+          "codigoValidacao": {
+            "type": "string",
+            "description": "Código de validação",
+            "nullable": true
+          },
+          "codTicket": {
+            "type": "string",
+            "description": "Código do ticket",
+            "nullable": true
+          },
+          "observacao": {
+            "type": "string",
+            "description": "Observação",
+            "nullable": true
+          },
+          "motivoCancelamento": {
+            "type": "string",
+            "description": "Motivo do cancelamento",
+            "nullable": true
+          },
+          "especialidadeId": {
+            "type": "integer",
+            "description": "ID da especialidade",
+            "nullable": true,
+            "format": "int32"
+          },
+          "especialidadeNome": {
+            "type": "string",
+            "description": "Nome da especialidade",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BuscaAgendaRM": {
+        "required": [
+          "dataInicio"
+        ],
+        "type": "object",
+        "properties": {
+          "dataInicio": {
+            "type": "string",
+            "description": "Data de início",
+            "format": "date-time"
+          },
+          "dataFim": {
+            "type": "string",
+            "description": "Data de fim",
+            "nullable": true,
+            "format": "date-time"
+          },
+          "servicoId": {
+            "type": "integer",
+            "description": "ID do serviço",
+            "nullable": true,
+            "format": "int32"
+          },
+          "unidadeId": {
+            "type": "integer",
+            "description": "ID da unidade",
+            "nullable": true,
+            "format": "int32"
+          },
+          "funcionarioId": {
+            "type": "integer",
+            "description": "ID do funcionário",
+            "nullable": true,
+            "format": "int32"
+          },
+          "disponiveis": {
+            "type": "boolean",
+            "description": "Retorna apenas agendas disponíveis",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BuscarPorCodValidacaoRM": {
+        "required": [
+          "codValidacao"
+        ],
+        "type": "object",
+        "properties": {
+          "codValidacao": {
+            "type": "string",
+            "description": "Código de validação"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CancelamentoRM": {
+        "required": [
+          "motivoCancelamento"
+        ],
+        "type": "object",
+        "properties": {
+          "motivoCancelamento": {
+            "type": "string",
+            "description": "Motivo do cancelamento"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CidadaoRequest": {
+        "required": [
+          "cpf",
+          "dataNascimento",
+          "email",
+          "nome",
+          "telefone"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "description": "Nome"
+          },
+          "cpf": {
+            "maxLength": 11,
+            "minLength": 0,
+            "type": "string",
+            "description": "CPF"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email"
+          },
+          "telefone": {
+            "type": "string",
+            "description": "Tefone"
+          },
+          "dataNascimento": {
+            "type": "string",
+            "description": "Data de nascimento",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CidadaoVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome",
+            "nullable": true
+          },
+          "cpf": {
+            "type": "string",
+            "description": "CPF",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Email",
+            "nullable": true
+          },
+          "telefone": {
+            "type": "string",
+            "description": "Telefone",
+            "nullable": true
+          },
+          "dataNascimento": {
+            "type": "string",
+            "description": "Data de nascimento",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EspecialidadeRM": {
+        "required": [
+          "nome",
+          "servicoId"
+        ],
+        "type": "object",
+        "properties": {
+          "servicoId": {
+            "type": "integer",
+            "description": "ID do serviço",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome da especialidade"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descricao",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          },
+          "valorCancelamento": {
+            "type": "number",
+            "description": "Valor do cancelamento",
+            "nullable": true,
+            "format": "double"
+          },
+          "tempoAtendimento": {
+            "type": "integer",
+            "description": "Tempo de atendimento em minutos",
+            "nullable": true,
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EspecialidadeUM": {
+        "type": "object",
+        "properties": {
+          "servicoId": {
+            "type": "integer",
+            "description": "ID do serviço",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome da especialidade",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descricao",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          },
+          "valorCancelamento": {
+            "type": "number",
+            "description": "Valor do cancelamento",
+            "nullable": true,
+            "format": "double"
+          },
+          "tempoAtendimento": {
+            "type": "integer",
+            "description": "Tempo de atendimento em minutos",
+            "nullable": true,
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EspecialidadeVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID",
+            "format": "int32"
+          },
+          "servicoId": {
+            "type": "integer",
+            "description": "ID do serviço",
+            "format": "int32"
+          },
+          "servicoNome": {
+            "type": "string",
+            "description": "Nome do serviço",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome da especialidade",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descricao",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          },
+          "empresaId": {
+            "type": "integer",
+            "description": "ID da empresa",
+            "format": "int32"
+          },
+          "valorCancelamento": {
+            "type": "number",
+            "description": "Valor do cancelamento",
+            "nullable": true,
+            "format": "double"
+          },
+          "tempoAtendimento": {
+            "type": "integer",
+            "description": "Tempo de atendimento em minutos",
+            "nullable": true,
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormConfiguracaoRM": {
+        "type": "object",
+        "properties": {
+          "respostaObrigatoria": {
+            "type": "boolean",
+            "description": "Resposta obrigatoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormConfiguracaoUM": {
+        "type": "object",
+        "properties": {
+          "respostaObrigatoria": {
+            "type": "boolean",
+            "description": "Resposta obrigatoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormConfiguracaoVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id",
+            "format": "int32"
+          },
+          "perguntaId": {
+            "type": "integer",
+            "description": "Id da pergunta",
+            "format": "int32"
+          },
+          "respostaObrigatoria": {
+            "type": "boolean",
+            "description": "Resposta obrigatoria"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormPerguntaRM": {
+        "required": [
+          "configuracao",
+          "formularioId",
+          "pergunta"
+        ],
+        "type": "object",
+        "properties": {
+          "formularioId": {
+            "type": "integer",
+            "description": "Id do formulário",
+            "format": "int32"
+          },
+          "pergunta": {
+            "type": "string",
+            "description": "Pergunta"
+          },
+          "tipoPergunta": {
+            "type": "integer",
+            "description": "Tipo de pergunta",
+            "format": "int32"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Opções para respostas de multipla escolha",
+            "nullable": true
+          },
+          "configuracao": {
+            "$ref": "#/components/schemas/FormConfiguracaoRM"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormPerguntaUM": {
+        "type": "object",
+        "properties": {
+          "pergunta": {
+            "type": "string",
+            "description": "Pergunta",
+            "nullable": true
+          },
+          "tipoPergunta": {
+            "type": "integer",
+            "description": "Tipo de pergunta",
+            "format": "int32"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Opções para respostas de multipla escolha",
+            "nullable": true
+          },
+          "configuracao": {
+            "$ref": "#/components/schemas/FormConfiguracaoUM"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormPerguntaVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id",
+            "format": "int32"
+          },
+          "formularioId": {
+            "type": "integer",
+            "description": "Id do formulário",
+            "format": "int32"
+          },
+          "pergunta": {
+            "type": "string",
+            "description": "Pergunta",
+            "nullable": true
+          },
+          "tipoPergunta": {
+            "type": "integer",
+            "description": "Tipo de pergunta",
+            "format": "int32"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Opções para respostas de multipla escolha",
+            "nullable": true
+          },
+          "configuracao": {
+            "$ref": "#/components/schemas/FormConfiguracaoVM"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormularioRM": {
+        "required": [
+          "nome"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do formulário"
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormularioServicoRM": {
+        "required": [
+          "servicoId"
+        ],
+        "type": "object",
+        "properties": {
+          "servicoId": {
+            "type": "integer",
+            "description": "Id do Servico",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormularioServicoVM": {
+        "type": "object",
+        "properties": {
+          "formularioId": {
+            "type": "integer",
+            "description": "Id do formulário",
+            "format": "int32"
+          },
+          "servicoId": {
+            "type": "integer",
+            "description": "Id do servico",
+            "format": "int32"
+          },
+          "servicoNome": {
+            "type": "string",
+            "description": "Nome do serviço",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormularioUM": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do formulário",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FormularioVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id do formulário",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome do formulário",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          },
+          "empresaId": {
+            "type": "integer",
+            "description": "ID da empresa",
+            "format": "int32"
+          },
+          "perguntas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormPerguntaVM"
+            },
+            "description": "Lista de perguntas",
+            "nullable": true
+          },
+          "servicos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FormularioServicoVM"
+            },
+            "description": "Lista de serviços",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FuncionarioEspecialidadeRM": {
+        "required": [
+          "especialidadeId"
+        ],
+        "type": "object",
+        "properties": {
+          "especialidadeId": {
+            "type": "integer",
+            "description": "Id da Especialidade",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FuncionarioEspecialidadeVM": {
+        "type": "object",
+        "properties": {
+          "funcionarioId": {
+            "type": "integer",
+            "description": "Id do funcionário",
+            "format": "int32"
+          },
+          "especialidadeId": {
+            "type": "integer",
+            "description": "Id da especialidade",
+            "format": "int32"
+          },
+          "especialidadeNome": {
+            "type": "string",
+            "description": "Nome da especialidade",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FuncionarioRM": {
+        "required": [
+          "nome"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do funcionário"
+          },
+          "sobrenome": {
+            "type": "string",
+            "description": "Sobrenome",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Email",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FuncionarioServicoRM": {
+        "required": [
+          "servicoId"
+        ],
+        "type": "object",
+        "properties": {
+          "servicoId": {
+            "type": "integer",
+            "description": "Id do Servico",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FuncionarioServicoVM": {
+        "type": "object",
+        "properties": {
+          "funcionarioId": {
+            "type": "integer",
+            "description": "Id do funcionário",
+            "format": "int32"
+          },
+          "servicoId": {
+            "type": "integer",
+            "description": "Id do servico",
+            "format": "int32"
+          },
+          "servicoNome": {
+            "type": "string",
+            "description": "Nome do serviço",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FuncionarioUM": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do funcionário",
+            "nullable": true
+          },
+          "sobrenome": {
+            "type": "string",
+            "description": "Sobrenome",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Email",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FuncionarioUnidadeRM": {
+        "required": [
+          "unidadeId"
+        ],
+        "type": "object",
+        "properties": {
+          "unidadeId": {
+            "type": "integer",
+            "description": "Id da Unidade",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FuncionarioUnidadeVM": {
+        "type": "object",
+        "properties": {
+          "funcionarioId": {
+            "type": "integer",
+            "description": "Id do funcionário",
+            "format": "int32"
+          },
+          "unidadeId": {
+            "type": "integer",
+            "description": "Id da unidade",
+            "format": "int32"
+          },
+          "unidadeNome": {
+            "type": "string",
+            "description": "Nome da unidade",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FuncionarioVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id do funcionário",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome do funcionário",
+            "nullable": true
+          },
+          "sobrenome": {
+            "type": "string",
+            "description": "Sobrenome",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "Email",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          },
+          "empresaId": {
+            "type": "integer",
+            "description": "Id da empresa",
+            "format": "int32"
+          },
+          "nomeSistema": {
+            "type": "string",
+            "description": "Nome do funcionário",
+            "nullable": true
+          },
+          "servicos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FuncionarioServicoVM"
+            },
+            "description": "Serviços do funcionário",
+            "nullable": true
+          },
+          "unidades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FuncionarioUnidadeVM"
+            },
+            "description": "Unidades do funcionário",
+            "nullable": true
+          },
+          "especialidades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FuncionarioEspecialidadeVM"
+            },
+            "description": "Especialidades do funcionário",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GerarAgendaRM": {
+        "required": [
+          "items"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgendaRM"
+            },
+            "description": "Lista de agendas a serem criadas"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "RemarcacaoRM": {
+        "required": [
+          "novaAgendaId"
+        ],
+        "type": "object",
+        "properties": {
+          "novaAgendaId": {
+            "type": "integer",
+            "description": "ID da nova agenda",
+            "format": "int32"
+          },
+          "motivoRemarcacao": {
+            "type": "string",
+            "description": "Motivo da remarcação",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServicoRM": {
+        "required": [
+          "nome"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do serviço"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          },
+          "valorCancelamento": {
+            "type": "number",
+            "description": "Valor de cancelamento",
+            "nullable": true,
+            "format": "double"
+          },
+          "tempoAtendimento": {
+            "type": "integer",
+            "description": "Tempo de atendimento em minutos",
+            "nullable": true,
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServicoUM": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome do serviço",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          },
+          "valorCancelamento": {
+            "type": "number",
+            "description": "Valor de cancelamento",
+            "nullable": true,
+            "format": "double"
+          },
+          "tempoAtendimento": {
+            "type": "integer",
+            "description": "Tempo de atendimento em minutos",
+            "nullable": true,
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServicoUnidadeRM": {
+        "required": [
+          "unidadeId"
+        ],
+        "type": "object",
+        "properties": {
+          "unidadeId": {
+            "type": "integer",
+            "description": "Id da Unidade",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServicoUnidadeVM": {
+        "type": "object",
+        "properties": {
+          "servicoId": {
+            "type": "integer",
+            "description": "Id do servico",
+            "format": "int32"
+          },
+          "unidadeId": {
+            "type": "integer",
+            "description": "Id da unidade",
+            "format": "int32"
+          },
+          "unidadeNome": {
+            "type": "string",
+            "description": "Nome da unidade",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServicoVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Id do serviço",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome do serviço",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          },
+          "empresaId": {
+            "type": "integer",
+            "description": "ID da empresa",
+            "format": "int32"
+          },
+          "valorCancelamento": {
+            "type": "number",
+            "description": "Valor de cancelamento",
+            "nullable": true,
+            "format": "double"
+          },
+          "tempoAtendimento": {
+            "type": "integer",
+            "description": "Tempo de atendimento em minutos",
+            "nullable": true,
+            "format": "int32"
+          },
+          "unidades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServicoUnidadeVM"
+            },
+            "description": "Unidades do serviço",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatusRM": {
+        "required": [
+          "statusId"
+        ],
+        "type": "object",
+        "properties": {
+          "statusId": {
+            "type": "integer",
+            "description": "ID do status",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnidadeRM": {
+        "required": [
+          "nome"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome da unidade"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descricao",
+            "nullable": true
+          },
+          "cep": {
+            "type": "string",
+            "description": "CEP",
+            "nullable": true
+          },
+          "logradouro": {
+            "type": "string",
+            "description": "Logradouro",
+            "nullable": true
+          },
+          "numero": {
+            "type": "string",
+            "description": "Número",
+            "nullable": true
+          },
+          "bairro": {
+            "type": "string",
+            "description": "Bairro",
+            "nullable": true
+          },
+          "cidade": {
+            "type": "string",
+            "description": "Cidade",
+            "nullable": true
+          },
+          "uf": {
+            "type": "string",
+            "description": "UF",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnidadeUM": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "description": "Nome da unidade",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descricao",
+            "nullable": true
+          },
+          "cep": {
+            "type": "string",
+            "description": "CEP",
+            "nullable": true
+          },
+          "logradouro": {
+            "type": "string",
+            "description": "Logradouro",
+            "nullable": true
+          },
+          "numero": {
+            "type": "string",
+            "description": "Número",
+            "nullable": true
+          },
+          "bairro": {
+            "type": "string",
+            "description": "Bairro",
+            "nullable": true
+          },
+          "cidade": {
+            "type": "string",
+            "description": "Cidade",
+            "nullable": true
+          },
+          "uf": {
+            "type": "string",
+            "description": "UF",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnidadeVM": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome da unidade",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descricao",
+            "nullable": true
+          },
+          "cep": {
+            "type": "string",
+            "description": "CEP",
+            "nullable": true
+          },
+          "logradouro": {
+            "type": "string",
+            "description": "Logradouro",
+            "nullable": true
+          },
+          "numero": {
+            "type": "string",
+            "description": "Número",
+            "nullable": true
+          },
+          "bairro": {
+            "type": "string",
+            "description": "Bairro",
+            "nullable": true
+          },
+          "cidade": {
+            "type": "string",
+            "description": "Cidade",
+            "nullable": true
+          },
+          "uf": {
+            "type": "string",
+            "description": "UF",
+            "nullable": true
+          },
+          "ativo": {
+            "type": "boolean",
+            "description": "Flag de ativo"
+          },
+          "empresaId": {
+            "type": "integer",
+            "description": "ID da empresa",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://login.microsoftonline.com/9a77c80a-ac3c-4027-b72c-0e15acd50d57/oauth2/v2.0/token",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  }
+}
