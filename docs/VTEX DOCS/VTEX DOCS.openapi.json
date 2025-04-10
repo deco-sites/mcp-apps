@@ -1,0 +1,632 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "VTEX API",
+    "description": "VTEX Commerce APIs",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://{accountName}.{environment}.com.br",
+      "variables": {
+        "accountName": {
+          "description": "VTEX account name",
+          "default": "youraccount"
+        },
+        "environment": {
+          "description": "VTEX environment",
+          "default": "vtexcommercestable"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/api/catalog/pvt/product": {
+      "post": {
+        "summary": "Create Product",
+        "tags": [
+          "Catalog"
+        ],
+        "description": "Creates a new product on the catalog",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "appKey": [],
+            "appToken": []
+          }
+        ]
+      }
+    },
+    "/api/checkout/pub/orderForm": {
+      "post": {
+        "summary": "Create Order Form",
+        "tags": [
+          "Checkout"
+        ],
+        "description": "Creates a new order form",
+        "responses": {
+          "200": {
+            "description": "Order form created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderForm"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/pvt/orders/{orderId}": {
+      "get": {
+        "summary": "Get Order",
+        "tags": [
+          "OMS"
+        ],
+        "description": "Retrieves order information by ID",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "appKey": [],
+            "appToken": []
+          }
+        ]
+      }
+    },
+    "/api/logistics/pvt/inventory/skus/{skuId}/warehouses/{warehouseId}": {
+      "put": {
+        "summary": "Update Inventory",
+        "tags": [
+          "Logistics"
+        ],
+        "description": "Updates inventory information for a specific SKU and warehouse",
+        "parameters": [
+          {
+            "name": "skuId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SKU ID"
+          },
+          {
+            "name": "warehouseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Warehouse ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Inventory updated successfully"
+          }
+        },
+        "security": [
+          {
+            "appKey": [],
+            "appToken": []
+          }
+        ]
+      }
+    },
+    "/api/pricing/prices/{skuId}": {
+      "get": {
+        "summary": "Get Price",
+        "tags": [
+          "Pricing"
+        ],
+        "description": "Retrieves price information for a specific SKU",
+        "parameters": [
+          {
+            "name": "skuId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SKU ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Price information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Price"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "appKey": [],
+            "appToken": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProductRequest": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "Product name"
+          },
+          "CategoryPath": {
+            "type": "string",
+            "description": "Category path"
+          },
+          "BrandId": {
+            "type": "integer",
+            "description": "Brand ID"
+          },
+          "DepartmentId": {
+            "type": "integer",
+            "description": "Department ID"
+          },
+          "Description": {
+            "type": "string",
+            "description": "Product description"
+          },
+          "Title": {
+            "type": "string",
+            "description": "Product title"
+          }
+        },
+        "required": [
+          "Name",
+          "CategoryPath",
+          "BrandId",
+          "DepartmentId"
+        ]
+      },
+      "ProductResponse": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "Product ID"
+          },
+          "Name": {
+            "type": "string",
+            "description": "Product name"
+          },
+          "CategoryPath": {
+            "type": "string",
+            "description": "Category path"
+          },
+          "BrandId": {
+            "type": "integer",
+            "description": "Brand ID"
+          },
+          "IsActive": {
+            "type": "boolean",
+            "description": "Product status"
+          }
+        }
+      },
+      "OrderForm": {
+        "type": "object",
+        "properties": {
+          "orderFormId": {
+            "type": "string",
+            "description": "Order form ID"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderFormItem"
+            }
+          },
+          "totalizers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Totalizer"
+            }
+          },
+          "value": {
+            "type": "number",
+            "description": "Total order value"
+          }
+        }
+      },
+      "OrderFormItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Item ID"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Item quantity"
+          },
+          "seller": {
+            "type": "string",
+            "description": "Seller ID"
+          },
+          "price": {
+            "type": "number",
+            "description": "Item price"
+          }
+        }
+      },
+      "Totalizer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Totalizer ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Totalizer name"
+          },
+          "value": {
+            "type": "number",
+            "description": "Totalizer value"
+          }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "description": "Order ID"
+          },
+          "sequence": {
+            "type": "string",
+            "description": "Order sequence"
+          },
+          "status": {
+            "type": "string",
+            "description": "Order status"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Order creation date"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "totals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Totalizer"
+            }
+          },
+          "clientProfileData": {
+            "$ref": "#/components/schemas/ClientProfile"
+          },
+          "shippingData": {
+            "$ref": "#/components/schemas/ShippingData"
+          },
+          "paymentData": {
+            "$ref": "#/components/schemas/PaymentData"
+          }
+        }
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Item ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Item name"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Item quantity"
+          },
+          "price": {
+            "type": "number",
+            "description": "Item price"
+          },
+          "unitMultiplier": {
+            "type": "number",
+            "description": "Unit multiplier"
+          }
+        }
+      },
+      "ClientProfile": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Client email"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "Client first name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Client last name"
+          },
+          "document": {
+            "type": "string",
+            "description": "Client document"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Client phone"
+          }
+        }
+      },
+      "ShippingData": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "logisticsInfo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogisticsInfo"
+            }
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "addressId": {
+            "type": "string",
+            "description": "Address ID"
+          },
+          "addressType": {
+            "type": "string",
+            "description": "Address type"
+          },
+          "city": {
+            "type": "string",
+            "description": "City"
+          },
+          "state": {
+            "type": "string",
+            "description": "State"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country"
+          },
+          "street": {
+            "type": "string",
+            "description": "Street"
+          },
+          "number": {
+            "type": "string",
+            "description": "Number"
+          },
+          "neighborhood": {
+            "type": "string",
+            "description": "Neighborhood"
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Postal code"
+          }
+        }
+      },
+      "LogisticsInfo": {
+        "type": "object",
+        "properties": {
+          "itemIndex": {
+            "type": "integer",
+            "description": "Item index"
+          },
+          "selectedSla": {
+            "type": "string",
+            "description": "Selected SLA"
+          },
+          "price": {
+            "type": "number",
+            "description": "Shipping price"
+          },
+          "listPrice": {
+            "type": "number",
+            "description": "Shipping list price"
+          },
+          "deliveryWindow": {
+            "$ref": "#/components/schemas/DeliveryWindow"
+          }
+        }
+      },
+      "DeliveryWindow": {
+        "type": "object",
+        "properties": {
+          "startDateUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Delivery window start date"
+          },
+          "endDateUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Delivery window end date"
+          }
+        }
+      },
+      "PaymentData": {
+        "type": "object",
+        "properties": {
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction"
+            }
+          }
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Transaction ID"
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Payment"
+            }
+          }
+        }
+      },
+      "Payment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Payment ID"
+          },
+          "paymentSystem": {
+            "type": "string",
+            "description": "Payment system"
+          },
+          "value": {
+            "type": "number",
+            "description": "Payment value"
+          },
+          "installments": {
+            "type": "integer",
+            "description": "Number of installments"
+          },
+          "referenceValue": {
+            "type": "number",
+            "description": "Reference value"
+          }
+        }
+      },
+      "InventoryUpdate": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "integer",
+            "description": "Inventory quantity"
+          },
+          "dateUtc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Update date"
+          },
+          "unlimitedQuantity": {
+            "type": "boolean",
+            "description": "Unlimited quantity flag"
+          }
+        },
+        "required": [
+          "quantity"
+        ]
+      },
+      "Price": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "description": "Item ID"
+          },
+          "listPrice": {
+            "type": "number",
+            "description": "List price"
+          },
+          "costPrice": {
+            "type": "number",
+            "description": "Cost price"
+          },
+          "basePrice": {
+            "type": "number",
+            "description": "Base price"
+          },
+          "markup": {
+            "type": "number",
+            "description": "Markup"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "appKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-VTEX-API-AppKey"
+      },
+      "appToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-VTEX-API-AppToken"
+      }
+    }
+  }
+}
