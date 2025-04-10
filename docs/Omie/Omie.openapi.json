@@ -1,0 +1,771 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Omie API",
+    "description": "API para integração com o sistema Omie",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Suporte Omie",
+      "url": "https://developer.omie.com.br"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://app.omie.com.br/api/v1"
+    }
+  ],
+  "paths": {
+    "/produtos/ncm/": {
+      "post": {
+        "summary": "Consulta NCM",
+        "description": "Consulta informações sobre Nomenclatura Comum do Mercosul",
+        "operationId": "ConsultarNCM",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NCMRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NCMResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/cadastro/": {
+      "post": {
+        "summary": "Cadastro de produtos",
+        "description": "Inclui, altera, exclui ou consulta produtos no Omie",
+        "operationId": "CadastrarProduto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/departamentos/": {
+      "post": {
+        "summary": "Departamentos",
+        "description": "Inclui, altera, exclui ou consulta departamentos no Omie",
+        "operationId": "GerenciarDepartamentos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartamentoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartamentoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/categorias/": {
+      "post": {
+        "summary": "Categorias",
+        "description": "Inclui, altera, exclui ou consulta categorias no Omie",
+        "operationId": "GerenciarCategorias",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoriaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/clientesfornecedores/": {
+      "post": {
+        "summary": "Clientes e Fornecedores",
+        "description": "Inclui, altera, exclui ou consulta clientes e fornecedores no Omie",
+        "operationId": "GerenciarClientesFornecedores",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteFornecedorRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteFornecedorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/contapagar/": {
+      "post": {
+        "summary": "Contas a Pagar",
+        "description": "Inclui, altera, exclui ou consulta contas a pagar no Omie",
+        "operationId": "GerenciarContasPagar",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContaPagarRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContaPagarResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/contareceber/": {
+      "post": {
+        "summary": "Contas a Receber",
+        "description": "Inclui, altera, exclui ou consulta contas a receber no Omie",
+        "operationId": "GerenciarContasReceber",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContaReceberRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContaReceberResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estoque/local/": {
+      "post": {
+        "summary": "Locais de Estoque",
+        "description": "Inclui, altera, exclui ou consulta locais de estoque no Omie",
+        "operationId": "GerenciarLocaisEstoque",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalEstoqueRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalEstoqueResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/pedido/": {
+      "post": {
+        "summary": "Pedidos de Vendas",
+        "description": "Inclui, altera, exclui ou consulta pedidos de vendas no Omie",
+        "operationId": "GerenciarPedidosVendas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PedidoVendaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoVendaResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "NCMRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do método"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta de aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "codigo": {
+                  "type": "string",
+                  "description": "Código do NCM"
+                }
+              }
+            }
+          }
+        }
+      },
+      "NCMResponse": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Código do NCM"
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do NCM"
+          }
+        }
+      },
+      "ProdutoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do método"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta de aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "codigo_produto": {
+                  "type": "string",
+                  "description": "Código do produto"
+                },
+                "descricao": {
+                  "type": "string",
+                  "description": "Descrição do produto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ProdutoResponse": {
+        "type": "object",
+        "properties": {
+          "codigo_produto": {
+            "type": "string",
+            "description": "Código do produto"
+          },
+          "codigo_produto_integracao": {
+            "type": "string",
+            "description": "Código de integração do produto"
+          },
+          "codigo_status": {
+            "type": "string",
+            "description": "Código do status da operação"
+          },
+          "descricao_status": {
+            "type": "string",
+            "description": "Descrição do status da operação"
+          }
+        }
+      },
+      "DepartamentoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do método"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta de aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "codigo": {
+                  "type": "string",
+                  "description": "Código do departamento"
+                },
+                "nome": {
+                  "type": "string",
+                  "description": "Nome do departamento"
+                }
+              }
+            }
+          }
+        }
+      },
+      "DepartamentoResponse": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Código do departamento"
+          },
+          "codigo_status": {
+            "type": "string",
+            "description": "Código do status da operação"
+          },
+          "descricao_status": {
+            "type": "string",
+            "description": "Descrição do status da operação"
+          }
+        }
+      },
+      "CategoriaRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do método"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta de aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "codigo": {
+                  "type": "string",
+                  "description": "Código da categoria"
+                },
+                "descricao": {
+                  "type": "string",
+                  "description": "Descrição da categoria"
+                }
+              }
+            }
+          }
+        }
+      },
+      "CategoriaResponse": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "description": "Código da categoria"
+          },
+          "codigo_status": {
+            "type": "string",
+            "description": "Código do status da operação"
+          },
+          "descricao_status": {
+            "type": "string",
+            "description": "Descrição do status da operação"
+          }
+        }
+      },
+      "ClienteFornecedorRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do método"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta de aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "codigo_cliente_omie": {
+                  "type": "string",
+                  "description": "Código do cliente/fornecedor no Omie"
+                },
+                "razao_social": {
+                  "type": "string",
+                  "description": "Razão social"
+                },
+                "cnpj_cpf": {
+                  "type": "string",
+                  "description": "CNPJ ou CPF"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ClienteFornecedorResponse": {
+        "type": "object",
+        "properties": {
+          "codigo_cliente_omie": {
+            "type": "string",
+            "description": "Código do cliente/fornecedor no Omie"
+          },
+          "codigo_cliente_integracao": {
+            "type": "string",
+            "description": "Código de integração do cliente/fornecedor"
+          },
+          "codigo_status": {
+            "type": "string",
+            "description": "Código do status da operação"
+          },
+          "descricao_status": {
+            "type": "string",
+            "description": "Descrição do status da operação"
+          }
+        }
+      },
+      "ContaPagarRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do método"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta de aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "codigo_lancamento_omie": {
+                  "type": "string",
+                  "description": "Código do lançamento no Omie"
+                },
+                "data_vencimento": {
+                  "type": "string",
+                  "description": "Data de vencimento"
+                },
+                "valor_documento": {
+                  "type": "number",
+                  "description": "Valor do documento"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ContaPagarResponse": {
+        "type": "object",
+        "properties": {
+          "codigo_lancamento_omie": {
+            "type": "string",
+            "description": "Código do lançamento no Omie"
+          },
+          "codigo_lancamento_integracao": {
+            "type": "string",
+            "description": "Código de integração do lançamento"
+          },
+          "codigo_status": {
+            "type": "string",
+            "description": "Código do status da operação"
+          },
+          "descricao_status": {
+            "type": "string",
+            "description": "Descrição do status da operação"
+          }
+        }
+      },
+      "ContaReceberRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do método"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta de aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "codigo_lancamento_omie": {
+                  "type": "string",
+                  "description": "Código do lançamento no Omie"
+                },
+                "data_vencimento": {
+                  "type": "string",
+                  "description": "Data de vencimento"
+                },
+                "valor_documento": {
+                  "type": "number",
+                  "description": "Valor do documento"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ContaReceberResponse": {
+        "type": "object",
+        "properties": {
+          "codigo_lancamento_omie": {
+            "type": "string",
+            "description": "Código do lançamento no Omie"
+          },
+          "codigo_lancamento_integracao": {
+            "type": "string",
+            "description": "Código de integração do lançamento"
+          },
+          "codigo_status": {
+            "type": "string",
+            "description": "Código do status da operação"
+          },
+          "descricao_status": {
+            "type": "string",
+            "description": "Descrição do status da operação"
+          }
+        }
+      },
+      "LocalEstoqueRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do método"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta de aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "codigo_local_estoque": {
+                  "type": "string",
+                  "description": "Código do local de estoque"
+                },
+                "descricao": {
+                  "type": "string",
+                  "description": "Descrição do local de estoque"
+                }
+              }
+            }
+          }
+        }
+      },
+      "LocalEstoqueResponse": {
+        "type": "object",
+        "properties": {
+          "codigo_local_estoque": {
+            "type": "string",
+            "description": "Código do local de estoque"
+          },
+          "codigo_status": {
+            "type": "string",
+            "description": "Código do status da operação"
+          },
+          "descricao_status": {
+            "type": "string",
+            "description": "Descrição do status da operação"
+          }
+        }
+      },
+      "PedidoVendaRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do método"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta de aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "codigo_pedido": {
+                  "type": "string",
+                  "description": "Código do pedido"
+                },
+                "data_previsao": {
+                  "type": "string",
+                  "description": "Data de previsão de entrega"
+                },
+                "codigo_cliente": {
+                  "type": "string",
+                  "description": "Código do cliente"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PedidoVendaResponse": {
+        "type": "object",
+        "properties": {
+          "codigo_pedido": {
+            "type": "string",
+            "description": "Código do pedido"
+          },
+          "codigo_pedido_integracao": {
+            "type": "string",
+            "description": "Código de integração do pedido"
+          },
+          "codigo_status": {
+            "type": "string",
+            "description": "Código do status da operação"
+          },
+          "descricao_status": {
+            "type": "string",
+            "description": "Descrição do status da operação"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "name": "app_key",
+        "in": "header"
+      },
+      "apiSecret": {
+        "type": "apiKey",
+        "name": "app_secret",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKey": [],
+      "apiSecret": []
+    }
+  ]
+}
