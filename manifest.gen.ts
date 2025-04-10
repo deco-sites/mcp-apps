@@ -4,40 +4,154 @@
 
 import * as $$$$$$$$$$$0 from "./apps/deco/website.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$0 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
-import * as $$$1 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$2 from "./loaders/vtex/api/GET/pricingConfig.ts";
-import * as $$$3 from "./loaders/vtex/api/GET/pricingMigration.ts";
-import * as $$$5 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$4 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
-import * as $$$6 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
-import * as $$$7 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
-import * as $$$9 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$8 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
-import * as $$$10 from "./loaders/vtex/api/GET/pricingTables.ts";
-import * as $$$11 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$12 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$13 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
+import * as $$$0 from "./loaders/Filazero/Filazero/DELETE/apiAgenda:id.ts";
+import * as $$$1 from "./loaders/Filazero/Filazero/DELETE/apiAtendimento:id.ts";
+import * as $$$2 from "./loaders/Filazero/Filazero/DELETE/apiEspecialidade:id.ts";
+import * as $$$3 from "./loaders/Filazero/Filazero/DELETE/apiFormulario:id.ts";
+import * as $$$4 from "./loaders/Filazero/Filazero/DELETE/apiFormulario:idServico:id2.ts";
+import * as $$$5 from "./loaders/Filazero/Filazero/DELETE/apiFuncionario:id.ts";
+import * as $$$6 from "./loaders/Filazero/Filazero/DELETE/apiFuncionario:idEspecialidade:id2.ts";
+import * as $$$7 from "./loaders/Filazero/Filazero/DELETE/apiFuncionario:idServico:id2.ts";
+import * as $$$8 from "./loaders/Filazero/Filazero/DELETE/apiFuncionario:idUnidade:id2.ts";
+import * as $$$9 from "./loaders/Filazero/Filazero/DELETE/apiServico:id.ts";
+import * as $$$10 from "./loaders/Filazero/Filazero/DELETE/apiServico:idUnidade:id2.ts";
+import * as $$$11 from "./loaders/Filazero/Filazero/DELETE/apiUnidade:id.ts";
+import * as $$$13 from "./loaders/Filazero/Filazero/GET/apiAgenda:id.ts";
+import * as $$$12 from "./loaders/Filazero/Filazero/GET/apiAgenda.ts";
+import * as $$$15 from "./loaders/Filazero/Filazero/GET/apiAtendimento:id.ts";
+import * as $$$16 from "./loaders/Filazero/Filazero/GET/apiAtendimento:idRespostasForm.ts";
+import * as $$$14 from "./loaders/Filazero/Filazero/GET/apiAtendimento.ts";
+import * as $$$18 from "./loaders/Filazero/Filazero/GET/apiEspecialidade:id.ts";
+import * as $$$17 from "./loaders/Filazero/Filazero/GET/apiEspecialidade.ts";
+import * as $$$20 from "./loaders/Filazero/Filazero/GET/apiFormulario:id.ts";
+import * as $$$19 from "./loaders/Filazero/Filazero/GET/apiFormulario.ts";
+import * as $$$22 from "./loaders/Filazero/Filazero/GET/apiFuncionario:id.ts";
+import * as $$$21 from "./loaders/Filazero/Filazero/GET/apiFuncionario.ts";
+import * as $$$24 from "./loaders/Filazero/Filazero/GET/apiServico:id.ts";
+import * as $$$25 from "./loaders/Filazero/Filazero/GET/apiServico:idFormulario.ts";
+import * as $$$23 from "./loaders/Filazero/Filazero/GET/apiServico.ts";
+import * as $$$27 from "./loaders/Filazero/Filazero/GET/apiUnidade:id.ts";
+import * as $$$26 from "./loaders/Filazero/Filazero/GET/apiUnidade.ts";
+import * as $$$28 from "./loaders/Filazero/Filazero/POST/apiAgenda.ts";
+import * as $$$29 from "./loaders/Filazero/Filazero/POST/apiAgendaBuscaAgendas.ts";
+import * as $$$30 from "./loaders/Filazero/Filazero/POST/apiAgendaGerarAgenda.ts";
+import * as $$$32 from "./loaders/Filazero/Filazero/POST/apiAtendimento:idCancelar.ts";
+import * as $$$33 from "./loaders/Filazero/Filazero/POST/apiAtendimento:idRemarcar.ts";
+import * as $$$34 from "./loaders/Filazero/Filazero/POST/apiAtendimento:idStatus.ts";
+import * as $$$31 from "./loaders/Filazero/Filazero/POST/apiAtendimento.ts";
+import * as $$$35 from "./loaders/Filazero/Filazero/POST/apiAtendimentoBuscarPorCodValidacao.ts";
+import * as $$$36 from "./loaders/Filazero/Filazero/POST/apiEspecialidade.ts";
+import * as $$$38 from "./loaders/Filazero/Filazero/POST/apiFormulario:idServico.ts";
+import * as $$$37 from "./loaders/Filazero/Filazero/POST/apiFormulario.ts";
+import * as $$$40 from "./loaders/Filazero/Filazero/POST/apiFuncionario:idEspecialidade.ts";
+import * as $$$41 from "./loaders/Filazero/Filazero/POST/apiFuncionario:idServico.ts";
+import * as $$$42 from "./loaders/Filazero/Filazero/POST/apiFuncionario:idUnidade.ts";
+import * as $$$39 from "./loaders/Filazero/Filazero/POST/apiFuncionario.ts";
+import * as $$$44 from "./loaders/Filazero/Filazero/POST/apiServico:idUnidade.ts";
+import * as $$$43 from "./loaders/Filazero/Filazero/POST/apiServico.ts";
+import * as $$$45 from "./loaders/Filazero/Filazero/POST/apiUnidade.ts";
+import * as $$$46 from "./loaders/Filazero/Filazero/PUT/apiAgenda:id.ts";
+import * as $$$47 from "./loaders/Filazero/Filazero/PUT/apiAtendimento:id.ts";
+import * as $$$48 from "./loaders/Filazero/Filazero/PUT/apiEspecialidade:id.ts";
+import * as $$$49 from "./loaders/Filazero/Filazero/PUT/apiFormulario:id.ts";
+import * as $$$50 from "./loaders/Filazero/Filazero/PUT/apiFuncionario:id.ts";
+import * as $$$51 from "./loaders/Filazero/Filazero/PUT/apiServico:id.ts";
+import * as $$$52 from "./loaders/Filazero/Filazero/PUT/apiUnidade:id.ts";
+import * as $$$53 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
+import * as $$$54 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$55 from "./loaders/vtex/api/GET/pricingConfig.ts";
+import * as $$$56 from "./loaders/vtex/api/GET/pricingMigration.ts";
+import * as $$$58 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$57 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
+import * as $$$59 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
+import * as $$$60 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
+import * as $$$62 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$61 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
+import * as $$$63 from "./loaders/vtex/api/GET/pricingTables.ts";
+import * as $$$64 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$65 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$66 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
 
 const manifest = {
   "loaders": {
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$0,
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$1,
-    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$2,
-    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$3,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$5,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$4,
-    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$6,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
+    "site/loaders/Filazero/Filazero/DELETE/apiAgenda:id.ts": $$$0,
+    "site/loaders/Filazero/Filazero/DELETE/apiAtendimento:id.ts": $$$1,
+    "site/loaders/Filazero/Filazero/DELETE/apiEspecialidade:id.ts": $$$2,
+    "site/loaders/Filazero/Filazero/DELETE/apiFormulario:id.ts": $$$3,
+    "site/loaders/Filazero/Filazero/DELETE/apiFormulario:idServico:id2.ts":
+      $$$4,
+    "site/loaders/Filazero/Filazero/DELETE/apiFuncionario:id.ts": $$$5,
+    "site/loaders/Filazero/Filazero/DELETE/apiFuncionario:idEspecialidade:id2.ts":
+      $$$6,
+    "site/loaders/Filazero/Filazero/DELETE/apiFuncionario:idServico:id2.ts":
       $$$7,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts": $$$9,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$8,
-    "site/loaders/vtex/api/GET/pricingTables.ts": $$$10,
+    "site/loaders/Filazero/Filazero/DELETE/apiFuncionario:idUnidade:id2.ts":
+      $$$8,
+    "site/loaders/Filazero/Filazero/DELETE/apiServico:id.ts": $$$9,
+    "site/loaders/Filazero/Filazero/DELETE/apiServico:idUnidade:id2.ts": $$$10,
+    "site/loaders/Filazero/Filazero/DELETE/apiUnidade:id.ts": $$$11,
+    "site/loaders/Filazero/Filazero/GET/apiAgenda:id.ts": $$$13,
+    "site/loaders/Filazero/Filazero/GET/apiAgenda.ts": $$$12,
+    "site/loaders/Filazero/Filazero/GET/apiAtendimento:id.ts": $$$15,
+    "site/loaders/Filazero/Filazero/GET/apiAtendimento:idRespostasForm.ts":
+      $$$16,
+    "site/loaders/Filazero/Filazero/GET/apiAtendimento.ts": $$$14,
+    "site/loaders/Filazero/Filazero/GET/apiEspecialidade:id.ts": $$$18,
+    "site/loaders/Filazero/Filazero/GET/apiEspecialidade.ts": $$$17,
+    "site/loaders/Filazero/Filazero/GET/apiFormulario:id.ts": $$$20,
+    "site/loaders/Filazero/Filazero/GET/apiFormulario.ts": $$$19,
+    "site/loaders/Filazero/Filazero/GET/apiFuncionario:id.ts": $$$22,
+    "site/loaders/Filazero/Filazero/GET/apiFuncionario.ts": $$$21,
+    "site/loaders/Filazero/Filazero/GET/apiServico:id.ts": $$$24,
+    "site/loaders/Filazero/Filazero/GET/apiServico:idFormulario.ts": $$$25,
+    "site/loaders/Filazero/Filazero/GET/apiServico.ts": $$$23,
+    "site/loaders/Filazero/Filazero/GET/apiUnidade:id.ts": $$$27,
+    "site/loaders/Filazero/Filazero/GET/apiUnidade.ts": $$$26,
+    "site/loaders/Filazero/Filazero/POST/apiAgenda.ts": $$$28,
+    "site/loaders/Filazero/Filazero/POST/apiAgendaBuscaAgendas.ts": $$$29,
+    "site/loaders/Filazero/Filazero/POST/apiAgendaGerarAgenda.ts": $$$30,
+    "site/loaders/Filazero/Filazero/POST/apiAtendimento:idCancelar.ts": $$$32,
+    "site/loaders/Filazero/Filazero/POST/apiAtendimento:idRemarcar.ts": $$$33,
+    "site/loaders/Filazero/Filazero/POST/apiAtendimento:idStatus.ts": $$$34,
+    "site/loaders/Filazero/Filazero/POST/apiAtendimento.ts": $$$31,
+    "site/loaders/Filazero/Filazero/POST/apiAtendimentoBuscarPorCodValidacao.ts":
+      $$$35,
+    "site/loaders/Filazero/Filazero/POST/apiEspecialidade.ts": $$$36,
+    "site/loaders/Filazero/Filazero/POST/apiFormulario:idServico.ts": $$$38,
+    "site/loaders/Filazero/Filazero/POST/apiFormulario.ts": $$$37,
+    "site/loaders/Filazero/Filazero/POST/apiFuncionario:idEspecialidade.ts":
+      $$$40,
+    "site/loaders/Filazero/Filazero/POST/apiFuncionario:idServico.ts": $$$41,
+    "site/loaders/Filazero/Filazero/POST/apiFuncionario:idUnidade.ts": $$$42,
+    "site/loaders/Filazero/Filazero/POST/apiFuncionario.ts": $$$39,
+    "site/loaders/Filazero/Filazero/POST/apiServico:idUnidade.ts": $$$44,
+    "site/loaders/Filazero/Filazero/POST/apiServico.ts": $$$43,
+    "site/loaders/Filazero/Filazero/POST/apiUnidade.ts": $$$45,
+    "site/loaders/Filazero/Filazero/PUT/apiAgenda:id.ts": $$$46,
+    "site/loaders/Filazero/Filazero/PUT/apiAtendimento:id.ts": $$$47,
+    "site/loaders/Filazero/Filazero/PUT/apiEspecialidade:id.ts": $$$48,
+    "site/loaders/Filazero/Filazero/PUT/apiFormulario:id.ts": $$$49,
+    "site/loaders/Filazero/Filazero/PUT/apiFuncionario:id.ts": $$$50,
+    "site/loaders/Filazero/Filazero/PUT/apiServico:id.ts": $$$51,
+    "site/loaders/Filazero/Filazero/PUT/apiUnidade:id.ts": $$$52,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$53,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$54,
+    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$55,
+    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$56,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$58,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$57,
+    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$59,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
+      $$$60,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$62,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$61,
+    "site/loaders/vtex/api/GET/pricingTables.ts": $$$63,
     "site/loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$11,
-    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$12,
-    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$13,
+      $$$64,
+    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$65,
+    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$66,
   },
   "apps": {
     "site/apps/deco/website.ts": $$$$$$$$$$$0,
