@@ -4,40 +4,122 @@
 
 import * as $$$$$$$$$$$0 from "./apps/deco/website.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$0 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
-import * as $$$1 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$2 from "./loaders/vtex/api/GET/pricingConfig.ts";
-import * as $$$3 from "./loaders/vtex/api/GET/pricingMigration.ts";
-import * as $$$5 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$4 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
-import * as $$$6 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
-import * as $$$7 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
-import * as $$$9 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$8 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
-import * as $$$10 from "./loaders/vtex/api/GET/pricingTables.ts";
-import * as $$$11 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$12 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$13 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
+import * as $$$0 from "./loaders/Filazero/Filazero/GET/apiV1TicketingEventDates.ts";
+import * as $$$1 from "./loaders/Filazero/Filazero/GET/apiV1TicketingEventDetail.ts";
+import * as $$$2 from "./loaders/Filazero/Filazero/GET/apiV1TicketingEventsCategory.ts";
+import * as $$$3 from "./loaders/Filazero/Filazero/GET/apiV1TicketingEventsList.ts";
+import * as $$$4 from "./loaders/Filazero/Filazero/GET/apiV1TicketingEventsRecommendations.ts";
+import * as $$$5 from "./loaders/Filazero/Filazero/GET/apiV1TicketingEventsRegions.ts";
+import * as $$$6 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGatesLayout.ts";
+import * as $$$7 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGatesTicketing.ts";
+import * as $$$8 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGetAvailableHours.ts";
+import * as $$$9 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGetDeliveries.ts";
+import * as $$$10 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGetFeatures.ts";
+import * as $$$11 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGetLocations.ts";
+import * as $$$12 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGetOrderDetail.ts";
+import * as $$$13 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGetOrderPayment.ts";
+import * as $$$14 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGetPromoCode.ts";
+import * as $$$15 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGetPurchaseHistory.ts";
+import * as $$$16 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGetTicket.ts";
+import * as $$$17 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGetTickets.ts";
+import * as $$$18 from "./loaders/Filazero/Filazero/GET/apiV1TicketingGetVenueDetail.ts";
+import * as $$$19 from "./loaders/Filazero/Filazero/GET/apiV1TicketingListEventsAndSessions.ts";
+import * as $$$20 from "./loaders/Filazero/Filazero/GET/apiV1TicketingOrderById.ts";
+import * as $$$21 from "./loaders/Filazero/Filazero/GET/apiV1TicketingPlaces.ts";
+import * as $$$22 from "./loaders/Filazero/Filazero/GET/apiV1TicketingSectorsLayout.ts";
+import * as $$$23 from "./loaders/Filazero/Filazero/GET/apiV1TicketingSetVariation.ts";
+import * as $$$24 from "./loaders/Filazero/Filazero/POST/apiV1TicketingCheckCaptcha.ts";
+import * as $$$25 from "./loaders/Filazero/Filazero/POST/apiV1TicketingPostSchedulePayments.ts";
+import * as $$$26 from "./loaders/Filazero/Filazero/POST/apiV1TicketingSearchSeats.ts";
+import * as $$$27 from "./loaders/Filazero/Filazero/POST/apiV1TicketingSetOrder.ts";
+import * as $$$28 from "./loaders/Filazero/Filazero/POST/apiV1TicketingSetOrderCallback.ts";
+import * as $$$29 from "./loaders/Filazero/Filazero/POST/apiV1TicketingSetOrderConfirmation.ts";
+import * as $$$30 from "./loaders/Filazero/Filazero/POST/apiV1TicketingSetOrderPixCallback.ts";
+import * as $$$31 from "./loaders/Filazero/Filazero/POST/apiV1TicketingSetOrderReturn.ts";
+import * as $$$32 from "./loaders/Filazero/Filazero/POST/apiV1TicketingSetPresenteeCaptcha.ts";
+import * as $$$33 from "./loaders/Filazero/Filazero/POST/apiV1TicketingUpdateUser.ts";
+import * as $$$34 from "./loaders/Filazero/Filazero/POST/apiV1TicketingUploadSelfie.ts";
+import * as $$$35 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
+import * as $$$36 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$37 from "./loaders/vtex/api/GET/pricingConfig.ts";
+import * as $$$38 from "./loaders/vtex/api/GET/pricingMigration.ts";
+import * as $$$40 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$39 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
+import * as $$$41 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
+import * as $$$42 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
+import * as $$$44 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$43 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
+import * as $$$45 from "./loaders/vtex/api/GET/pricingTables.ts";
+import * as $$$46 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$47 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$48 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
 
 const manifest = {
   "loaders": {
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$0,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingEventDates.ts": $$$0,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingEventDetail.ts": $$$1,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingEventsCategory.ts": $$$2,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingEventsList.ts": $$$3,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingEventsRecommendations.ts":
+      $$$4,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingEventsRegions.ts": $$$5,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGatesLayout.ts": $$$6,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGatesTicketing.ts": $$$7,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGetAvailableHours.ts":
+      $$$8,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGetDeliveries.ts": $$$9,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGetFeatures.ts": $$$10,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGetLocations.ts": $$$11,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGetOrderDetail.ts": $$$12,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGetOrderPayment.ts":
+      $$$13,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGetPromoCode.ts": $$$14,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGetPurchaseHistory.ts":
+      $$$15,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGetTicket.ts": $$$16,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGetTickets.ts": $$$17,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingGetVenueDetail.ts": $$$18,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingListEventsAndSessions.ts":
+      $$$19,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingOrderById.ts": $$$20,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingPlaces.ts": $$$21,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingSectorsLayout.ts": $$$22,
+    "site/loaders/Filazero/Filazero/GET/apiV1TicketingSetVariation.ts": $$$23,
+    "site/loaders/Filazero/Filazero/POST/apiV1TicketingCheckCaptcha.ts": $$$24,
+    "site/loaders/Filazero/Filazero/POST/apiV1TicketingPostSchedulePayments.ts":
+      $$$25,
+    "site/loaders/Filazero/Filazero/POST/apiV1TicketingSearchSeats.ts": $$$26,
+    "site/loaders/Filazero/Filazero/POST/apiV1TicketingSetOrder.ts": $$$27,
+    "site/loaders/Filazero/Filazero/POST/apiV1TicketingSetOrderCallback.ts":
+      $$$28,
+    "site/loaders/Filazero/Filazero/POST/apiV1TicketingSetOrderConfirmation.ts":
+      $$$29,
+    "site/loaders/Filazero/Filazero/POST/apiV1TicketingSetOrderPixCallback.ts":
+      $$$30,
+    "site/loaders/Filazero/Filazero/POST/apiV1TicketingSetOrderReturn.ts":
+      $$$31,
+    "site/loaders/Filazero/Filazero/POST/apiV1TicketingSetPresenteeCaptcha.ts":
+      $$$32,
+    "site/loaders/Filazero/Filazero/POST/apiV1TicketingUpdateUser.ts": $$$33,
+    "site/loaders/Filazero/Filazero/POST/apiV1TicketingUploadSelfie.ts": $$$34,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$35,
     "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$1,
-    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$2,
-    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$3,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$5,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$4,
-    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$6,
+      $$$36,
+    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$37,
+    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$38,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$40,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$39,
+    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$41,
     "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
-      $$$7,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts": $$$9,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$8,
-    "site/loaders/vtex/api/GET/pricingTables.ts": $$$10,
+      $$$42,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$44,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$43,
+    "site/loaders/vtex/api/GET/pricingTables.ts": $$$45,
     "site/loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$11,
-    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$12,
-    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$13,
+      $$$46,
+    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$47,
+    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$48,
   },
   "apps": {
     "site/apps/deco/website.ts": $$$$$$$$$$$0,
