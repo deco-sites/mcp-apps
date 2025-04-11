@@ -1,0 +1,1102 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Omie API",
+    "version": "1.0.0",
+    "description": "API for Omie services"
+  },
+  "servers": [
+    {
+      "url": "https://app.omie.com.br/api/v1"
+    }
+  ],
+  "paths": {
+    "/geral/clientes/": {
+      "post": {
+        "summary": "Client API",
+        "operationId": "clientApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/produtos/familia/": {
+      "post": {
+        "summary": "Product Family API",
+        "operationId": "productFamilyApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/produtos/ncm/": {
+      "post": {
+        "summary": "NCM API",
+        "operationId": "ncmApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/produtos/caracteristicas/": {
+      "post": {
+        "summary": "Product Characteristics API",
+        "operationId": "productCharacteristicsApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/produtos/pesquisa/": {
+      "post": {
+        "summary": "Product Search API",
+        "operationId": "productSearchApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/produtos/pedidocompra/": {
+      "post": {
+        "summary": "Purchase Order API",
+        "operationId": "purchaseOrderApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/produtos/pedido/": {
+      "post": {
+        "summary": "Order API",
+        "operationId": "orderApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/produtos/tabelaprecos/": {
+      "post": {
+        "summary": "Price Table API",
+        "operationId": "priceTableApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/geral/departamentos/": {
+      "post": {
+        "summary": "Departments API",
+        "operationId": "departmentsApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/geral/categoriaConta/": {
+      "post": {
+        "summary": "Account Category API",
+        "operationId": "accountCategoryApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/geral/projetos/": {
+      "post": {
+        "summary": "Projects API",
+        "operationId": "projectsApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/financas/contapagar/": {
+      "post": {
+        "summary": "Accounts Payable API",
+        "operationId": "accountsPayableApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/financas/contareceber/": {
+      "post": {
+        "summary": "Accounts Receivable API",
+        "operationId": "accountsReceivableApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/financas/mf/": {
+      "post": {
+        "summary": "Financial Movement API",
+        "operationId": "financialMovementApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/financas/pesquisartitulos/": {
+      "post": {
+        "summary": "Search Titles API",
+        "operationId": "searchTitlesApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/geral/contacorrente/": {
+      "post": {
+        "summary": "Current Account API",
+        "operationId": "currentAccountApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/financas/lancamentocontas/": {
+      "post": {
+        "summary": "Account Posting API",
+        "operationId": "accountPostingApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/produtos/servico/": {
+      "post": {
+        "summary": "Service API",
+        "operationId": "serviceApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/produtos/produto/": {
+      "post": {
+        "summary": "Product API",
+        "operationId": "productApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/geral/produtos/": {
+      "post": {
+        "summary": "General Products API",
+        "operationId": "generalProductsApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/geral/vendedores/": {
+      "post": {
+        "summary": "Vendors API",
+        "operationId": "vendorsApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/produtos/atualizarTags/": {
+      "post": {
+        "summary": "Update Tags API",
+        "operationId": "updateTagsApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/geral/empresas/": {
+      "post": {
+        "summary": "Companies API",
+        "operationId": "companiesApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/geral/parcelas/": {
+      "post": {
+        "summary": "Installments API",
+        "operationId": "installmentsApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/estoque/local/": {
+      "post": {
+        "summary": "Inventory Location API",
+        "operationId": "inventoryLocationApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/estoque/posest/": {
+      "post": {
+        "summary": "Stock Position API",
+        "operationId": "stockPositionApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/estoque/movestoque/": {
+      "post": {
+        "summary": "Stock Movement API",
+        "operationId": "stockMovementApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/estoque/ajuste/": {
+      "post": {
+        "summary": "Stock Adjustment API",
+        "operationId": "stockAdjustmentApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/servicos/os/": {
+      "post": {
+        "summary": "Service Orders API",
+        "operationId": "serviceOrdersApi",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string"
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ]
+}
