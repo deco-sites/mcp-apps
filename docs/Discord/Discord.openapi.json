@@ -1,0 +1,105 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Discord API",
+    "description": "Discord's API provides a service for creating meaningful interactions between humans and bots over chat.",
+    "version": "10",
+    "contact": {
+      "url": "https://discord.com/developers/docs"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://discord.com/api/v10"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BotToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Bot token for authorization"
+      }
+    }
+  },
+  "paths": {
+    "/gateway": {
+      "get": {
+        "summary": "Get gateway URL",
+        "description": "Returns an object with a single valid WSS URL. This URL is used for initiating a connection to Discord's Gateway.",
+        "responses": {
+          "200": {
+            "description": "Gateway URL object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "The WSS URL to connect to"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gateway/bot": {
+      "get": {
+        "summary": "Get bot gateway",
+        "description": "Returns an object with the same information as Get Gateway, plus a shards key, containing the recommended number of shards to connect with.",
+        "security": [
+          {
+            "BotToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bot gateway object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "The WSS URL to connect to"
+                    },
+                    "shards": {
+                      "type": "integer",
+                      "description": "The recommended number of shards"
+                    },
+                    "session_start_limit": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "description": "The total number of session starts the current user is allowed"
+                        },
+                        "remaining": {
+                          "type": "integer",
+                          "description": "The remaining number of session starts the current user is allowed"
+                        },
+                        "reset_after": {
+                          "type": "integer",
+                          "description": "The number of milliseconds after which the limit resets"
+                        },
+                        "max_concurrency": {
+                          "type": "integer",
+                          "description": "The number of identify requests that can be made concurrently"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
