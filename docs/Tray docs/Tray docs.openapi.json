@@ -1,0 +1,509 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tray Partners API - Themes",
+    "description": "API for managing themes on the Tray Partners platform",
+    "version": "1.0.0",
+    "contact": {
+      "email": "api@tray.com.br"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://partners.tray.com.br",
+      "description": "Tray Partners Production Server"
+    }
+  ],
+  "paths": {
+    "/themes": {
+      "get": {
+        "summary": "List all themes",
+        "description": "Returns a paginated list of themes according to the given parameters",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Current page (default: 1)",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page (default: 20)",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort field (id, name, created_at, updated_at, status)",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at",
+                "status"
+              ],
+              "default": "id"
+            }
+          },
+          {
+            "name": "sortType",
+            "in": "query",
+            "description": "Sort type (default: DESC)",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "default": "DESC"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Filter by theme name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "statusCode",
+            "in": "query",
+            "description": "Filter by theme status code (1: in development, 2: awaiting review, 3: approved, 4: rejected, 5: removed)",
+            "schema": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of themes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "paging": {
+                      "$ref": "#/components/schemas/Paging"
+                    },
+                    "sort": {
+                      "type": "object",
+                      "properties": {
+                        "field": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "themes": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ThemeSummary"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new theme",
+        "description": "Creates a new theme with the provided information",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThemeCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Theme created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theme"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters"
+          }
+        }
+      }
+    },
+    "/themes/{id}": {
+      "get": {
+        "summary": "Get theme details",
+        "description": "Returns detailed information about a specific theme",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Theme ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detailed theme information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theme"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Theme not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update theme",
+        "description": "Updates a theme with the provided information",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Theme ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThemeUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Theme updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theme"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters"
+          },
+          "404": {
+            "description": "Theme not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete theme",
+        "description": "Deletes a specific theme",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Theme ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Theme deleted successfully"
+          },
+          "404": {
+            "description": "Theme not found"
+          }
+        }
+      }
+    },
+    "/themes/{id}/submit": {
+      "post": {
+        "summary": "Submit theme for review",
+        "description": "Submits a theme for review, changing its status to 'awaiting review'",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Theme ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Theme submitted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Theme"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid operation"
+          },
+          "404": {
+            "description": "Theme not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Paging": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Total number of items"
+          },
+          "page": {
+            "type": "integer",
+            "description": "Current page"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Offset from the first result"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of items per page"
+          },
+          "maxPage": {
+            "type": "integer",
+            "description": "Total number of pages"
+          }
+        }
+      },
+      "ThemeSummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Theme ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Theme name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Theme description"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "Theme price"
+          },
+          "status": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "integer",
+                "description": "Status code"
+              },
+              "text": {
+                "type": "string",
+                "description": "Status text"
+              }
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Theme creation date"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Theme last update date"
+          }
+        }
+      },
+      "Theme": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Theme ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Theme name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Theme description"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "Theme price"
+          },
+          "status": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "integer",
+                "description": "Status code"
+              },
+              "text": {
+                "type": "string",
+                "description": "Status text"
+              }
+            }
+          },
+          "demo_store": {
+            "type": "string",
+            "description": "Demo store URL"
+          },
+          "documentation": {
+            "type": "string",
+            "description": "Documentation URL"
+          },
+          "repository": {
+            "type": "string",
+            "description": "Repository URL"
+          },
+          "preview_image": {
+            "type": "string",
+            "description": "Preview image URL"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Theme creation date"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Theme last update date"
+          },
+          "review_notes": {
+            "type": "string",
+            "description": "Review notes"
+          }
+        }
+      },
+      "ThemeCreate": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "price",
+          "demo_store",
+          "documentation",
+          "repository",
+          "preview_image"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Theme name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Theme description"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "Theme price"
+          },
+          "demo_store": {
+            "type": "string",
+            "description": "Demo store URL"
+          },
+          "documentation": {
+            "type": "string",
+            "description": "Documentation URL"
+          },
+          "repository": {
+            "type": "string",
+            "description": "Repository URL"
+          },
+          "preview_image": {
+            "type": "string",
+            "description": "Preview image URL"
+          }
+        }
+      },
+      "ThemeUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Theme name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Theme description"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "Theme price"
+          },
+          "demo_store": {
+            "type": "string",
+            "description": "Demo store URL"
+          },
+          "documentation": {
+            "type": "string",
+            "description": "Documentation URL"
+          },
+          "repository": {
+            "type": "string",
+            "description": "Repository URL"
+          },
+          "preview_image": {
+            "type": "string",
+            "description": "Preview image URL"
+          }
+        }
+      }
+    }
+  }
+}
