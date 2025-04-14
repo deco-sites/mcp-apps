@@ -1,0 +1,948 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Loja Integrada API",
+    "description": "API da Loja Integrada para integração com lojas virtuais",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Loja Integrada",
+      "url": "https://lojaintegrada.com.br"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.awsli.com.br",
+      "description": "Servidor de produção"
+    }
+  ],
+  "paths": {
+    "/v1/categoria": {
+      "get": {
+        "summary": "Listar categorias",
+        "description": "Retorna as categorias cadastradas na loja",
+        "parameters": [
+          {
+            "name": "chave_api",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de acesso à API"
+          },
+          {
+            "name": "chave_aplicacao",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de aplicação"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "description": "Quantidade de registros retornados por página"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Posição inicial dos registros"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de categorias",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "objects": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Categoria"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Meta"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/categoria/{id}": {
+      "get": {
+        "summary": "Detalhar categoria",
+        "description": "Retorna os detalhes de uma categoria específica",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID da categoria"
+          },
+          {
+            "name": "chave_api",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de acesso à API"
+          },
+          {
+            "name": "chave_aplicacao",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de aplicação"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes da categoria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Categoria"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/produto": {
+      "get": {
+        "summary": "Listar produtos",
+        "description": "Retorna os produtos cadastrados na loja",
+        "parameters": [
+          {
+            "name": "chave_api",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de acesso à API"
+          },
+          {
+            "name": "chave_aplicacao",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de aplicação"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "description": "Quantidade de registros retornados por página"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Posição inicial dos registros"
+          },
+          {
+            "name": "categoria_id",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Filtrar por categoria"
+          },
+          {
+            "name": "sku",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filtrar por SKU"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de produtos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "objects": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Produto"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Meta"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Criar novo produto",
+        "description": "Cria um novo produto na loja",
+        "parameters": [
+          {
+            "name": "chave_api",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de acesso à API"
+          },
+          {
+            "name": "chave_aplicacao",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de aplicação"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Produto criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Produto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/produto/{id}": {
+      "get": {
+        "summary": "Detalhar produto",
+        "description": "Retorna os detalhes de um produto específico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID do produto"
+          },
+          {
+            "name": "chave_api",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de acesso à API"
+          },
+          {
+            "name": "chave_aplicacao",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de aplicação"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do produto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Produto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar produto",
+        "description": "Atualiza um produto existente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID do produto"
+          },
+          {
+            "name": "chave_api",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de acesso à API"
+          },
+          {
+            "name": "chave_aplicacao",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de aplicação"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Produto atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Produto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/pedido": {
+      "get": {
+        "summary": "Listar pedidos",
+        "description": "Retorna os pedidos da loja",
+        "parameters": [
+          {
+            "name": "chave_api",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de acesso à API"
+          },
+          {
+            "name": "chave_aplicacao",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de aplicação"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            },
+            "description": "Quantidade de registros retornados por página"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Posição inicial dos registros"
+          },
+          {
+            "name": "since_numero",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Filtrar pedidos a partir de um número"
+          },
+          {
+            "name": "since_data",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Filtrar pedidos a partir de uma data"
+          },
+          {
+            "name": "situacao_id",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Filtrar por situação do pedido"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de pedidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "objects": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Pedido"
+                      }
+                    },
+                    "meta": {
+                      "$ref": "#/components/schemas/Meta"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/pedido/{id}": {
+      "get": {
+        "summary": "Detalhar pedido",
+        "description": "Retorna os detalhes de um pedido específico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID do pedido"
+          },
+          {
+            "name": "chave_api",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de acesso à API"
+          },
+          {
+            "name": "chave_aplicacao",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de aplicação"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do pedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pedido"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/situacao_pedido": {
+      "get": {
+        "summary": "Listar situações de pedido",
+        "description": "Retorna as situações de pedido disponíveis",
+        "parameters": [
+          {
+            "name": "chave_api",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de acesso à API"
+          },
+          {
+            "name": "chave_aplicacao",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Chave de aplicação"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de situações de pedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "objects": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SituacaoPedido"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Meta": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "description": "Quantidade de registros retornados por página"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Posição inicial dos registros"
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "Total de registros encontrados"
+          }
+        }
+      },
+      "Categoria": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "categoria_pai": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "resource_uri": {
+                "type": "string"
+              }
+            },
+            "nullable": true
+          },
+          "criado_em": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modificado_em": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "resource_uri": {
+            "type": "string"
+          }
+        }
+      },
+      "Produto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "descricao_completa": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "number",
+            "format": "float"
+          },
+          "preco_promocional": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "peso": {
+            "type": "number",
+            "format": "float"
+          },
+          "altura": {
+            "type": "number",
+            "format": "float"
+          },
+          "largura": {
+            "type": "number",
+            "format": "float"
+          },
+          "comprimento": {
+            "type": "number",
+            "format": "float"
+          },
+          "estoque": {
+            "type": "integer"
+          },
+          "disponivel": {
+            "type": "boolean"
+          },
+          "destaque": {
+            "type": "boolean"
+          },
+          "categorias": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "resource_uri": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "imagens": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "posicao": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "criado_em": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modificado_em": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "resource_uri": {
+            "type": "string"
+          }
+        }
+      },
+      "ProdutoInput": {
+        "type": "object",
+        "required": [
+          "nome",
+          "sku",
+          "preco",
+          "peso",
+          "altura",
+          "largura",
+          "comprimento",
+          "estoque"
+        ],
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "descricao_completa": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "number",
+            "format": "float"
+          },
+          "preco_promocional": {
+            "type": "number",
+            "format": "float"
+          },
+          "peso": {
+            "type": "number",
+            "format": "float"
+          },
+          "altura": {
+            "type": "number",
+            "format": "float"
+          },
+          "largura": {
+            "type": "number",
+            "format": "float"
+          },
+          "comprimento": {
+            "type": "number",
+            "format": "float"
+          },
+          "estoque": {
+            "type": "integer"
+          },
+          "disponivel": {
+            "type": "boolean"
+          },
+          "destaque": {
+            "type": "boolean"
+          },
+          "categorias": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "Pedido": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "numero": {
+            "type": "integer"
+          },
+          "data_criacao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "valor_total": {
+            "type": "number",
+            "format": "float"
+          },
+          "valor_subtotal": {
+            "type": "number",
+            "format": "float"
+          },
+          "valor_frete": {
+            "type": "number",
+            "format": "float"
+          },
+          "valor_desconto": {
+            "type": "number",
+            "format": "float"
+          },
+          "cliente": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "cpf": {
+                "type": "string"
+              },
+              "telefone_celular": {
+                "type": "string"
+              },
+              "telefone_principal": {
+                "type": "string"
+              }
+            }
+          },
+          "endereco_entrega": {
+            "type": "object",
+            "properties": {
+              "endereco": {
+                "type": "string"
+              },
+              "numero": {
+                "type": "string"
+              },
+              "complemento": {
+                "type": "string"
+              },
+              "bairro": {
+                "type": "string"
+              },
+              "cidade": {
+                "type": "string"
+              },
+              "estado": {
+                "type": "string"
+              },
+              "cep": {
+                "type": "string"
+              }
+            }
+          },
+          "forma_pagamento": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "nome": {
+                "type": "string"
+              }
+            }
+          },
+          "forma_envio": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "codigo_rastreamento": {
+                "type": "string"
+              }
+            }
+          },
+          "situacao": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "codigo": {
+                "type": "string"
+              }
+            }
+          },
+          "itens": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "produto": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "nome": {
+                      "type": "string"
+                    },
+                    "sku": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "preco_unitario": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "quantidade": {
+                  "type": "integer"
+                },
+                "preco_total": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            }
+          },
+          "resource_uri": {
+            "type": "string"
+          }
+        }
+      },
+      "SituacaoPedido": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "resource_uri": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
