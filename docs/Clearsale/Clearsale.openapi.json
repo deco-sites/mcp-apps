@@ -1,0 +1,952 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ClearSale Total/Total Garantido API",
+    "description": "API for ClearSale Total and Total Garantido application",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clearsale.com.br"
+    }
+  ],
+  "paths": {
+    "/order": {
+      "post": {
+        "summary": "Create a new order",
+        "description": "Create a new order for fraud analysis",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/order/updatestatus": {
+      "put": {
+        "summary": "Update order status",
+        "description": "Update the status of an existing order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/order/{order-id}": {
+      "get": {
+        "summary": "Get order details",
+        "description": "Retrieve details of a specific order",
+        "parameters": [
+          {
+            "name": "order-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "OrderRequest": {
+        "type": "object",
+        "required": [
+          "id",
+          "date",
+          "email",
+          "totalOrder",
+          "totalItems",
+          "quantityItems",
+          "payments",
+          "customer"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Order identification"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Order reference"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Order date in ISO format"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Customer's email"
+          },
+          "b2bB2c": {
+            "type": "integer",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "description": "0 = B2C; 1 = B2B; 2 = B2E"
+          },
+          "shippingPrice": {
+            "type": "number",
+            "format": "double",
+            "description": "Shipping price"
+          },
+          "totalOrder": {
+            "type": "number",
+            "format": "double",
+            "description": "Total order amount"
+          },
+          "totalItems": {
+            "type": "number",
+            "format": "double",
+            "description": "Sum of all items"
+          },
+          "quantityItems": {
+            "type": "integer",
+            "description": "Quantity of items"
+          },
+          "quantityPaymentTypes": {
+            "type": "integer",
+            "description": "Quantity of payment types"
+          },
+          "quantityInstallments": {
+            "type": "integer",
+            "description": "Quantity of installments"
+          },
+          "ip": {
+            "type": "string",
+            "description": "Customer's IP address"
+          },
+          "origin": {
+            "type": "string",
+            "description": "Order origin"
+          },
+          "channelID": {
+            "type": "integer",
+            "description": "Channel ID"
+          },
+          "reservationDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Reservation date in ISO format"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country name"
+          },
+          "nationality": {
+            "type": "string",
+            "description": "Customer's nationality"
+          },
+          "product": {
+            "type": "string",
+            "description": "Product name"
+          },
+          "customSla": {
+            "type": "integer",
+            "description": "Custom SLA"
+          },
+          "platform": {
+            "type": "string",
+            "description": "Platform identifier"
+          },
+          "merchantId": {
+            "type": "string",
+            "description": "Merchant identifier"
+          },
+          "merchant": {
+            "type": "string",
+            "description": "Merchant name"
+          },
+          "store": {
+            "type": "string",
+            "description": "Store identifier"
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Payment"
+            },
+            "description": "Payment methods used"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "billing": {
+            "$ref": "#/components/schemas/Billing"
+          },
+          "shipping": {
+            "$ref": "#/components/schemas/Shipping"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            },
+            "description": "Items list"
+          },
+          "passenger": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Passenger"
+            },
+            "description": "Passengers list"
+          },
+          "connections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Connection"
+            },
+            "description": "Connections list"
+          },
+          "hotels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Hotel"
+            },
+            "description": "Hotels list"
+          },
+          "customFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomField"
+            },
+            "description": "Custom fields list"
+          }
+        }
+      },
+      "Payment": {
+        "type": "object",
+        "required": [
+          "type",
+          "amount"
+        ],
+        "properties": {
+          "sequential": {
+            "type": "integer",
+            "description": "Payment sequential number"
+          },
+          "type": {
+            "type": "integer",
+            "description": "Payment type ID"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "description": "Payment amount"
+          },
+          "installments": {
+            "type": "integer",
+            "description": "Number of installments"
+          },
+          "interestRate": {
+            "type": "number",
+            "format": "double",
+            "description": "Interest rate"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          }
+        }
+      },
+      "Customer": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Customer identification"
+          },
+          "type": {
+            "type": "integer",
+            "enum": [
+              1,
+              2
+            ],
+            "description": "Customer type (1 = Natural Person, 2 = Legal Person)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Customer name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Customer last name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Customer email"
+          },
+          "document": {
+            "type": "string",
+            "description": "Customer document (CPF/CNPJ)"
+          },
+          "documentTwo": {
+            "type": "string",
+            "description": "Customer second document (RG)"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "M",
+              "F"
+            ],
+            "description": "Customer gender (M or F)"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Customer birth date (YYYY-MM-DD)"
+          },
+          "phone": {
+            "$ref": "#/components/schemas/Phone"
+          },
+          "mobile": {
+            "$ref": "#/components/schemas/Phone"
+          },
+          "workPhone": {
+            "$ref": "#/components/schemas/Phone"
+          },
+          "company": {
+            "type": "string",
+            "description": "Company name"
+          }
+        }
+      },
+      "Billing": {
+        "type": "object",
+        "properties": {
+          "clientID": {
+            "type": "string",
+            "description": "Client ID for billing"
+          },
+          "type": {
+            "type": "integer",
+            "enum": [
+              1,
+              2
+            ],
+            "description": "Billing type (1 = Natural Person, 2 = Legal Person)"
+          },
+          "primaryDocument": {
+            "type": "string",
+            "description": "Primary document (CPF/CNPJ)"
+          },
+          "secondaryDocument": {
+            "type": "string",
+            "description": "Secondary document (RG)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Billing name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Billing last name"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "phones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Phone"
+            }
+          }
+        }
+      },
+      "Shipping": {
+        "type": "object",
+        "properties": {
+          "clientID": {
+            "type": "string",
+            "description": "Client ID for shipping"
+          },
+          "type": {
+            "type": "integer",
+            "enum": [
+              1,
+              2
+            ],
+            "description": "Shipping type (1 = Natural Person, 2 = Legal Person)"
+          },
+          "primaryDocument": {
+            "type": "string",
+            "description": "Primary document (CPF/CNPJ)"
+          },
+          "secondaryDocument": {
+            "type": "string",
+            "description": "Secondary document (RG)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Shipping name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Shipping last name"
+          },
+          "deliveryType": {
+            "type": "string",
+            "description": "Delivery type"
+          },
+          "deliveryTime": {
+            "type": "string",
+            "description": "Delivery time"
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
+            "description": "Shipping price"
+          },
+          "pickupStoreDocument": {
+            "type": "string",
+            "description": "Document for store pickup"
+          },
+          "pickupStoreDocumentTwo": {
+            "type": "string",
+            "description": "Second document for store pickup"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "phones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Phone"
+            }
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "description": "Street name"
+          },
+          "number": {
+            "type": "string",
+            "description": "Street number"
+          },
+          "complement": {
+            "type": "string",
+            "description": "Address complement"
+          },
+          "county": {
+            "type": "string",
+            "description": "County/Neighborhood"
+          },
+          "city": {
+            "type": "string",
+            "description": "City name"
+          },
+          "state": {
+            "type": "string",
+            "description": "State code"
+          },
+          "country": {
+            "type": "string",
+            "description": "Country name"
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "Postal code/ZIP"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Address reference"
+          }
+        }
+      },
+      "Phone": {
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "string",
+            "description": "Country code"
+          },
+          "areaCode": {
+            "type": "string",
+            "description": "Area code"
+          },
+          "number": {
+            "type": "string",
+            "description": "Phone number"
+          },
+          "type": {
+            "type": "integer",
+            "description": "Phone type"
+          },
+          "extension": {
+            "type": "string",
+            "description": "Extension number"
+          }
+        }
+      },
+      "Card": {
+        "type": "object",
+        "properties": {
+          "bin": {
+            "type": "string",
+            "description": "First 6 digits of card number"
+          },
+          "end": {
+            "type": "string",
+            "description": "Last 4 digits of card number"
+          },
+          "number": {
+            "type": "string",
+            "description": "Full card number (not recommended)"
+          },
+          "expireMonth": {
+            "type": "string",
+            "description": "Card expiration month"
+          },
+          "expireYear": {
+            "type": "string",
+            "description": "Card expiration year"
+          },
+          "brandName": {
+            "type": "string",
+            "description": "Card brand name"
+          },
+          "cvv": {
+            "type": "string",
+            "description": "Card CVV code"
+          },
+          "nameOnCard": {
+            "type": "string",
+            "description": "Name printed on card"
+          },
+          "token": {
+            "type": "string",
+            "description": "Card token"
+          }
+        }
+      },
+      "Item": {
+        "type": "object",
+        "required": [
+          "code",
+          "name",
+          "quantity",
+          "price"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Item code"
+          },
+          "name": {
+            "type": "string",
+            "description": "Item name"
+          },
+          "categoryID": {
+            "type": "integer",
+            "description": "Item category ID"
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "Item category name"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Item quantity"
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
+            "description": "Item unit price"
+          },
+          "originalPrice": {
+            "type": "number",
+            "format": "double",
+            "description": "Item original price"
+          },
+          "gift": {
+            "type": "boolean",
+            "description": "Is this item a gift"
+          },
+          "productType": {
+            "type": "string",
+            "description": "Product type"
+          },
+          "downloadDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of download for digital goods"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Item creation date"
+          }
+        }
+      },
+      "Passenger": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Passenger name"
+          },
+          "document": {
+            "type": "string",
+            "description": "Passenger document"
+          },
+          "documentTwo": {
+            "type": "string",
+            "description": "Second passenger document"
+          },
+          "documentType": {
+            "type": "string",
+            "description": "Type of document"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "M",
+              "F"
+            ],
+            "description": "Gender (M or F)"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Passenger birth date"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Passenger email"
+          },
+          "loyalty": {
+            "type": "string",
+            "description": "Loyalty program"
+          },
+          "phone": {
+            "$ref": "#/components/schemas/Phone"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "status": {
+            "type": "string",
+            "description": "Passenger status"
+          }
+        }
+      },
+      "Connection": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "type": "string",
+            "description": "Connection company"
+          },
+          "number": {
+            "type": "string",
+            "description": "Connection number"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Connection date and time"
+          },
+          "arrivalDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Arrival date and time"
+          },
+          "origin": {
+            "type": "string",
+            "description": "Origin location"
+          },
+          "destination": {
+            "type": "string",
+            "description": "Destination location"
+          },
+          "fare": {
+            "type": "string",
+            "description": "Connection fare"
+          },
+          "flightClass": {
+            "type": "string",
+            "description": "Flight class"
+          },
+          "service": {
+            "type": "string",
+            "description": "Connection service"
+          }
+        }
+      },
+      "Hotel": {
+        "type": "object",
+        "properties": {
+          "cnpj": {
+            "type": "string",
+            "description": "Hotel CNPJ (Brazilian tax ID)"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "category": {
+            "type": "string",
+            "description": "Hotel category"
+          },
+          "name": {
+            "type": "string",
+            "description": "Hotel name"
+          },
+          "checkin": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Check-in date and time"
+          },
+          "checkout": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Check-out date and time"
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
+            "description": "Hotel price"
+          },
+          "dailyRate": {
+            "type": "number",
+            "format": "double",
+            "description": "Daily rate"
+          },
+          "state": {
+            "type": "string",
+            "description": "Hotel state"
+          },
+          "city": {
+            "type": "string",
+            "description": "Hotel city"
+          },
+          "roomType": {
+            "type": "string",
+            "description": "Room type"
+          }
+        }
+      },
+      "CustomField": {
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Custom field key"
+          },
+          "value": {
+            "type": "string",
+            "description": "Custom field value"
+          }
+        }
+      },
+      "OrderResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Order ID"
+          },
+          "score": {
+            "type": "number",
+            "format": "double",
+            "description": "Risk score"
+          },
+          "status": {
+            "type": "string",
+            "description": "Order status"
+          },
+          "transactionId": {
+            "type": "string",
+            "description": "Transaction ID"
+          }
+        }
+      },
+      "StatusRequest": {
+        "type": "object",
+        "required": [
+          "id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Order identification"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Status update date"
+          },
+          "status": {
+            "type": "string",
+            "description": "New order status"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Comments about status change"
+          }
+        }
+      },
+      "StatusResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Response message"
+          },
+          "id": {
+            "type": "string",
+            "description": "Order ID"
+          },
+          "status": {
+            "type": "string",
+            "description": "Updated status"
+          },
+          "score": {
+            "type": "number",
+            "format": "double",
+            "description": "Risk score"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
