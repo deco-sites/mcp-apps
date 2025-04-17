@@ -1,0 +1,728 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Customers API",
+    "description": "API to manage customer data",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.example.com/v1"
+    }
+  ],
+  "paths": {
+    "/customers": {
+      "get": {
+        "summary": "List customers",
+        "description": "Returns a list of all customers, optionally filtered by email, name, status, date created, date updated, date of birth, and CPF.",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Filter by customer email",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Filter by customer name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by customer status",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "approved",
+                "inactive"
+              ]
+            }
+          },
+          {
+            "name": "created_at_start",
+            "in": "query",
+            "description": "Filter by creation date (start)",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "created_at_end",
+            "in": "query",
+            "description": "Filter by creation date (end)",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "updated_at_start",
+            "in": "query",
+            "description": "Filter by update date (start)",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "updated_at_end",
+            "in": "query",
+            "description": "Filter by update date (end)",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "birth_date_start",
+            "in": "query",
+            "description": "Filter by birth date (start)",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "birth_date_end",
+            "in": "query",
+            "description": "Filter by birth date (end)",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "cpf",
+            "in": "query",
+            "description": "Filter by CPF",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Customer"
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a customer",
+        "description": "Creates a new customer",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Customer created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "summary": "Get a customer",
+        "description": "Returns a customer by their ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Customer ID",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a customer",
+        "description": "Updates a customer by their ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Customer ID",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Customer updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a customer",
+        "description": "Deletes a customer by their ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Customer ID",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Customer deleted successfully"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for the customer"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Customer email address"
+          },
+          "name": {
+            "type": "string",
+            "description": "Customer full name"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Customer phone number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "inactive"
+            ],
+            "description": "Customer status"
+          },
+          "cpf": {
+            "type": "string",
+            "description": "Customer CPF (Brazilian ID)"
+          },
+          "birth_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Customer birth date"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the customer was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the customer was last updated"
+          }
+        }
+      },
+      "CustomerCreate": {
+        "type": "object",
+        "required": [
+          "email",
+          "name",
+          "cpf",
+          "birth_date"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Customer email address"
+          },
+          "name": {
+            "type": "string",
+            "description": "Customer full name"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Customer phone number"
+          },
+          "cpf": {
+            "type": "string",
+            "description": "Customer CPF (Brazilian ID)"
+          },
+          "birth_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Customer birth date"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressCreate"
+          }
+        }
+      },
+      "CustomerUpdate": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Customer email address"
+          },
+          "name": {
+            "type": "string",
+            "description": "Customer full name"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Customer phone number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "inactive"
+            ],
+            "description": "Customer status"
+          },
+          "cpf": {
+            "type": "string",
+            "description": "Customer CPF (Brazilian ID)"
+          },
+          "birth_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Customer birth date"
+          },
+          "address": {
+            "$ref": "#/components/schemas/AddressUpdate"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "description": "Street name"
+          },
+          "number": {
+            "type": "string",
+            "description": "House/building number"
+          },
+          "complement": {
+            "type": "string",
+            "description": "Address complement"
+          },
+          "neighborhood": {
+            "type": "string",
+            "description": "Neighborhood name"
+          },
+          "city": {
+            "type": "string",
+            "description": "City name"
+          },
+          "state": {
+            "type": "string",
+            "description": "State abbreviation"
+          },
+          "zipcode": {
+            "type": "string",
+            "description": "Postal code"
+          }
+        }
+      },
+      "AddressCreate": {
+        "type": "object",
+        "required": [
+          "street",
+          "number",
+          "neighborhood",
+          "city",
+          "state",
+          "zipcode"
+        ],
+        "properties": {
+          "street": {
+            "type": "string",
+            "description": "Street name"
+          },
+          "number": {
+            "type": "string",
+            "description": "House/building number"
+          },
+          "complement": {
+            "type": "string",
+            "description": "Address complement"
+          },
+          "neighborhood": {
+            "type": "string",
+            "description": "Neighborhood name"
+          },
+          "city": {
+            "type": "string",
+            "description": "City name"
+          },
+          "state": {
+            "type": "string",
+            "description": "State abbreviation"
+          },
+          "zipcode": {
+            "type": "string",
+            "description": "Postal code"
+          }
+        }
+      },
+      "AddressUpdate": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string",
+            "description": "Street name"
+          },
+          "number": {
+            "type": "string",
+            "description": "House/building number"
+          },
+          "complement": {
+            "type": "string",
+            "description": "Address complement"
+          },
+          "neighborhood": {
+            "type": "string",
+            "description": "Neighborhood name"
+          },
+          "city": {
+            "type": "string",
+            "description": "City name"
+          },
+          "state": {
+            "type": "string",
+            "description": "State abbreviation"
+          },
+          "zipcode": {
+            "type": "string",
+            "description": "Postal code"
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Total number of items"
+          },
+          "page": {
+            "type": "integer",
+            "description": "Current page number"
+          },
+          "page_size": {
+            "type": "integer",
+            "description": "Number of items per page"
+          },
+          "total_pages": {
+            "type": "integer",
+            "description": "Total number of pages"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "details": {
+            "type": "object",
+            "description": "Additional error details"
+          }
+        }
+      }
+    }
+  }
+}
