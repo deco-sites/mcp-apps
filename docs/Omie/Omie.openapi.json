@@ -1,0 +1,932 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Omie API",
+    "description": "API para integração com o sistema Omie",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://app.omie.com.br/api/v1"
+    }
+  ],
+  "paths": {
+    "/produtos/malote": {
+      "post": {
+        "summary": "API de Produtos em Lote",
+        "description": "Permite incluir/alterar/excluir listagens em lote de seus cadastros de produtos.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutosMaloteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutosMaloteResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/cadastro": {
+      "post": {
+        "summary": "API de Cadastro de Produtos",
+        "description": "Permite incluir/alterar/excluir cadastros de produtos.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoCadastroRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutoCadastroResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/clientes": {
+      "post": {
+        "summary": "API de Clientes",
+        "description": "Permite incluir/alterar/excluir cadastros de clientes",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/departamentos": {
+      "post": {
+        "summary": "API de Departamentos",
+        "description": "Permite incluir/alterar/excluir cadastros de departamentos.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartamentosRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartamentosResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/contacorrente": {
+      "post": {
+        "summary": "API de Conta Corrente",
+        "description": "Permite incluir/alterar/excluir cadastros de contas correntes.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContaCorrenteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContaCorrenteResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geral/projetos": {
+      "post": {
+        "summary": "API de Projetos",
+        "description": "Permite incluir/alterar/excluir cadastros de projetos.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjetosRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjetosResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/contapagar": {
+      "post": {
+        "summary": "API de Contas a Pagar",
+        "description": "Permite incluir/alterar/excluir lançamentos de contas a pagar.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContaPagarRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContaPagarResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/contareceber": {
+      "post": {
+        "summary": "API de Contas a Receber",
+        "description": "Permite incluir/alterar/excluir lançamentos de contas a receber",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContaReceberRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContaReceberResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/movimento": {
+      "post": {
+        "summary": "API de Movimentos Financeiros",
+        "description": "Permite incluir/alterar/excluir movimentos financeiros",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovimentoFinanceiroRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MovimentoFinanceiroResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estoque/local": {
+      "post": {
+        "summary": "API de Local de Estoque",
+        "description": "Permite incluir/alterar/excluir cadastros de locais de estoque.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalEstoqueRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalEstoqueResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/estoque/ajuste": {
+      "post": {
+        "summary": "API de Ajuste de Estoque",
+        "description": "Permite incluir/alterar/excluir movimentos de ajuste de estoque.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AjusteEstoqueRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjusteEstoqueResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/pedido": {
+      "post": {
+        "summary": "API de Pedido de Venda",
+        "description": "Permite incluir/alterar/excluir pedidos de venda.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PedidoVendaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PedidoVendaResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/nfce": {
+      "post": {
+        "summary": "API de NFC-e de Venda",
+        "description": "Permite incluir/alterar/excluir NFC-e de venda.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NFCeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NFCeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/osServico": {
+      "post": {
+        "summary": "API de Ordem de Serviço",
+        "description": "Permite incluir/alterar/excluir ordens de serviço.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdemServicoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrdemServicoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProdutosMaloteRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "ProdutosMaloteResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "registros": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Registros processados"
+          }
+        }
+      },
+      "ProdutoCadastroRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "ProdutoCadastroResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "produto": {
+            "type": "object",
+            "description": "Dados do produto"
+          }
+        }
+      },
+      "ClientesRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "ClientesResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "cliente": {
+            "type": "object",
+            "description": "Dados do cliente"
+          }
+        }
+      },
+      "DepartamentosRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "DepartamentosResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "departamento": {
+            "type": "object",
+            "description": "Dados do departamento"
+          }
+        }
+      },
+      "ContaCorrenteRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "ContaCorrenteResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "conta": {
+            "type": "object",
+            "description": "Dados da conta corrente"
+          }
+        }
+      },
+      "ProjetosRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "ProjetosResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "projeto": {
+            "type": "object",
+            "description": "Dados do projeto"
+          }
+        }
+      },
+      "ContaPagarRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "ContaPagarResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "conta": {
+            "type": "object",
+            "description": "Dados da conta a pagar"
+          }
+        }
+      },
+      "ContaReceberRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "ContaReceberResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "conta": {
+            "type": "object",
+            "description": "Dados da conta a receber"
+          }
+        }
+      },
+      "MovimentoFinanceiroRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "MovimentoFinanceiroResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "movimento": {
+            "type": "object",
+            "description": "Dados do movimento financeiro"
+          }
+        }
+      },
+      "LocalEstoqueRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "LocalEstoqueResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "local": {
+            "type": "object",
+            "description": "Dados do local de estoque"
+          }
+        }
+      },
+      "AjusteEstoqueRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "AjusteEstoqueResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "ajuste": {
+            "type": "object",
+            "description": "Dados do ajuste de estoque"
+          }
+        }
+      },
+      "PedidoVendaRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "PedidoVendaResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "pedido": {
+            "type": "object",
+            "description": "Dados do pedido de venda"
+          }
+        }
+      },
+      "NFCeRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "NFCeResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "nfce": {
+            "type": "object",
+            "description": "Dados da NFC-e"
+          }
+        }
+      },
+      "OrdemServicoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string",
+            "description": "Nome do endpoint a ser chamado"
+          },
+          "app_key": {
+            "type": "string",
+            "description": "Chave de acesso da aplicação"
+          },
+          "app_secret": {
+            "type": "string",
+            "description": "Chave secreta da aplicação"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Parâmetros da requisição"
+          }
+        }
+      },
+      "OrdemServicoResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status da operação"
+          },
+          "os": {
+            "type": "object",
+            "description": "Dados da ordem de serviço"
+          }
+        }
+      }
+    }
+  }
+}
