@@ -1,0 +1,777 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Bling",
+    "description": "API para integração com o Bling ERP",
+    "version": "3.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.bling.com.br/v3"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Categoria": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "idCategoriaPai": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        }
+      },
+      "CategoriaResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Categoria"
+          }
+        }
+      },
+      "CategoriasResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Categoria"
+            }
+          }
+        }
+      },
+      "Produto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "number",
+            "format": "float"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "P",
+              "S"
+            ]
+          },
+          "situacao": {
+            "type": "string",
+            "enum": [
+              "A",
+              "I"
+            ]
+          },
+          "formato": {
+            "type": "string",
+            "enum": [
+              "S",
+              "P",
+              "E",
+              "D",
+              "U",
+              "N"
+            ]
+          },
+          "descricaoCurta": {
+            "type": "string"
+          },
+          "descricaoComplementar": {
+            "type": "string"
+          },
+          "dataInclusao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataAlteracao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "imageThumbnail": {
+            "type": "string"
+          },
+          "urlVideo": {
+            "type": "string"
+          },
+          "idCategoria": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "pesoLiquido": {
+            "type": "number",
+            "format": "float"
+          },
+          "pesoBruto": {
+            "type": "number",
+            "format": "float"
+          },
+          "volumes": {
+            "type": "integer"
+          },
+          "itensPorCaixa": {
+            "type": "integer"
+          },
+          "unidade": {
+            "type": "string"
+          },
+          "gtin": {
+            "type": "string"
+          },
+          "gtinEmbalagem": {
+            "type": "string"
+          },
+          "tipoProducao": {
+            "type": "string",
+            "enum": [
+              "P",
+              "T",
+              "R"
+            ]
+          },
+          "condicao": {
+            "type": "string",
+            "enum": [
+              "N",
+              "U"
+            ]
+          },
+          "freteGratis": {
+            "type": "boolean"
+          },
+          "marca": {
+            "type": "string"
+          },
+          "descricaoFornecedor": {
+            "type": "string"
+          },
+          "idFabricante": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "codigoFabricante": {
+            "type": "string"
+          },
+          "unidadePorCaixa": {
+            "type": "integer"
+          },
+          "precoCusto": {
+            "type": "number",
+            "format": "float"
+          },
+          "produtoLoja": {
+            "type": "object",
+            "properties": {
+              "preco": {
+                "type": "object",
+                "properties": {
+                  "precoVenda": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "precoCusto": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "margemLucro": {
+                    "type": "number",
+                    "format": "float"
+                  }
+                }
+              },
+              "categorias": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "descricao": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "dimensoes": {
+            "type": "object",
+            "properties": {
+              "largura": {
+                "type": "number",
+                "format": "float"
+              },
+              "altura": {
+                "type": "number",
+                "format": "float"
+              },
+              "profundidade": {
+                "type": "number",
+                "format": "float"
+              },
+              "unidadeMedida": {
+                "type": "string"
+              }
+            }
+          },
+          "tributacao": {
+            "type": "object",
+            "properties": {
+              "ncm": {
+                "type": "string"
+              },
+              "cest": {
+                "type": "string"
+              },
+              "origem": {
+                "type": "string"
+              },
+              "codigoInterno": {
+                "type": "string"
+              }
+            }
+          },
+          "midia": {
+            "type": "object",
+            "properties": {
+              "imagens": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "validade": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "estoque": {
+            "type": "object",
+            "properties": {
+              "minimo": {
+                "type": "number",
+                "format": "float"
+              },
+              "crossdocking": {
+                "type": "number",
+                "format": "float"
+              },
+              "localizacao": {
+                "type": "string"
+              }
+            }
+          },
+          "variacoes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "nome": {
+                  "type": "string"
+                },
+                "codigo": {
+                  "type": "string"
+                },
+                "preco": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "gtin": {
+                  "type": "string"
+                },
+                "gtinEmbalagem": {
+                  "type": "string"
+                },
+                "estoque": {
+                  "type": "object",
+                  "properties": {
+                    "minimo": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "crossdocking": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "localizacao": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "camposPersonalizados": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "nome": {
+                  "type": "string"
+                },
+                "valor": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ProdutoResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Produto"
+          }
+        }
+      },
+      "ProdutosResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Produto"
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/categorias": {
+      "get": {
+        "summary": "Listar todas as categorias",
+        "operationId": "getCategorias",
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriasResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Criar uma nova categoria",
+        "operationId": "createCategoria",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "descricao": {
+                    "type": "string"
+                  },
+                  "idCategoriaPai": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "descricao"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/categorias/{id}": {
+      "get": {
+        "summary": "Obter uma categoria específica",
+        "operationId": "getCategoriaById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Atualizar uma categoria",
+        "operationId": "updateCategoria",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "descricao": {
+                    "type": "string"
+                  },
+                  "idCategoriaPai": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "descricao"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Excluir uma categoria",
+        "operationId": "deleteCategoria",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Excluído com sucesso"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/produtos": {
+      "get": {
+        "summary": "Listar todos os produtos",
+        "operationId": "getProdutos",
+        "parameters": [
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limite",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutosResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Criar um novo produto",
+        "operationId": "createProduto",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "codigo": {
+                    "type": "string"
+                  },
+                  "preco": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "tipo": {
+                    "type": "string",
+                    "enum": [
+                      "P",
+                      "S"
+                    ]
+                  }
+                },
+                "required": [
+                  "nome",
+                  "codigo",
+                  "preco",
+                  "tipo"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutoResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/produtos/{id}": {
+      "get": {
+        "summary": "Obter um produto específico",
+        "operationId": "getProdutoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutoResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Atualizar um produto",
+        "operationId": "updateProduto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "codigo": {
+                    "type": "string"
+                  },
+                  "preco": {
+                    "type": "number",
+                    "format": "float"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutoResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Excluir um produto",
+        "operationId": "deleteProduto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Excluído com sucesso"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
