@@ -1,0 +1,1004 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ClearSale Total/Total Garantido API",
+    "description": "API for ClearSale Total and Total Garantido products",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clearsale.com.br/api/v2"
+    }
+  ],
+  "paths": {
+    "/orders": {
+      "post": {
+        "summary": "Send a new order",
+        "description": "Submit a new order for risk analysis",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Order successfully submitted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "summary": "Get order status",
+        "description": "Retrieve the analysis status of an order",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Order ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order status retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderStatusResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Order not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/orders/{id}/update": {
+      "put": {
+        "summary": "Update order",
+        "description": "Update an existing order",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Order ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Order successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Order not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "OrderRequest": {
+        "type": "object",
+        "required": [
+          "order",
+          "payments",
+          "person"
+        ],
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/Order"
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Payment"
+            }
+          },
+          "person": {
+            "$ref": "#/components/schemas/Person"
+          },
+          "shipment": {
+            "$ref": "#/components/schemas/Shipment"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "ipAddress": {
+            "type": "string"
+          },
+          "device": {
+            "$ref": "#/components/schemas/Device"
+          },
+          "cart": {
+            "$ref": "#/components/schemas/Cart"
+          }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "required": [
+          "id",
+          "date",
+          "email",
+          "totalOrder",
+          "totalItems",
+          "quantityItems",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string"
+          },
+          "b2b": {
+            "type": "boolean"
+          },
+          "totalOrder": {
+            "type": "number",
+            "format": "float"
+          },
+          "totalItems": {
+            "type": "number",
+            "format": "float"
+          },
+          "totalShipping": {
+            "type": "number",
+            "format": "float"
+          },
+          "quantityItems": {
+            "type": "integer"
+          },
+          "quantityPaymentTypes": {
+            "type": "integer"
+          },
+          "quantityInstallments": {
+            "type": "integer"
+          },
+          "firstDateOrder": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "salesChannel": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "New",
+              "Approved",
+              "Rejected",
+              "Canceled",
+              "Fraud",
+              "OnHold"
+            ]
+          },
+          "marketPlace": {
+            "type": "string"
+          },
+          "origin": {
+            "type": "string"
+          },
+          "coupons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coupon"
+            }
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            }
+          }
+        }
+      },
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Person",
+              "Company"
+            ]
+          }
+        }
+      },
+      "Coupon": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "Item": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "value",
+          "quantity"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number",
+            "format": "float"
+          },
+          "discount": {
+            "type": "number",
+            "format": "float"
+          },
+          "category": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "isGift": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "shippingCompany": {
+            "type": "string"
+          },
+          "isMarketPlace": {
+            "type": "boolean"
+          },
+          "marketPlaceCode": {
+            "type": "string"
+          },
+          "isSponsor": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Payment": {
+        "type": "object",
+        "required": [
+          "type",
+          "value"
+        ],
+        "properties": {
+          "sequential": {
+            "type": "integer"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CreditCard",
+              "DebitCard",
+              "Boleto",
+              "Transfer",
+              "Financing",
+              "StoreCredit",
+              "PIX",
+              "PayPal",
+              "MercadoPago",
+              "Other"
+            ]
+          },
+          "gateway": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number",
+            "format": "float"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "nsu": {
+            "type": "string"
+          },
+          "lid": {
+            "type": "string"
+          },
+          "bin": {
+            "type": "string"
+          },
+          "last4": {
+            "type": "string"
+          },
+          "typeCard": {
+            "type": "string",
+            "enum": [
+              "Credit",
+              "Debit",
+              "Voucher"
+            ]
+          },
+          "card": {
+            "$ref": "#/components/schemas/Card"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "boleto": {
+            "$ref": "#/components/schemas/Boleto"
+          },
+          "pix": {
+            "$ref": "#/components/schemas/Pix"
+          },
+          "bankTransfer": {
+            "$ref": "#/components/schemas/BankTransfer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Approved",
+              "Declined",
+              "Pending"
+            ]
+          },
+          "numberOfInstallment": {
+            "type": "integer"
+          },
+          "installments": {
+            "type": "integer"
+          },
+          "authorizationId": {
+            "type": "string"
+          },
+          "authorizationCode": {
+            "type": "string"
+          },
+          "returnCode": {
+            "type": "string"
+          },
+          "returnMessage": {
+            "type": "string"
+          },
+          "exemptionCode": {
+            "type": "string"
+          }
+        }
+      },
+      "Card": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string"
+          },
+          "bin": {
+            "type": "string"
+          },
+          "end": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Credit",
+              "Debit",
+              "Voucher"
+            ]
+          },
+          "expirationDate": {
+            "type": "string"
+          },
+          "holderName": {
+            "type": "string"
+          },
+          "document": {
+            "type": "string"
+          },
+          "brand": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "Boleto": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "expirationDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "value": {
+            "type": "number",
+            "format": "float"
+          },
+          "bank": {
+            "type": "string"
+          },
+          "documentNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "Pix": {
+        "type": "object",
+        "properties": {
+          "expirationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "qrCode": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          }
+        }
+      },
+      "BankTransfer": {
+        "type": "object",
+        "properties": {
+          "bank": {
+            "type": "string"
+          },
+          "agency": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string"
+          },
+          "accountType": {
+            "type": "string"
+          },
+          "documentNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "Person": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "name",
+          "document"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Person",
+              "Company"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "document": {
+            "type": "string"
+          },
+          "documentTwo": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "M",
+              "F",
+              "O"
+            ]
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "email": {
+            "type": "string"
+          },
+          "secondaryEmail": {
+            "type": "string"
+          },
+          "phones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Phone"
+            }
+          },
+          "company": {
+            "$ref": "#/components/schemas/Company"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Address"
+            }
+          }
+        }
+      },
+      "Phone": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Residential",
+              "Commercial",
+              "Mobile",
+              "Other"
+            ]
+          },
+          "ddi": {
+            "type": "string"
+          },
+          "ddd": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "extension": {
+            "type": "string"
+          },
+          "full": {
+            "type": "string"
+          }
+        }
+      },
+      "Company": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "document": {
+            "type": "string"
+          },
+          "documentTwo": {
+            "type": "string"
+          },
+          "thirdDocument": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "foundationDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "revenue": {
+            "type": "number",
+            "format": "float"
+          },
+          "size": {
+            "type": "string"
+          },
+          "legalNature": {
+            "type": "string"
+          }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Facebook",
+              "Twitter",
+              "Instagram",
+              "Other"
+            ]
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Residential",
+              "Commercial",
+              "Shipping",
+              "Billing",
+              "Other"
+            ]
+          },
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "complement": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "district": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          }
+        }
+      },
+      "Shipment": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "value": {
+            "type": "number",
+            "format": "float"
+          },
+          "deliveryType": {
+            "type": "string"
+          },
+          "deliveryTime": {
+            "type": "string"
+          },
+          "carrier": {
+            "type": "string"
+          }
+        }
+      },
+      "Device": {
+        "type": "object",
+        "properties": {
+          "cookies": {
+            "type": "boolean"
+          },
+          "javascript": {
+            "type": "boolean"
+          },
+          "flash": {
+            "type": "boolean"
+          },
+          "fingerprint": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "ipAddress": {
+            "type": "string"
+          },
+          "hostname": {
+            "type": "string"
+          },
+          "browserType": {
+            "type": "string"
+          }
+        }
+      },
+      "Cart": {
+        "type": "object",
+        "properties": {
+          "abandoned": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            }
+          },
+          "shippingValue": {
+            "type": "number",
+            "format": "float"
+          },
+          "discountValue": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "CartItem": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "price": {
+            "type": "number",
+            "format": "float"
+          },
+          "addedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "format": "float"
+          },
+          "stock": {
+            "type": "integer"
+          },
+          "sku": {
+            "type": "string"
+          }
+        }
+      },
+      "OrderResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number",
+            "format": "float"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "APA",
+              "APM",
+              "RPM",
+              "AMA",
+              "ERR",
+              "NVO",
+              "SUS",
+              "CAN",
+              "FRD",
+              "RPA"
+            ]
+          },
+          "reanalysis": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "OrderStatusResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number",
+            "format": "float"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "APA",
+              "APM",
+              "RPM",
+              "AMA",
+              "ERR",
+              "NVO",
+              "SUS",
+              "CAN",
+              "FRD",
+              "RPA"
+            ]
+          },
+          "reanalysis": {
+            "type": "boolean"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "OrderUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "Approved",
+              "Rejected",
+              "Canceled",
+              "Fraud"
+            ]
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Payment"
+            }
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            }
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
