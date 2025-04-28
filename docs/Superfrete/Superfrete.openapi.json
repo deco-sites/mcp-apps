@@ -1,0 +1,505 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SuperFrete API",
+    "description": "API para cotação de frete",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.superfrete.com"
+    }
+  ],
+  "paths": {
+    "/api/v0/quote": {
+      "post": {
+        "summary": "Cotação de Frete",
+        "description": "Endpoint para obter cotações de frete",
+        "tags": [
+          "Cotação"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CotacaoRequest"
+              },
+              "examples": {
+                "cotacao": {
+                  "value": {
+                    "origin_zip_code": "01001000",
+                    "destination_zip_code": "29000000",
+                    "volumes": [
+                      {
+                        "amount": 1,
+                        "category": "caixa",
+                        "sku": "123",
+                        "tag": "grupo_01",
+                        "description": "Produto 01",
+                        "height": 0.2,
+                        "width": 0.2,
+                        "length": 0.2,
+                        "weight": 5,
+                        "unitary_value": 100.5,
+                        "unitary_value_declared": 100
+                      }
+                    ],
+                    "options": {
+                      "own_hand": true,
+                      "collect": false,
+                      "art": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cotação bem-sucedida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CotacaoResponse"
+                },
+                "examples": {
+                  "cotacao": {
+                    "value": {
+                      "id": "d17b7a28-a33e-4173-96c5-13261a7dd1d2",
+                      "request": {
+                        "origin_zip_code": "01001000",
+                        "destination_zip_code": "29000000",
+                        "volumes": [
+                          {
+                            "amount": 1,
+                            "category": "caixa",
+                            "sku": "123",
+                            "tag": "grupo_01",
+                            "description": "Produto 01",
+                            "height": 0.2,
+                            "width": 0.2,
+                            "length": 0.2,
+                            "weight": 5,
+                            "unitary_value": 100.5,
+                            "unitary_value_declared": 100
+                          }
+                        ],
+                        "options": {
+                          "own_hand": true,
+                          "collect": false,
+                          "art": false
+                        }
+                      },
+                      "offers": [
+                        {
+                          "carrier": {
+                            "name": "TRANSPORTADORA",
+                            "company_name": "TRANSPORTADORA LTDA",
+                            "registered_number": "00.000.000/0000-00",
+                            "logo": "https://site.com.br/logo.png",
+                            "reference": 9
+                          },
+                          "service": "Normal",
+                          "delivery_time": {
+                            "days": 7,
+                            "estimated_date": "2022-09-12"
+                          },
+                          "expiration": "2022-09-05T17:20:31.355Z",
+                          "cost": {
+                            "final": 38.69,
+                            "weight": 24.14,
+                            "art": 0,
+                            "collect": 0,
+                            "delivery": 0,
+                            "freight_addition": 0,
+                            "own_hand": 10,
+                            "declared_value": 4.55,
+                            "insurance_value": 0,
+                            "additional_services": []
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "error": {
+                    "value": {
+                      "error": "Erro na requisição",
+                      "details": [
+                        {
+                          "field": "origin_zip_code",
+                          "message": "CEP de origem inválido"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CotacaoRequest": {
+        "type": "object",
+        "required": [
+          "origin_zip_code",
+          "destination_zip_code",
+          "volumes"
+        ],
+        "properties": {
+          "origin_zip_code": {
+            "type": "string",
+            "description": "CEP de origem (apenas números)",
+            "example": "01001000"
+          },
+          "destination_zip_code": {
+            "type": "string",
+            "description": "CEP de destino (apenas números)",
+            "example": "29000000"
+          },
+          "volumes": {
+            "type": "array",
+            "description": "Volumes a serem transportados",
+            "items": {
+              "$ref": "#/components/schemas/Volume"
+            }
+          },
+          "options": {
+            "$ref": "#/components/schemas/Options"
+          }
+        }
+      },
+      "Volume": {
+        "type": "object",
+        "required": [
+          "amount",
+          "category",
+          "height",
+          "width",
+          "length",
+          "weight"
+        ],
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "description": "Quantidade de itens",
+            "example": 1
+          },
+          "category": {
+            "type": "string",
+            "description": "Categoria do volume",
+            "example": "caixa"
+          },
+          "sku": {
+            "type": "string",
+            "description": "Código do produto",
+            "example": "123"
+          },
+          "tag": {
+            "type": "string",
+            "description": "Tag para agrupar volumes",
+            "example": "grupo_01"
+          },
+          "description": {
+            "type": "string",
+            "description": "Descrição do produto",
+            "example": "Produto 01"
+          },
+          "height": {
+            "type": "number",
+            "format": "float",
+            "description": "Altura do volume em metros",
+            "example": 0.2
+          },
+          "width": {
+            "type": "number",
+            "format": "float",
+            "description": "Largura do volume em metros",
+            "example": 0.2
+          },
+          "length": {
+            "type": "number",
+            "format": "float",
+            "description": "Comprimento do volume em metros",
+            "example": 0.2
+          },
+          "weight": {
+            "type": "number",
+            "format": "float",
+            "description": "Peso do volume em kg",
+            "example": 5
+          },
+          "unitary_value": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor unitário do produto",
+            "example": 100.5
+          },
+          "unitary_value_declared": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor declarado unitário",
+            "example": 100
+          }
+        }
+      },
+      "Options": {
+        "type": "object",
+        "properties": {
+          "own_hand": {
+            "type": "boolean",
+            "description": "Entrega em mãos próprias",
+            "example": true
+          },
+          "collect": {
+            "type": "boolean",
+            "description": "Coleta na origem",
+            "example": false
+          },
+          "art": {
+            "type": "boolean",
+            "description": "Aviso de recebimento",
+            "example": false
+          }
+        }
+      },
+      "CotacaoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID da cotação",
+            "example": "d17b7a28-a33e-4173-96c5-13261a7dd1d2"
+          },
+          "request": {
+            "$ref": "#/components/schemas/CotacaoRequest"
+          },
+          "offers": {
+            "type": "array",
+            "description": "Ofertas de frete disponíveis",
+            "items": {
+              "$ref": "#/components/schemas/Offer"
+            }
+          }
+        }
+      },
+      "Offer": {
+        "type": "object",
+        "properties": {
+          "carrier": {
+            "$ref": "#/components/schemas/Carrier"
+          },
+          "service": {
+            "type": "string",
+            "description": "Tipo de serviço",
+            "example": "Normal"
+          },
+          "delivery_time": {
+            "$ref": "#/components/schemas/DeliveryTime"
+          },
+          "expiration": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data de expiração da cotação",
+            "example": "2022-09-05T17:20:31.355Z"
+          },
+          "cost": {
+            "$ref": "#/components/schemas/Cost"
+          }
+        }
+      },
+      "Carrier": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome da transportadora",
+            "example": "TRANSPORTADORA"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "Razão social",
+            "example": "TRANSPORTADORA LTDA"
+          },
+          "registered_number": {
+            "type": "string",
+            "description": "CNPJ",
+            "example": "00.000.000/0000-00"
+          },
+          "logo": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL do logo",
+            "example": "https://site.com.br/logo.png"
+          },
+          "reference": {
+            "type": "integer",
+            "description": "Referência interna da transportadora",
+            "example": 9
+          }
+        }
+      },
+      "DeliveryTime": {
+        "type": "object",
+        "properties": {
+          "days": {
+            "type": "integer",
+            "description": "Prazo de entrega em dias",
+            "example": 7
+          },
+          "estimated_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Data estimada de entrega",
+            "example": "2022-09-12"
+          }
+        }
+      },
+      "Cost": {
+        "type": "object",
+        "properties": {
+          "final": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor final do frete",
+            "example": 38.69
+          },
+          "weight": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor do frete pelo peso",
+            "example": 24.14
+          },
+          "art": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor do aviso de recebimento",
+            "example": 0
+          },
+          "collect": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor da coleta",
+            "example": 0
+          },
+          "delivery": {
+            "type": "number",
+            "format": "float",
+            "description": "Taxa de entrega",
+            "example": 0
+          },
+          "freight_addition": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor adicional do frete",
+            "example": 0
+          },
+          "own_hand": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor de mão própria",
+            "example": 10
+          },
+          "declared_value": {
+            "type": "number",
+            "format": "float",
+            "description": "Taxa do valor declarado",
+            "example": 4.55
+          },
+          "insurance_value": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor do seguro",
+            "example": 0
+          },
+          "additional_services": {
+            "type": "array",
+            "description": "Serviços adicionais",
+            "items": {
+              "type": "object"
+            },
+            "example": []
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Mensagem de erro",
+            "example": "Erro na requisição"
+          },
+          "details": {
+            "type": "array",
+            "description": "Detalhes do erro",
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "description": "Campo com problema",
+                  "example": "origin_zip_code"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Mensagem de erro específica",
+                  "example": "CEP de origem inválido"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      }
+    }
+  }
+}
