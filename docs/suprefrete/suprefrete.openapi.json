@@ -1,0 +1,454 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SuperFrete API",
+    "description": "API para cotação de frete da SuperFrete",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.superfrete.com/v1"
+    }
+  ],
+  "paths": {
+    "/cotacoes": {
+      "post": {
+        "summary": "Cotação de Frete",
+        "description": "Endpoint para realizar cotação de frete",
+        "operationId": "criarCotacao",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CotacaoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cotação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CotacaoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição inválida",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CotacaoRequest": {
+        "type": "object",
+        "required": [
+          "origem",
+          "destino",
+          "volumes"
+        ],
+        "properties": {
+          "tipo_frete": {
+            "type": "string",
+            "description": "Tipo de frete (CIF ou FOB)",
+            "enum": [
+              "CIF",
+              "FOB"
+            ],
+            "default": "CIF"
+          },
+          "origem": {
+            "$ref": "#/components/schemas/Endereco"
+          },
+          "destino": {
+            "$ref": "#/components/schemas/Endereco"
+          },
+          "volumes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Volume"
+            },
+            "minItems": 1
+          },
+          "valor_declarado": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor declarado para o seguro",
+            "example": 100.99
+          },
+          "transportadoras": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array com os IDs das transportadoras para filtrar",
+            "example": [
+              "123",
+              "456"
+            ]
+          },
+          "categorias_veiculos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Categorias de veículos para filtrar",
+            "example": [
+              "Carreta Baú",
+              "Truck Baú"
+            ]
+          },
+          "modalidades": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Modalidades para filtrar",
+            "example": [
+              "Rodoviário",
+              "Aéreo"
+            ]
+          },
+          "detalhes_entrega": {
+            "$ref": "#/components/schemas/DetalhesEntrega"
+          },
+          "etiquetas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Etiquetas personalizadas",
+            "example": [
+              "etiqueta1",
+              "etiqueta2"
+            ]
+          },
+          "veiculo_dedicado": {
+            "type": "boolean",
+            "description": "Define se a carga precisa de veículo dedicado",
+            "default": false
+          },
+          "formato_dados": {
+            "type": "boolean",
+            "description": "Define se a API deve retornar um objeto com mais detalhes",
+            "default": false
+          }
+        }
+      },
+      "Endereco": {
+        "type": "object",
+        "required": [
+          "cep"
+        ],
+        "properties": {
+          "cep": {
+            "type": "string",
+            "description": "CEP no formato 00000-000 ou 00000000",
+            "example": "01310-100"
+          },
+          "cidade": {
+            "type": "string",
+            "description": "Nome da cidade",
+            "example": "São Paulo"
+          },
+          "estado": {
+            "type": "string",
+            "description": "Sigla do estado com 2 caracteres",
+            "example": "SP"
+          },
+          "logradouro": {
+            "type": "string",
+            "description": "Nome da rua, avenida, etc.",
+            "example": "Avenida Paulista"
+          },
+          "numero": {
+            "type": "string",
+            "description": "Número do endereço",
+            "example": "1000"
+          }
+        }
+      },
+      "Volume": {
+        "type": "object",
+        "required": [
+          "quantidade",
+          "peso",
+          "comprimento",
+          "largura",
+          "altura"
+        ],
+        "properties": {
+          "quantidade": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Quantidade de volumes",
+            "example": 1
+          },
+          "peso": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0.01,
+            "description": "Peso em kg",
+            "example": 10.5
+          },
+          "comprimento": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0.01,
+            "description": "Comprimento em cm",
+            "example": 50
+          },
+          "largura": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0.01,
+            "description": "Largura em cm",
+            "example": 40
+          },
+          "altura": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0.01,
+            "description": "Altura em cm",
+            "example": 30
+          },
+          "tipo": {
+            "type": "string",
+            "description": "Tipo de produto",
+            "example": "Caixa"
+          },
+          "empilhavel": {
+            "type": "boolean",
+            "description": "Define se o volume pode ser empilhado",
+            "default": true
+          },
+          "descricao": {
+            "type": "string",
+            "description": "Descrição do volume",
+            "example": "Caixa com eletrônicos"
+          }
+        }
+      },
+      "DetalhesEntrega": {
+        "type": "object",
+        "properties": {
+          "data_coleta": {
+            "type": "string",
+            "format": "date",
+            "description": "Data de coleta no formato YYYY-MM-DD",
+            "example": "2023-12-31"
+          },
+          "data_entrega": {
+            "type": "string",
+            "format": "date",
+            "description": "Data de entrega no formato YYYY-MM-DD",
+            "example": "2024-01-10"
+          },
+          "entrega_domiciliar": {
+            "type": "boolean",
+            "description": "Define se a entrega é domiciliar",
+            "default": true
+          },
+          "coleta_domiciliar": {
+            "type": "boolean",
+            "description": "Define se a coleta é domiciliar",
+            "default": true
+          },
+          "servicos_adicionais": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array de serviços adicionais",
+            "example": [
+              "ajudante",
+              "paletizacao"
+            ]
+          }
+        }
+      },
+      "CotacaoResponse": {
+        "type": "object",
+        "properties": {
+          "cotacao_id": {
+            "type": "string",
+            "description": "ID da cotação",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "ofertas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Oferta"
+            }
+          },
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem de status",
+            "example": "Cotação realizada com sucesso"
+          }
+        }
+      },
+      "Oferta": {
+        "type": "object",
+        "properties": {
+          "oferta_id": {
+            "type": "string",
+            "description": "ID da oferta",
+            "example": "abc123"
+          },
+          "transportadora": {
+            "$ref": "#/components/schemas/Transportadora"
+          },
+          "valor_frete": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor do frete",
+            "example": 150.99
+          },
+          "prazo_entrega": {
+            "type": "integer",
+            "description": "Prazo de entrega em dias úteis",
+            "example": 3
+          },
+          "veiculo": {
+            "type": "string",
+            "description": "Tipo de veículo",
+            "example": "Truck Baú"
+          },
+          "modalidade": {
+            "type": "string",
+            "description": "Modalidade do frete",
+            "example": "Rodoviário"
+          },
+          "data_previsao_entrega": {
+            "type": "string",
+            "format": "date",
+            "description": "Data prevista para entrega",
+            "example": "2024-01-10"
+          },
+          "valores_detalhados": {
+            "$ref": "#/components/schemas/ValoresDetalhados"
+          }
+        }
+      },
+      "Transportadora": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID da transportadora",
+            "example": "456"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome da transportadora",
+            "example": "Transportadora XYZ"
+          },
+          "logo": {
+            "type": "string",
+            "description": "URL da logo da transportadora",
+            "example": "https://exemplo.com/logo.png"
+          }
+        }
+      },
+      "ValoresDetalhados": {
+        "type": "object",
+        "properties": {
+          "frete": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor do frete base",
+            "example": 120.5
+          },
+          "gris": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor do GRIS",
+            "example": 10.25
+          },
+          "taxas": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor das taxas",
+            "example": 15
+          },
+          "pedagio": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor do pedágio",
+            "example": 5.24
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "erro": {
+            "type": "boolean",
+            "description": "Indica que ocorreu um erro",
+            "example": true
+          },
+          "codigo": {
+            "type": "string",
+            "description": "Código do erro",
+            "example": "INVALID_CEP"
+          },
+          "mensagem": {
+            "type": "string",
+            "description": "Mensagem de erro",
+            "example": "CEP de origem inválido"
+          },
+          "detalhes": {
+            "type": "object",
+            "description": "Detalhes adicionais do erro"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
