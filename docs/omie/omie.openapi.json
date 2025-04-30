@@ -1,0 +1,459 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Omie API",
+    "description": "API for accessing Omie services for business management",
+    "version": "1.0.0",
+    "contact": {
+      "email": "api@omie.com.br"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://app.omie.com.br/api/v1",
+      "description": "Omie API production server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "appKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "app_key"
+      },
+      "appSecret": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "app_secret"
+      }
+    }
+  },
+  "security": [
+    {
+      "appKey": [],
+      "appSecret": []
+    }
+  ],
+  "paths": {
+    "/geral/clientes/": {
+      "post": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Operations with clients",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string",
+                    "enum": [
+                      "IncluirCliente",
+                      "AlterarCliente",
+                      "ExcluirCliente",
+                      "ConsultarCliente",
+                      "ListarClientes",
+                      "UpsertCliente"
+                    ]
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "call",
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/produtos/pedido/": {
+      "post": {
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Operations with orders",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string",
+                    "enum": [
+                      "IncluirPedido",
+                      "AlterarPedido",
+                      "StatusPedido",
+                      "ConsultarPedido",
+                      "ListarPedidos",
+                      "TrocarEtapaPedido"
+                    ]
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "call",
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/contareceber/": {
+      "post": {
+        "tags": [
+          "Contas a Receber"
+        ],
+        "summary": "Operations with accounts receivable",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string",
+                    "enum": [
+                      "IncluirContaReceber",
+                      "AlterarContaReceber",
+                      "ExcluirContaReceber",
+                      "ConsultarContaReceber",
+                      "ListarContasReceber"
+                    ]
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "call",
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/financas/contapagar/": {
+      "post": {
+        "tags": [
+          "Contas a Pagar"
+        ],
+        "summary": "Operations with accounts payable",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string",
+                    "enum": [
+                      "IncluirContaPagar",
+                      "AlterarContaPagar",
+                      "ExcluirContaPagar",
+                      "ConsultarContaPagar",
+                      "ListarContasPagar"
+                    ]
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "call",
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/nfce/": {
+      "post": {
+        "tags": [
+          "NFC-e"
+        ],
+        "summary": "Operations with NFC-e",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string",
+                    "enum": [
+                      "EmitirNFCe",
+                      "CancelarNFCe",
+                      "ConsultarNFCe",
+                      "ListarNFCe"
+                    ]
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "call",
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/nfse/": {
+      "post": {
+        "tags": [
+          "NFS-e"
+        ],
+        "summary": "Operations with NFS-e",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string",
+                    "enum": [
+                      "EmitirNFSE",
+                      "CancelarNFSE",
+                      "ConsultarNFSE",
+                      "ListarNFSE"
+                    ]
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "call",
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/cadastro/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Operations with products",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "call": {
+                    "type": "string",
+                    "enum": [
+                      "IncluirProduto",
+                      "AlterarProduto",
+                      "ExcluirProduto",
+                      "ConsultarProduto",
+                      "ListarProdutos",
+                      "UpsertProduto"
+                    ]
+                  },
+                  "app_key": {
+                    "type": "string"
+                  },
+                  "app_secret": {
+                    "type": "string"
+                  },
+                  "param": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "required": [
+                  "call",
+                  "app_key",
+                  "app_secret",
+                  "param"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
