@@ -4,40 +4,79 @@
 
 import * as $$$$$$$$$$$0 from "./apps/deco/website.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$0 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
-import * as $$$1 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$2 from "./loaders/vtex/api/GET/pricingConfig.ts";
-import * as $$$3 from "./loaders/vtex/api/GET/pricingMigration.ts";
-import * as $$$5 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$4 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
-import * as $$$6 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
-import * as $$$7 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
-import * as $$$9 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$8 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
-import * as $$$10 from "./loaders/vtex/api/GET/pricingTables.ts";
-import * as $$$11 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$12 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$13 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
+import * as $$$0 from "./loaders/RD Station/RD Station/DELETE/marketingAccounts:accountUuidWebhooks:webhookUuid.ts";
+import * as $$$2 from "./loaders/RD Station/RD Station/GET/marketingAccounts:accountUuidWebhooks:webhookUuid.ts";
+import * as $$$1 from "./loaders/RD Station/RD Station/GET/marketingAccounts:accountUuidWebhooks.ts";
+import * as $$$3 from "./loaders/RD Station/RD Station/GET/platformContacts:uuid.ts";
+import * as $$$4 from "./loaders/RD Station/RD Station/GET/platformContactsFields.ts";
+import * as $$$5 from "./loaders/RD Station/RD Station/GET/platformFunnels.ts";
+import * as $$$7 from "./loaders/RD Station/RD Station/GET/platformSegmentations:segmentationIdContacts.ts";
+import * as $$$6 from "./loaders/RD Station/RD Station/GET/platformSegmentations.ts";
+import * as $$$8 from "./loaders/RD Station/RD Station/PATCH/platformContacts:uuid.ts";
+import * as $$$9 from "./loaders/RD Station/RD Station/POST/authRefresh.ts";
+import * as $$$10 from "./loaders/RD Station/RD Station/POST/authRevoke.ts";
+import * as $$$11 from "./loaders/RD Station/RD Station/POST/authToken.ts";
+import * as $$$12 from "./loaders/RD Station/RD Station/POST/marketingAccounts:accountUuidWebhooks.ts";
+import * as $$$13 from "./loaders/RD Station/RD Station/POST/platformContacts.ts";
+import * as $$$14 from "./loaders/RD Station/RD Station/POST/platformContactsEvents.ts";
+import * as $$$15 from "./loaders/RD Station/RD Station/PUT/marketingAccounts:accountUuidWebhooks:webhookUuid.ts";
+import * as $$$16 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
+import * as $$$17 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$18 from "./loaders/vtex/api/GET/pricingConfig.ts";
+import * as $$$19 from "./loaders/vtex/api/GET/pricingMigration.ts";
+import * as $$$21 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$20 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
+import * as $$$22 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
+import * as $$$23 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
+import * as $$$25 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$24 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
+import * as $$$26 from "./loaders/vtex/api/GET/pricingTables.ts";
+import * as $$$27 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$28 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$29 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
 
 const manifest = {
   "loaders": {
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$0,
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
+    "site/loaders/RD Station/RD Station/DELETE/marketingAccounts:accountUuidWebhooks:webhookUuid.ts":
+      $$$0,
+    "site/loaders/RD Station/RD Station/GET/marketingAccounts:accountUuidWebhooks:webhookUuid.ts":
+      $$$2,
+    "site/loaders/RD Station/RD Station/GET/marketingAccounts:accountUuidWebhooks.ts":
       $$$1,
-    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$2,
-    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$3,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$5,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$4,
-    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$6,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
+    "site/loaders/RD Station/RD Station/GET/platformContacts:uuid.ts": $$$3,
+    "site/loaders/RD Station/RD Station/GET/platformContactsFields.ts": $$$4,
+    "site/loaders/RD Station/RD Station/GET/platformFunnels.ts": $$$5,
+    "site/loaders/RD Station/RD Station/GET/platformSegmentations:segmentationIdContacts.ts":
       $$$7,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts": $$$9,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$8,
-    "site/loaders/vtex/api/GET/pricingTables.ts": $$$10,
+    "site/loaders/RD Station/RD Station/GET/platformSegmentations.ts": $$$6,
+    "site/loaders/RD Station/RD Station/PATCH/platformContacts:uuid.ts": $$$8,
+    "site/loaders/RD Station/RD Station/POST/authRefresh.ts": $$$9,
+    "site/loaders/RD Station/RD Station/POST/authRevoke.ts": $$$10,
+    "site/loaders/RD Station/RD Station/POST/authToken.ts": $$$11,
+    "site/loaders/RD Station/RD Station/POST/marketingAccounts:accountUuidWebhooks.ts":
+      $$$12,
+    "site/loaders/RD Station/RD Station/POST/platformContacts.ts": $$$13,
+    "site/loaders/RD Station/RD Station/POST/platformContactsEvents.ts": $$$14,
+    "site/loaders/RD Station/RD Station/PUT/marketingAccounts:accountUuidWebhooks:webhookUuid.ts":
+      $$$15,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$16,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$17,
+    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$18,
+    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$19,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$21,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$20,
+    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$22,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
+      $$$23,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$25,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$24,
+    "site/loaders/vtex/api/GET/pricingTables.ts": $$$26,
     "site/loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$11,
-    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$12,
-    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$13,
+      $$$27,
+    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$28,
+    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$29,
   },
   "apps": {
     "site/apps/deco/website.ts": $$$$$$$$$$$0,
