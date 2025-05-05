@@ -1,0 +1,406 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RD Station Custom Fields API",
+    "description": "API for managing custom fields in RD Station Marketing",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.rd.services"
+    }
+  ],
+  "paths": {
+    "/platform/contacts/fields": {
+      "get": {
+        "summary": "Get all custom fields",
+        "description": "Returns a list of all custom fields for the authenticated account",
+        "operationId": "getCustomFields",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "description": "Number of items per page",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved custom fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomFieldsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create a new custom field",
+        "description": "Creates a new custom field in RD Station Marketing",
+        "operationId": "createCustomField",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomFieldRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Custom field created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomField"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/platform/contacts/fields/{uuid}": {
+      "put": {
+        "summary": "Update a custom field",
+        "description": "Updates an existing custom field in RD Station Marketing",
+        "operationId": "updateCustomField",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "UUID of the custom field to update",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomFieldRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Custom field updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomField"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Custom field not found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a custom field",
+        "description": "Deletes a custom field from RD Station Marketing",
+        "operationId": "deleteCustomField",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "UUID of the custom field to delete",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Custom field deleted successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Custom field not found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CustomFieldsResponse": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomField"
+            }
+          },
+          "page_info": {
+            "$ref": "#/components/schemas/PageInfo"
+          }
+        }
+      },
+      "CustomField": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for the custom field"
+          },
+          "api_identifier": {
+            "type": "string",
+            "description": "API identifier of the custom field"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable name of the custom field"
+          },
+          "label": {
+            "type": "string",
+            "description": "Field label displayed in forms"
+          },
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "STRING",
+              "TEXT",
+              "BOOLEAN",
+              "NUMBER",
+              "FLOAT",
+              "URL",
+              "EMAIL",
+              "COMBOBOX"
+            ],
+            "description": "Type of data stored in the field"
+          },
+          "presentation_type": {
+            "type": "string",
+            "enum": [
+              "TEXT_INPUT",
+              "TEXT_AREA",
+              "DROPDOWN",
+              "CHECKBOX",
+              "RADIO"
+            ],
+            "description": "How the field is presented in forms"
+          },
+          "validation_rules": {
+            "type": "object",
+            "properties": {
+              "valid_options": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Valid options for COMBOBOX fields"
+              }
+            }
+          },
+          "custom_domain": {
+            "type": "string",
+            "description": "Custom domain for the field"
+          },
+          "is_default": {
+            "type": "boolean",
+            "description": "Indicates if this is a default field"
+          }
+        },
+        "required": [
+          "uuid",
+          "api_identifier",
+          "name",
+          "data_type"
+        ]
+      },
+      "CustomFieldRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Human-readable name of the custom field"
+          },
+          "label": {
+            "type": "string",
+            "description": "Field label displayed in forms"
+          },
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "STRING",
+              "TEXT",
+              "BOOLEAN",
+              "NUMBER",
+              "FLOAT",
+              "URL",
+              "EMAIL",
+              "COMBOBOX"
+            ],
+            "description": "Type of data stored in the field"
+          },
+          "presentation_type": {
+            "type": "string",
+            "enum": [
+              "TEXT_INPUT",
+              "TEXT_AREA",
+              "DROPDOWN",
+              "CHECKBOX",
+              "RADIO"
+            ],
+            "description": "How the field is presented in forms"
+          },
+          "validation_rules": {
+            "type": "object",
+            "properties": {
+              "valid_options": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Valid options for COMBOBOX fields"
+              }
+            }
+          },
+          "custom_domain": {
+            "type": "string",
+            "description": "Custom domain for the field"
+          }
+        },
+        "required": [
+          "name",
+          "data_type"
+        ]
+      },
+      "PageInfo": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "Current page number"
+          },
+          "page_size": {
+            "type": "integer",
+            "description": "Number of items per page"
+          },
+          "total_pages": {
+            "type": "integer",
+            "description": "Total number of pages"
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "Total number of items"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Error messages keyed by field name"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
