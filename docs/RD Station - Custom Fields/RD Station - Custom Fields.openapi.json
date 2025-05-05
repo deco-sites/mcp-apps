@@ -1,0 +1,573 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RD Station Custom Fields API",
+    "description": "API for managing custom fields in RD Station Marketing",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.rd.services"
+    }
+  ],
+  "paths": {
+    "/platform/contacts/fields": {
+      "get": {
+        "summary": "List custom fields",
+        "description": "Returns custom fields for contacts in RD Station Marketing",
+        "tags": [
+          "Custom Fields"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results to return",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of results",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "description": "Authentication token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of custom fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomFieldsList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create custom field",
+        "description": "Creates a new custom field in RD Station Marketing",
+        "tags": [
+          "Custom Fields"
+        ],
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "query",
+            "description": "Authentication token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomFieldCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Custom field created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomField"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/platform/contacts/fields/{uuid}": {
+      "get": {
+        "summary": "Get custom field",
+        "description": "Returns information about a specific custom field",
+        "tags": [
+          "Custom Fields"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "UUID of the custom field",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "description": "Authentication token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Custom field details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomField"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update custom field",
+        "description": "Updates a custom field in RD Station Marketing",
+        "tags": [
+          "Custom Fields"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "UUID of the custom field",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "description": "Authentication token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomFieldUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Custom field updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomField"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete custom field",
+        "description": "Deletes a custom field from RD Station Marketing",
+        "tags": [
+          "Custom Fields"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "UUID of the custom field",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "description": "Authentication token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Custom field deleted"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CustomField": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "description": "Unique identifier of the custom field"
+          },
+          "api_identifier": {
+            "type": "string",
+            "description": "Identifier used in APIs to reference the field"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the custom field"
+          },
+          "label": {
+            "type": "string",
+            "description": "Display label of the custom field"
+          },
+          "data_type": {
+            "type": "string",
+            "description": "Data type of the custom field",
+            "enum": [
+              "STRING",
+              "INTEGER",
+              "BOOLEAN",
+              "FLOAT",
+              "MULTISELECT",
+              "RADIOBUTTON",
+              "SELECT_BOX"
+            ]
+          },
+          "data_format": {
+            "type": "string",
+            "description": "Format of the data",
+            "enum": [
+              "TEXT",
+              "EMAIL",
+              "DATE",
+              "PHONE",
+              "URL",
+              "CURRENCY"
+            ]
+          },
+          "presentation_type": {
+            "type": "string",
+            "description": "How the field is presented in the interface",
+            "enum": [
+              "TEXT",
+              "TEXTAREA",
+              "SELECT",
+              "CHECKBOX",
+              "RADIO"
+            ]
+          },
+          "validation_rules": {
+            "type": "object",
+            "description": "Validation rules for the field"
+          },
+          "default_value": {
+            "type": "string",
+            "description": "Default value for the field"
+          },
+          "custom_domain": {
+            "type": "object",
+            "properties": {
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Available options for select fields"
+              }
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the field was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the field was last updated"
+          }
+        }
+      },
+      "CustomFieldsList": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomField"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "total_count": {
+                "type": "integer",
+                "description": "Total number of fields"
+              },
+              "total_pages": {
+                "type": "integer",
+                "description": "Total number of pages"
+              },
+              "current_page": {
+                "type": "integer",
+                "description": "Current page number"
+              }
+            }
+          }
+        }
+      },
+      "CustomFieldCreate": {
+        "type": "object",
+        "required": [
+          "name",
+          "label",
+          "data_type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the custom field"
+          },
+          "label": {
+            "type": "string",
+            "description": "Display label of the custom field"
+          },
+          "data_type": {
+            "type": "string",
+            "description": "Data type of the custom field",
+            "enum": [
+              "STRING",
+              "INTEGER",
+              "BOOLEAN",
+              "FLOAT",
+              "MULTISELECT",
+              "RADIOBUTTON",
+              "SELECT_BOX"
+            ]
+          },
+          "data_format": {
+            "type": "string",
+            "description": "Format of the data",
+            "enum": [
+              "TEXT",
+              "EMAIL",
+              "DATE",
+              "PHONE",
+              "URL",
+              "CURRENCY"
+            ]
+          },
+          "presentation_type": {
+            "type": "string",
+            "description": "How the field is presented in the interface",
+            "enum": [
+              "TEXT",
+              "TEXTAREA",
+              "SELECT",
+              "CHECKBOX",
+              "RADIO"
+            ]
+          },
+          "validation_rules": {
+            "type": "object",
+            "description": "Validation rules for the field"
+          },
+          "default_value": {
+            "type": "string",
+            "description": "Default value for the field"
+          },
+          "custom_domain": {
+            "type": "object",
+            "properties": {
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Available options for select fields"
+              }
+            }
+          }
+        }
+      },
+      "CustomFieldUpdate": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Display label of the custom field"
+          },
+          "presentation_type": {
+            "type": "string",
+            "description": "How the field is presented in the interface",
+            "enum": [
+              "TEXT",
+              "TEXTAREA",
+              "SELECT",
+              "CHECKBOX",
+              "RADIO"
+            ]
+          },
+          "validation_rules": {
+            "type": "object",
+            "description": "Validation rules for the field"
+          },
+          "default_value": {
+            "type": "string",
+            "description": "Default value for the field"
+          },
+          "custom_domain": {
+            "type": "object",
+            "properties": {
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Available options for select fields"
+              }
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "error_message": {
+            "type": "string",
+            "description": "Detailed error message"
+          }
+        }
+      }
+    }
+  }
+}
