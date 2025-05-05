@@ -1,0 +1,477 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Pinecone API",
+    "description": "API for Pinecone vector database service",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://{indexName}-{projectId}.svc.{environment}.pinecone.io",
+      "variables": {
+        "indexName": {
+          "description": "Name of the index",
+          "default": "example-index"
+        },
+        "projectId": {
+          "description": "Project ID",
+          "default": "abc123"
+        },
+        "environment": {
+          "description": "Pinecone environment",
+          "default": "us-west1-gcp"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/vectors/upsert": {
+      "post": {
+        "summary": "Upsert vectors",
+        "description": "Upsert vectors into the index",
+        "operationId": "upsertVectors",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful upsert operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpsertResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/vectors/query": {
+      "post": {
+        "summary": "Query vectors",
+        "description": "Query for the most similar vectors to a given query vector",
+        "operationId": "queryVectors",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful query operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueryResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/vectors/delete": {
+      "post": {
+        "summary": "Delete vectors",
+        "description": "Delete vectors from the index",
+        "operationId": "deleteVectors",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful delete operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/vectors/fetch": {
+      "get": {
+        "summary": "Fetch vectors",
+        "description": "Fetch vectors by their IDs",
+        "operationId": "fetchVectors",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Vector IDs to fetch",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "namespace",
+            "in": "query",
+            "description": "Namespace to fetch vectors from",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful fetch operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FetchResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/describe_index_stats": {
+      "get": {
+        "summary": "Describe index stats",
+        "description": "Get statistics about the index",
+        "operationId": "describeIndexStats",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Filter condition to apply",
+            "required": false,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful stats retrieval",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DescribeIndexStatsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Vector": {
+        "type": "object",
+        "required": [
+          "id",
+          "values"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the vector"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            },
+            "description": "Vector values"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Optional metadata associated with the vector"
+          },
+          "sparse_values": {
+            "type": "object",
+            "properties": {
+              "indices": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            },
+            "description": "Optional sparse vector representation"
+          }
+        }
+      },
+      "UpsertRequest": {
+        "type": "object",
+        "required": [
+          "vectors"
+        ],
+        "properties": {
+          "vectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Vector"
+            }
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Optional namespace to which vectors belong"
+          }
+        }
+      },
+      "UpsertResponse": {
+        "type": "object",
+        "properties": {
+          "upsertedCount": {
+            "type": "integer",
+            "description": "Number of vectors upserted"
+          }
+        }
+      },
+      "QueryRequest": {
+        "type": "object",
+        "properties": {
+          "vector": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            },
+            "description": "Query vector"
+          },
+          "id": {
+            "type": "string",
+            "description": "ID of the vector to use as a query vector"
+          },
+          "sparse_vector": {
+            "type": "object",
+            "properties": {
+              "indices": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
+              }
+            }
+          },
+          "top_k": {
+            "type": "integer",
+            "default": 10,
+            "description": "Number of results to return"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Namespace to query"
+          },
+          "filter": {
+            "type": "object",
+            "description": "Metadata filter to apply"
+          },
+          "include_values": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to include vector values in response"
+          },
+          "include_metadata": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to include metadata in response"
+          }
+        }
+      },
+      "QueryResponse": {
+        "type": "object",
+        "properties": {
+          "matches": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "format": "float"
+                  }
+                },
+                "metadata": {
+                  "type": "object"
+                },
+                "sparse_values": {
+                  "type": "object",
+                  "properties": {
+                    "indices": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "values": {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "format": "float"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "namespace": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteRequest": {
+        "type": "object",
+        "properties": {
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Vector IDs to delete"
+          },
+          "delete_all": {
+            "type": "boolean",
+            "description": "Whether to delete all vectors"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Namespace from which to delete vectors"
+          },
+          "filter": {
+            "type": "object",
+            "description": "Metadata filter for vectors to delete"
+          }
+        }
+      },
+      "DeleteResponse": {
+        "type": "object",
+        "properties": {
+          "deletedCount": {
+            "type": "integer",
+            "description": "Number of vectors deleted"
+          }
+        }
+      },
+      "FetchResponse": {
+        "type": "object",
+        "properties": {
+          "vectors": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Vector"
+            }
+          },
+          "namespace": {
+            "type": "string"
+          }
+        }
+      },
+      "DescribeIndexStatsResponse": {
+        "type": "object",
+        "properties": {
+          "dimension": {
+            "type": "integer"
+          },
+          "index_fullness": {
+            "type": "number",
+            "format": "float"
+          },
+          "total_vector_count": {
+            "type": "integer"
+          },
+          "namespaces": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "vector_count": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Api-Key"
+      }
+    }
+  }
+}
