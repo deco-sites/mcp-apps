@@ -1,0 +1,732 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "HubSpot CRM API",
+    "description": "API for managing CRM objects in HubSpot",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.hubapi.com",
+      "description": "HubSpot API Server"
+    }
+  ],
+  "paths": {
+    "/crm/v3/objects/{objectType}": {
+      "get": {
+        "summary": "Get a list of CRM objects",
+        "description": "Returns a list of CRM objects of the specified type",
+        "parameters": [
+          {
+            "name": "objectType",
+            "in": "path",
+            "description": "Type of CRM object (contacts, companies, deals, tickets, etc.)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "contacts",
+                "companies",
+                "deals",
+                "tickets",
+                "products",
+                "line_items"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results to return",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Cursor token for pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "description": "List of properties to include in the response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of CRM objects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a CRM object",
+        "description": "Creates a new CRM object of the specified type",
+        "parameters": [
+          {
+            "name": "objectType",
+            "in": "path",
+            "description": "Type of CRM object (contacts, companies, deals, tickets, etc.)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "contacts",
+                "companies",
+                "deals",
+                "tickets",
+                "products",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObjectCreateInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrmObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/crm/v3/objects/{objectType}/{objectId}": {
+      "get": {
+        "summary": "Get a CRM object by ID",
+        "description": "Gets a specific CRM object by ID",
+        "parameters": [
+          {
+            "name": "objectType",
+            "in": "path",
+            "description": "Type of CRM object (contacts, companies, deals, tickets, etc.)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "contacts",
+                "companies",
+                "deals",
+                "tickets",
+                "products",
+                "line_items"
+              ]
+            }
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "ID of the CRM object",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "description": "List of properties to include in the response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Requested CRM object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrmObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a CRM object",
+        "description": "Updates properties of a specific CRM object",
+        "parameters": [
+          {
+            "name": "objectType",
+            "in": "path",
+            "description": "Type of CRM object (contacts, companies, deals, tickets, etc.)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "contacts",
+                "companies",
+                "deals",
+                "tickets",
+                "products",
+                "line_items"
+              ]
+            }
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "ID of the CRM object",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObjectUpdateInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated CRM object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CrmObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a CRM object",
+        "description": "Deletes a specific CRM object",
+        "parameters": [
+          {
+            "name": "objectType",
+            "in": "path",
+            "description": "Type of CRM object (contacts, companies, deals, tickets, etc.)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "contacts",
+                "companies",
+                "deals",
+                "tickets",
+                "products",
+                "line_items"
+              ]
+            }
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "ID of the CRM object",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/crm/v3/objects/{objectType}/search": {
+      "post": {
+        "summary": "Search CRM objects",
+        "description": "Searches for CRM objects that match the given criteria",
+        "parameters": [
+          {
+            "name": "objectType",
+            "in": "path",
+            "description": "Type of CRM object (contacts, companies, deals, tickets, etc.)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "contacts",
+                "companies",
+                "deals",
+                "tickets",
+                "products",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/crm/v3/objects/{objectType}/{objectId}/associations/{toObjectType}": {
+      "get": {
+        "summary": "Get associated objects",
+        "description": "Gets objects associated with the specified object",
+        "parameters": [
+          {
+            "name": "objectType",
+            "in": "path",
+            "description": "Type of CRM object (contacts, companies, deals, tickets, etc.)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "contacts",
+                "companies",
+                "deals",
+                "tickets",
+                "products",
+                "line_items"
+              ]
+            }
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "ID of the CRM object",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toObjectType",
+            "in": "path",
+            "description": "Type of associated objects to return",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "contacts",
+                "companies",
+                "deals",
+                "tickets",
+                "products",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of associated objects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssociationResults"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CrmObject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the object"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Properties of the object as key-value pairs"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the object was created"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the object was last updated"
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether the object is archived"
+          }
+        }
+      },
+      "ObjectCreateInput": {
+        "type": "object",
+        "properties": {
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Properties of the object to set during creation"
+          },
+          "associations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssociationInput"
+            },
+            "description": "Associations to create with the object"
+          }
+        },
+        "required": [
+          "properties"
+        ]
+      },
+      "ObjectUpdateInput": {
+        "type": "object",
+        "properties": {
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Properties of the object to update"
+          }
+        },
+        "required": [
+          "properties"
+        ]
+      },
+      "AssociationInput": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "associationCategory": {
+                  "type": "string",
+                  "enum": [
+                    "HUBSPOT_DEFINED",
+                    "USER_DEFINED"
+                  ]
+                },
+                "associationTypeId": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "associationCategory",
+                "associationTypeId"
+              ]
+            }
+          }
+        },
+        "required": [
+          "to",
+          "types"
+        ]
+      },
+      "SearchRequest": {
+        "type": "object",
+        "properties": {
+          "filterGroups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "propertyName": {
+                        "type": "string"
+                      },
+                      "operator": {
+                        "type": "string",
+                        "enum": [
+                          "EQ",
+                          "NEQ",
+                          "LT",
+                          "LTE",
+                          "GT",
+                          "GTE",
+                          "BETWEEN",
+                          "IN",
+                          "NOT_IN",
+                          "HAS_PROPERTY",
+                          "NOT_HAS_PROPERTY",
+                          "CONTAINS_TOKEN",
+                          "NOT_CONTAINS_TOKEN"
+                        ]
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "propertyName",
+                      "operator"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "filters"
+              ]
+            }
+          },
+          "sorts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "propertyName": {
+                  "type": "string"
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": [
+                    "ASCENDING",
+                    "DESCENDING"
+                  ]
+                }
+              },
+              "required": [
+                "propertyName",
+                "direction"
+              ]
+            }
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "after": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "filterGroups"
+        ]
+      },
+      "CollectionResponse": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CrmObject"
+            }
+          },
+          "paging": {
+            "type": "object",
+            "properties": {
+              "next": {
+                "type": "object",
+                "properties": {
+                  "after": {
+                    "type": "string"
+                  },
+                  "link": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "total": {
+            "type": "integer"
+          }
+        }
+      },
+      "AssociationResults": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "paging": {
+            "type": "object",
+            "properties": {
+              "next": {
+                "type": "object",
+                "properties": {
+                  "after": {
+                    "type": "string"
+                  },
+                  "link": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://app.hubspot.com/oauth/authorize",
+            "tokenUrl": "https://api.hubapi.com/oauth/v1/token",
+            "scopes": {
+              "crm.objects.contacts.read": "Read contact objects",
+              "crm.objects.contacts.write": "Write contact objects",
+              "crm.objects.companies.read": "Read company objects",
+              "crm.objects.companies.write": "Write company objects",
+              "crm.objects.deals.read": "Read deal objects",
+              "crm.objects.deals.write": "Write deal objects",
+              "crm.objects.tickets.read": "Read ticket objects",
+              "crm.objects.tickets.write": "Write ticket objects"
+            }
+          }
+        }
+      },
+      "apiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key token preceded by 'Bearer '"
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": []
+    },
+    {
+      "apiKey": []
+    }
+  ]
+}
