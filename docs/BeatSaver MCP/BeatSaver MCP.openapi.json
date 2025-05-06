@@ -1,0 +1,1298 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "BeatSaver",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/collaborations": {
+      "get": {
+        "tags": [
+          "Collaborations"
+        ],
+        "operationId": "getCollaborations",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CollaborationDetailContract"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/collaborations/{key}": {
+      "get": {
+        "tags": [
+          "Collaborations"
+        ],
+        "operationId": "getCollaboration",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollaborationDetailContract"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/download/key/{key}/{hash}": {
+      "get": {
+        "tags": [
+          "Download"
+        ],
+        "operationId": "downloadByHash",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/download/hash/{hash}": {
+      "get": {
+        "tags": [
+          "Download"
+        ],
+        "operationId": "downloadByKeys",
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/maps/hash/{hash}": {
+      "get": {
+        "tags": [
+          "Maps"
+        ],
+        "operationId": "getMapByHash",
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapDetailContract"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/maps/id/{id}": {
+      "get": {
+        "tags": [
+          "Maps"
+        ],
+        "operationId": "getMapById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapDetailContract"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/maps/collaborations/{id}": {
+      "get": {
+        "tags": [
+          "Maps"
+        ],
+        "operationId": "getMapsByCollaboration",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "automapper",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SortOrder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedMapDetailContract"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/maps/latest": {
+      "get": {
+        "tags": [
+          "Maps"
+        ],
+        "operationId": "getLatestMaps",
+        "parameters": [
+          {
+            "name": "automapper",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedMapDetailContract"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/maps/plays/{id}": {
+      "get": {
+        "tags": [
+          "Maps"
+        ],
+        "operationId": "getPlaysByMapId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/maps/uploader/{id}": {
+      "get": {
+        "tags": [
+          "Maps"
+        ],
+        "operationId": "getMapsByUploader",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "automapper",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SortOrder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedMapDetailContract"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/maps/votes/{id}": {
+      "get": {
+        "tags": [
+          "Maps"
+        ],
+        "operationId": "getVotesByMapId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MapStatsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/search/text/{searchType}": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "operationId": "textSearch",
+        "parameters": [
+          {
+            "name": "searchType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SearchType"
+            }
+          },
+          {
+            "name": "automapper",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "noodle",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "chroma",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "me",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "cinema",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "ranked",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "curated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "verified",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "minDuration",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "maxDuration",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "minNps",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "maxNps",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "minRating",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "maxRating",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fullSpread",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SortOrder"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "includeEmpty",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedMapDetailContract"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/find": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "findUsers",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/id/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "getUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/name/{name}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "getUserByName",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CollaborationDetailContract": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/CollaborationType"
+          },
+          "ownerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CollaborationType": {
+        "enum": [
+          "Unknown",
+          "Private",
+          "Public"
+        ],
+        "type": "string"
+      },
+      "Difficulty": {
+        "type": "object",
+        "properties": {
+          "njs": {
+            "type": "number",
+            "format": "float"
+          },
+          "offset": {
+            "type": "number",
+            "format": "float"
+          },
+          "notes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bombs": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "obstacles": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nps": {
+            "type": "number",
+            "format": "float"
+          },
+          "length": {
+            "type": "number",
+            "format": "float"
+          },
+          "characteristic": {
+            "type": "string",
+            "nullable": true
+          },
+          "difficulty": {
+            "type": "string",
+            "nullable": true
+          },
+          "events": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chroma": {
+            "type": "boolean"
+          },
+          "me": {
+            "type": "boolean"
+          },
+          "ne": {
+            "type": "boolean"
+          },
+          "cinema": {
+            "type": "boolean"
+          },
+          "seconds": {
+            "type": "number",
+            "format": "float"
+          },
+          "paritySummary": {
+            "$ref": "#/components/schemas/ParitySummary"
+          },
+          "stars": {
+            "type": "number",
+            "format": "float",
+            "nullable": true
+          },
+          "maxScore": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DifficultyDescription": {
+        "type": "object",
+        "properties": {
+          "bombCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "characteristic": {
+            "type": "string",
+            "nullable": true
+          },
+          "difficulty": {
+            "type": "string",
+            "nullable": true
+          },
+          "noteCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nps": {
+            "type": "number",
+            "format": "float"
+          },
+          "obstacleCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MapDetailContract": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "uploader": {
+            "$ref": "#/components/schemas/UserResponse"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MapDetailMetadata"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/StatsResponse"
+          },
+          "uploaded": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "automapper": {
+            "type": "boolean"
+          },
+          "ranked": {
+            "type": "boolean"
+          },
+          "qualified": {
+            "type": "boolean"
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapVersion"
+            },
+            "nullable": true
+          },
+          "curator": {
+            "$ref": "#/components/schemas/UserResponse"
+          },
+          "curatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastPublishedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "collaborated": {
+            "type": "boolean"
+          },
+          "collaborators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MapDetailMetadata": {
+        "type": "object",
+        "properties": {
+          "bpm": {
+            "type": "number",
+            "format": "float"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "songName": {
+            "type": "string",
+            "nullable": true
+          },
+          "songSubName": {
+            "type": "string",
+            "nullable": true
+          },
+          "songAuthorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "levelAuthorName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MapStatsResponse": {
+        "type": "object",
+        "properties": {
+          "scoreStats": {
+            "$ref": "#/components/schemas/ScoreStats"
+          },
+          "scoreVotes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScoreVote"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MapVersion": {
+        "type": "object",
+        "properties": {
+          "hash": {
+            "type": "string",
+            "nullable": true
+          },
+          "key": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sageScore": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "diffs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Difficulty"
+            },
+            "nullable": true
+          },
+          "downloadURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "coverURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "previewURL": {
+            "type": "string",
+            "nullable": true
+          },
+          "feedback": {
+            "type": "string",
+            "nullable": true
+          },
+          "testplayAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "testplays": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Testplay"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PagedMapDetailContract": {
+        "type": "object",
+        "properties": {
+          "docs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MapDetailContract"
+            },
+            "nullable": true
+          },
+          "totalDocs": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prevPage": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nextPage": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ParitySummary": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "warns": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resets": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreStats": {
+        "type": "object",
+        "properties": {
+          "totalVotes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "upVotes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "downVotes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "score": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "myVote": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScoreVote": {
+        "type": "object",
+        "properties": {
+          "direction": {
+            "type": "boolean"
+          },
+          "playerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "steamId": {
+            "type": "string",
+            "nullable": true
+          },
+          "hash": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchType": {
+        "enum": [
+          "Latest",
+          "Relevance",
+          "Rating",
+          "Plays"
+        ],
+        "type": "string"
+      },
+      "SortOrder": {
+        "enum": [
+          "Latest",
+          "Relevance",
+          "Rating",
+          "Curated"
+        ],
+        "type": "string"
+      },
+      "StatsResponse": {
+        "type": "object",
+        "properties": {
+          "plays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "downloads": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "upvotes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "downvotes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "score": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Testplay": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "feedback": {
+            "type": "string",
+            "nullable": true
+          },
+          "feedbackAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "user": {
+            "$ref": "#/components/schemas/UserResponse"
+          },
+          "video": {
+            "type": "string",
+            "nullable": true
+          },
+          "difficulty": {
+            "$ref": "#/components/schemas/DifficultyDescription"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "avatar": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "admin": {
+            "type": "boolean"
+          },
+          "curator": {
+            "type": "boolean"
+          },
+          "verifiedMapper": {
+            "type": "boolean"
+          },
+          "playlistUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "uploadLimit": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "stats": {
+            "$ref": "#/components/schemas/UserStatsResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserStatsResponse": {
+        "type": "object",
+        "properties": {
+          "totalUpvotes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDownvotes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalMaps": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rankedMaps": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "avgBpm": {
+            "type": "number",
+            "format": "float"
+          },
+          "avgScore": {
+            "type": "number",
+            "format": "float"
+          },
+          "avgDuration": {
+            "type": "number",
+            "format": "float"
+          },
+          "firstUpload": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpload": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "diffStats": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
