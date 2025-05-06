@@ -1,0 +1,625 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Moralis Web3 Data API - EVM",
+    "description": "API for accessing Ethereum Virtual Machine (EVM) blockchain data",
+    "version": "2.3"
+  },
+  "servers": [
+    {
+      "url": "https://deep-index.moralis.io/api/v2.2"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/block/{block_number_or_hash}": {
+      "get": {
+        "summary": "Get Block",
+        "description": "Get the contents of a block by block hash or block number",
+        "parameters": [
+          {
+            "name": "block_number_or_hash",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The block hash or block number"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "If the result should contain the internal transactions"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the block contents"
+          }
+        }
+      }
+    },
+    "/block/{{START_DATE}}": {
+      "get": {
+        "summary": "Get Date To Block",
+        "description": "Get the closest block given a date",
+        "parameters": [
+          {
+            "name": "START_DATE",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unix date in seconds or a datestring (e.g. 2021-01-01)"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the block number"
+          }
+        }
+      }
+    },
+    "/nft/{address}": {
+      "get": {
+        "summary": "Get NFTs by contract",
+        "description": "Get NFTs for a given contract address",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The address of the NFT contract"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The format of the token id"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The desired page size of the result"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The cursor returned in the previous response"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns NFTs by contract"
+          }
+        }
+      }
+    },
+    "/nft/{address}/{token_id}": {
+      "get": {
+        "summary": "Get NFT metadata",
+        "description": "Get NFT data, including metadata, for a given NFT token id",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The address of the NFT contract"
+          },
+          {
+            "name": "token_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The token id of the NFT"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The format of the token id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns NFT metadata"
+          }
+        }
+      }
+    },
+    "/nft/{address}/{token_id}/owners": {
+      "get": {
+        "summary": "Get NFT token owners",
+        "description": "Get the owners of a specific NFT given the contract address and token ID",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The address of the NFT contract"
+          },
+          {
+            "name": "token_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The token id of the NFT"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The format of the token id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns NFT token owners"
+          }
+        }
+      }
+    },
+    "/nft/{address}/transfers": {
+      "get": {
+        "summary": "Get NFT transfers by contract",
+        "description": "Get transfers of an NFT given a contract address",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The address of the NFT contract"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The format of the token id"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The desired page size of the result"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The cursor returned in the previous response"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns NFT transfers by contract"
+          }
+        }
+      }
+    },
+    "/nft/{address}/{token_id}/transfers": {
+      "get": {
+        "summary": "Get NFT transfers by token ID",
+        "description": "Get transfers of an NFT given a contract address and token ID",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The address of the NFT contract"
+          },
+          {
+            "name": "token_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The token id of the NFT"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The format of the token id"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The desired page size of the result"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The cursor returned in the previous response"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns NFT transfers by token ID"
+          }
+        }
+      }
+    },
+    "/{address}/nft": {
+      "get": {
+        "summary": "Get NFTs by wallet",
+        "description": "Get NFTs owned by a given address",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The owner of the NFTs"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The format of the token id"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The desired page size of the result"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The cursor returned in the previous response"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns NFTs by wallet"
+          }
+        }
+      }
+    },
+    "/{address}/nft/transfers": {
+      "get": {
+        "summary": "Get wallet NFT transfers",
+        "description": "Get NFT transfers for a given wallet address",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The address of the wallet"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The format of the token id"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The desired page size of the result"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The cursor returned in the previous response"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns wallet NFT transfers"
+          }
+        }
+      }
+    },
+    "/transaction/{transaction_hash}": {
+      "get": {
+        "summary": "Get transaction",
+        "description": "Get the contents of a transaction by the given transaction hash",
+        "parameters": [
+          {
+            "name": "transaction_hash",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The transaction hash"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "If the result should contain the internal transactions"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns transaction data"
+          }
+        }
+      }
+    },
+    "/{address}": {
+      "get": {
+        "summary": "Get native balance",
+        "description": "Get the native balance for a specific address",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The address for which to get the native balance"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "to_block",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The block number up to which to get the native balance"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns native balance"
+          }
+        }
+      }
+    },
+    "/{address}/balance": {
+      "get": {
+        "summary": "Get native balance by wallet",
+        "description": "Get the native balance for a specific wallet address",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The address for which to get the native balance"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "to_block",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The block number up to which to get the native balance"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns native balance"
+          }
+        }
+      }
+    },
+    "/{address}/erc20": {
+      "get": {
+        "summary": "Get ERC20 tokens by wallet",
+        "description": "Get ERC20 tokens owned by a given address",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The address for which to get the ERC20 tokens"
+          },
+          {
+            "name": "chain",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The chain to query"
+          },
+          {
+            "name": "token_addresses",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "The addresses of the tokens to get the balance for"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns ERC20 tokens"
+          }
+        }
+      }
+    }
+  }
+}
