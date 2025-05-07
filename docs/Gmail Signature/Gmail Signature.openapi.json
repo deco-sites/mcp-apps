@@ -1,0 +1,242 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Gmail API - Email Signatures",
+    "description": "API for modifying email signatures with the Gmail API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://gmail.googleapis.com/gmail/v1",
+      "description": "Gmail API Server"
+    }
+  ],
+  "paths": {
+    "/users/{userId}/settings/sendAs/{sendAsEmail}": {
+      "get": {
+        "summary": "Get send-as alias",
+        "description": "Gets the specified send-as alias.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "me"
+            },
+            "description": "The user's email address. The special value 'me' can be used to indicate the authenticated user."
+          },
+          {
+            "name": "sendAsEmail",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The send-as alias email address."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAs"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update send-as alias",
+        "description": "Updates a send-as alias.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "me"
+            },
+            "description": "The user's email address. The special value 'me' can be used to indicate the authenticated user."
+          },
+          {
+            "name": "sendAsEmail",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The send-as alias email address."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAs"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendAs"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/users/{userId}/settings/sendAs": {
+      "get": {
+        "summary": "List send-as aliases",
+        "description": "Lists the send-as aliases for the specified account.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "me"
+            },
+            "description": "The user's email address. The special value 'me' can be used to indicate the authenticated user."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sendAs": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SendAs"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SendAs": {
+        "type": "object",
+        "properties": {
+          "sendAsEmail": {
+            "type": "string",
+            "description": "The email address that appears in the 'From:' header for mail sent using this alias."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "A name that appears in the 'From:' header for mail sent using this alias."
+          },
+          "replyToAddress": {
+            "type": "string",
+            "description": "An optional email address that is included in a 'Reply-To:' header for mail sent using this alias."
+          },
+          "signature": {
+            "type": "string",
+            "description": "An optional HTML signature that is included in messages composed with this alias in the Gmail web UI."
+          },
+          "isPrimary": {
+            "type": "boolean",
+            "description": "Whether this address is the primary address used to login to the account."
+          },
+          "isDefault": {
+            "type": "boolean",
+            "description": "Whether this address is selected as the default 'From:' address in situations such as composing a new message."
+          },
+          "treatAsAlias": {
+            "type": "boolean",
+            "description": "Whether Gmail should treat this address as an alias for the user's primary email address."
+          },
+          "verificationStatus": {
+            "type": "string",
+            "description": "Indicates whether this address has been verified for use as a send-as alias.",
+            "enum": [
+              "accepted",
+              "pending",
+              "rejected",
+              "verificationNotRequired"
+            ]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+            "tokenUrl": "https://oauth2.googleapis.com/token",
+            "scopes": {
+              "https://www.googleapis.com/auth/gmail.settings.basic": "Manage your basic mail settings",
+              "https://www.googleapis.com/auth/gmail.settings.sharing": "Manage your sensitive mail settings, including who can manage your mail"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "OAuth2": [
+        "https://www.googleapis.com/auth/gmail.settings.basic"
+      ]
+    }
+  ]
+}
