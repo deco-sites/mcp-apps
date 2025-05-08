@@ -4,40 +4,79 @@
 
 import * as $$$$$$$$$$$0 from "./apps/deco/website.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$0 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
-import * as $$$1 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$2 from "./loaders/vtex/api/GET/pricingConfig.ts";
-import * as $$$3 from "./loaders/vtex/api/GET/pricingMigration.ts";
-import * as $$$5 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$4 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
-import * as $$$6 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
-import * as $$$7 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
-import * as $$$9 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$8 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
-import * as $$$10 from "./loaders/vtex/api/GET/pricingTables.ts";
-import * as $$$11 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
-import * as $$$12 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
-import * as $$$13 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
+import * as $$$0 from "./loaders/Runrun.it/Runrun.it/DELETE/v1.0Tasks:id.ts";
+import * as $$$2 from "./loaders/Runrun.it/Runrun.it/GET/v1.0Clients:id.ts";
+import * as $$$1 from "./loaders/Runrun.it/Runrun.it/GET/v1.0Clients.ts";
+import * as $$$4 from "./loaders/Runrun.it/Runrun.it/GET/v1.0Projects:id.ts";
+import * as $$$3 from "./loaders/Runrun.it/Runrun.it/GET/v1.0Projects.ts";
+import * as $$$7 from "./loaders/Runrun.it/Runrun.it/GET/v1.0Tasks:id.ts";
+import * as $$$6 from "./loaders/Runrun.it/Runrun.it/GET/v1.0Tasks.ts";
+import * as $$$5 from "./loaders/Runrun.it/Runrun.it/GET/v1.0TaskTypes.ts";
+import * as $$$9 from "./loaders/Runrun.it/Runrun.it/GET/v1.0Teams:id.ts";
+import * as $$$8 from "./loaders/Runrun.it/Runrun.it/GET/v1.0Teams.ts";
+import * as $$$11 from "./loaders/Runrun.it/Runrun.it/GET/v1.0Users:id.ts";
+import * as $$$10 from "./loaders/Runrun.it/Runrun.it/GET/v1.0Users.ts";
+import * as $$$12 from "./loaders/Runrun.it/Runrun.it/POST/v1.0Clients.ts";
+import * as $$$13 from "./loaders/Runrun.it/Runrun.it/POST/v1.0Projects.ts";
+import * as $$$15 from "./loaders/Runrun.it/Runrun.it/POST/v1.0Tasks:idDeliver.ts";
+import * as $$$16 from "./loaders/Runrun.it/Runrun.it/POST/v1.0Tasks:idPause.ts";
+import * as $$$17 from "./loaders/Runrun.it/Runrun.it/POST/v1.0Tasks:idPlay.ts";
+import * as $$$14 from "./loaders/Runrun.it/Runrun.it/POST/v1.0Tasks.ts";
+import * as $$$18 from "./loaders/Runrun.it/Runrun.it/PUT/v1.0Tasks:id.ts";
+import * as $$$19 from "./loaders/vtex/api/DELETE/pricingPrices:itemId.ts";
+import * as $$$20 from "./loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$21 from "./loaders/vtex/api/GET/pricingConfig.ts";
+import * as $$$22 from "./loaders/vtex/api/GET/pricingMigration.ts";
+import * as $$$24 from "./loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$23 from "./loaders/vtex/api/GET/pricingPipelineCatalog.ts";
+import * as $$$25 from "./loaders/vtex/api/GET/pricingPrices:itemId.ts";
+import * as $$$26 from "./loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts";
+import * as $$$28 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$27 from "./loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts";
+import * as $$$29 from "./loaders/vtex/api/GET/pricingTables.ts";
+import * as $$$30 from "./loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts";
+import * as $$$31 from "./loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts";
+import * as $$$32 from "./loaders/vtex/api/PUT/pricingPrices:itemId.ts";
 
 const manifest = {
   "loaders": {
-    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$0,
+    "site/loaders/Runrun.it/Runrun.it/DELETE/v1.0Tasks:id.ts": $$$0,
+    "site/loaders/Runrun.it/Runrun.it/GET/v1.0Clients:id.ts": $$$2,
+    "site/loaders/Runrun.it/Runrun.it/GET/v1.0Clients.ts": $$$1,
+    "site/loaders/Runrun.it/Runrun.it/GET/v1.0Projects:id.ts": $$$4,
+    "site/loaders/Runrun.it/Runrun.it/GET/v1.0Projects.ts": $$$3,
+    "site/loaders/Runrun.it/Runrun.it/GET/v1.0Tasks:id.ts": $$$7,
+    "site/loaders/Runrun.it/Runrun.it/GET/v1.0Tasks.ts": $$$6,
+    "site/loaders/Runrun.it/Runrun.it/GET/v1.0TaskTypes.ts": $$$5,
+    "site/loaders/Runrun.it/Runrun.it/GET/v1.0Teams:id.ts": $$$9,
+    "site/loaders/Runrun.it/Runrun.it/GET/v1.0Teams.ts": $$$8,
+    "site/loaders/Runrun.it/Runrun.it/GET/v1.0Users:id.ts": $$$11,
+    "site/loaders/Runrun.it/Runrun.it/GET/v1.0Users.ts": $$$10,
+    "site/loaders/Runrun.it/Runrun.it/POST/v1.0Clients.ts": $$$12,
+    "site/loaders/Runrun.it/Runrun.it/POST/v1.0Projects.ts": $$$13,
+    "site/loaders/Runrun.it/Runrun.it/POST/v1.0Tasks:idDeliver.ts": $$$15,
+    "site/loaders/Runrun.it/Runrun.it/POST/v1.0Tasks:idPause.ts": $$$16,
+    "site/loaders/Runrun.it/Runrun.it/POST/v1.0Tasks:idPlay.ts": $$$17,
+    "site/loaders/Runrun.it/Runrun.it/POST/v1.0Tasks.ts": $$$14,
+    "site/loaders/Runrun.it/Runrun.it/PUT/v1.0Tasks:id.ts": $$$18,
+    "site/loaders/vtex/api/DELETE/pricingPrices:itemId.ts": $$$19,
     "site/loaders/vtex/api/DELETE/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$1,
-    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$2,
-    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$3,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$5,
-    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$4,
-    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$6,
+      $$$20,
+    "site/loaders/vtex/api/GET/pricingConfig.ts": $$$21,
+    "site/loaders/vtex/api/GET/pricingMigration.ts": $$$22,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog:priceTableId.ts": $$$24,
+    "site/loaders/vtex/api/GET/pricingPipelineCatalog.ts": $$$23,
+    "site/loaders/vtex/api/GET/pricingPrices:itemId.ts": $$$25,
     "site/loaders/vtex/api/GET/pricingPrices:itemIdComputed:priceTableId.ts":
-      $$$7,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts": $$$9,
-    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$8,
-    "site/loaders/vtex/api/GET/pricingTables.ts": $$$10,
+      $$$26,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed:priceTableId.ts":
+      $$$28,
+    "site/loaders/vtex/api/GET/pricingPrices:itemIdFixed.ts": $$$27,
+    "site/loaders/vtex/api/GET/pricingTables.ts": $$$29,
     "site/loaders/vtex/api/POST/pricingPrices:itemIdFixed:priceTableId.ts":
-      $$$11,
-    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$12,
-    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$13,
+      $$$30,
+    "site/loaders/vtex/api/PUT/pricingPipelineCatalog:priceTableId.ts": $$$31,
+    "site/loaders/vtex/api/PUT/pricingPrices:itemId.ts": $$$32,
   },
   "apps": {
     "site/apps/deco/website.ts": $$$$$$$$$$$0,
