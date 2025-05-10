@@ -1,0 +1,1260 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tray API",
+    "description": "API da Plataforma Tray para integração com e-commerce",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.tray.com.br",
+      "description": "Servidor principal da API Tray"
+    }
+  ],
+  "paths": {
+    "/auth": {
+      "post": {
+        "summary": "Autenticação",
+        "description": "Obtém o token de acesso para uso da API",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token de acesso obtido com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "Lista de produtos",
+        "description": "Retorna a lista de produtos da loja",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PageParam"
+          },
+          {
+            "$ref": "#/components/parameters/LimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/SortParam"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de produtos retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductsList"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cria um produto",
+        "description": "Adiciona um novo produto à loja",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductRequest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Produto criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{product_id}": {
+      "get": {
+        "summary": "Detalhes do produto",
+        "description": "Retorna os detalhes de um produto específico",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID do produto"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do produto retornados com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza um produto",
+        "description": "Atualiza as informações de um produto existente",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID do produto"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductRequest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove um produto",
+        "description": "Remove um produto da loja",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID do produto"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Produto removido com sucesso"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "summary": "Lista de pedidos",
+        "description": "Retorna a lista de pedidos da loja",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PageParam"
+          },
+          {
+            "$ref": "#/components/parameters/LimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/SortParam"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de pedidos retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrdersList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{order_id}": {
+      "get": {
+        "summary": "Detalhes do pedido",
+        "description": "Retorna os detalhes de um pedido específico",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID do pedido"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do pedido retornados com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza um pedido",
+        "description": "Atualiza as informações de um pedido existente",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID do pedido"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderUpdateRequest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pedido atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers": {
+      "get": {
+        "summary": "Lista de clientes",
+        "description": "Retorna a lista de clientes da loja",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PageParam"
+          },
+          {
+            "$ref": "#/components/parameters/LimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/SortParam"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de clientes retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomersList"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cria um cliente",
+        "description": "Adiciona um novo cliente à loja",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerRequest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Cliente criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customer_id}": {
+      "get": {
+        "summary": "Detalhes do cliente",
+        "description": "Retorna os detalhes de um cliente específico",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID do cliente"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes do cliente retornados com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza um cliente",
+        "description": "Atualiza as informações de um cliente existente",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID do cliente"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerRequest"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cliente atualizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuthRequest": {
+        "type": "object",
+        "required": [
+          "consumer_key",
+          "consumer_secret",
+          "code"
+        ],
+        "properties": {
+          "consumer_key": {
+            "type": "string",
+            "description": "Chave do consumidor"
+          },
+          "consumer_secret": {
+            "type": "string",
+            "description": "Segredo do consumidor"
+          },
+          "code": {
+            "type": "string",
+            "description": "Código de autorização"
+          }
+        }
+      },
+      "AuthResponse": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "Token de acesso"
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "Token de atualização"
+          },
+          "expires_in": {
+            "type": "integer",
+            "description": "Tempo de expiração em segundos"
+          },
+          "token_type": {
+            "type": "string",
+            "description": "Tipo do token"
+          }
+        }
+      },
+      "ProductsList": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductSummary"
+            }
+          },
+          "paging": {
+            "$ref": "#/components/schemas/Paging"
+          }
+        }
+      },
+      "ProductSummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do produto"
+          },
+          "name": {
+            "type": "string",
+            "description": "Nome do produto"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "Preço do produto"
+          },
+          "sku": {
+            "type": "string",
+            "description": "SKU do produto"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Status do produto"
+          }
+        }
+      },
+      "ProductDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do produto"
+          },
+          "name": {
+            "type": "string",
+            "description": "Nome do produto"
+          },
+          "description": {
+            "type": "string",
+            "description": "Descrição do produto"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "Preço do produto"
+          },
+          "cost_price": {
+            "type": "number",
+            "format": "float",
+            "description": "Preço de custo"
+          },
+          "promotional_price": {
+            "type": "number",
+            "format": "float",
+            "description": "Preço promocional"
+          },
+          "sku": {
+            "type": "string",
+            "description": "SKU do produto"
+          },
+          "stock": {
+            "type": "integer",
+            "description": "Estoque do produto"
+          },
+          "weight": {
+            "type": "number",
+            "format": "float",
+            "description": "Peso do produto em kg"
+          },
+          "length": {
+            "type": "number",
+            "format": "float",
+            "description": "Comprimento do produto em cm"
+          },
+          "width": {
+            "type": "number",
+            "format": "float",
+            "description": "Largura do produto em cm"
+          },
+          "height": {
+            "type": "number",
+            "format": "float",
+            "description": "Altura do produto em cm"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Status do produto"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductImage"
+            }
+          },
+          "variations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductVariation"
+            }
+          }
+        }
+      },
+      "ProductImage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID da imagem"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL da imagem"
+          },
+          "position": {
+            "type": "integer",
+            "description": "Posição da imagem"
+          }
+        }
+      },
+      "ProductVariation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID da variação"
+          },
+          "sku": {
+            "type": "string",
+            "description": "SKU da variação"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "Preço da variação"
+          },
+          "stock": {
+            "type": "integer",
+            "description": "Estoque da variação"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VariationAttribute"
+            }
+          }
+        }
+      },
+      "VariationAttribute": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome do atributo"
+          },
+          "value": {
+            "type": "string",
+            "description": "Valor do atributo"
+          }
+        }
+      },
+      "ProductRequest": {
+        "type": "object",
+        "required": [
+          "Product"
+        ],
+        "properties": {
+          "Product": {
+            "type": "object",
+            "required": [
+              "name",
+              "price",
+              "sku"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Nome do produto"
+              },
+              "description": {
+                "type": "string",
+                "description": "Descrição do produto"
+              },
+              "price": {
+                "type": "number",
+                "format": "float",
+                "description": "Preço do produto"
+              },
+              "sku": {
+                "type": "string",
+                "description": "SKU do produto"
+              },
+              "stock": {
+                "type": "integer",
+                "description": "Estoque do produto"
+              },
+              "weight": {
+                "type": "number",
+                "format": "float",
+                "description": "Peso do produto em kg"
+              },
+              "length": {
+                "type": "number",
+                "format": "float",
+                "description": "Comprimento do produto em cm"
+              },
+              "width": {
+                "type": "number",
+                "format": "float",
+                "description": "Largura do produto em cm"
+              },
+              "height": {
+                "type": "number",
+                "format": "float",
+                "description": "Altura do produto em cm"
+              },
+              "active": {
+                "type": "boolean",
+                "description": "Status do produto"
+              }
+            }
+          }
+        }
+      },
+      "ProductResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do produto"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensagem de resposta"
+          },
+          "code": {
+            "type": "integer",
+            "description": "Código de resposta"
+          }
+        }
+      },
+      "OrdersList": {
+        "type": "object",
+        "properties": {
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderSummary"
+            }
+          },
+          "paging": {
+            "$ref": "#/components/schemas/Paging"
+          }
+        }
+      },
+      "OrderSummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do pedido"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Referência do pedido"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status do pedido"
+          },
+          "customer_name": {
+            "type": "string",
+            "description": "Nome do cliente"
+          },
+          "total": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor total do pedido"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data de criação do pedido"
+          }
+        }
+      },
+      "OrderDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do pedido"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Referência do pedido"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status do pedido"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/CustomerSummary"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem"
+            }
+          },
+          "payment": {
+            "$ref": "#/components/schemas/Payment"
+          },
+          "shipping": {
+            "$ref": "#/components/schemas/Shipping"
+          },
+          "total": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor total do pedido"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data de criação do pedido"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data de atualização do pedido"
+          }
+        }
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do item"
+          },
+          "product_id": {
+            "type": "integer",
+            "description": "ID do produto"
+          },
+          "name": {
+            "type": "string",
+            "description": "Nome do produto"
+          },
+          "sku": {
+            "type": "string",
+            "description": "SKU do produto"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "Preço unitário"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Quantidade"
+          },
+          "total": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor total do item"
+          }
+        }
+      },
+      "Payment": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "type": "string",
+            "description": "Método de pagamento"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status do pagamento"
+          },
+          "installments": {
+            "type": "integer",
+            "description": "Número de parcelas"
+          },
+          "total": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor total do pagamento"
+          }
+        }
+      },
+      "Shipping": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "type": "string",
+            "description": "Método de envio"
+          },
+          "price": {
+            "type": "number",
+            "format": "float",
+            "description": "Valor do frete"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "tracking_code": {
+            "type": "string",
+            "description": "Código de rastreamento"
+          }
+        }
+      },
+      "OrderUpdateRequest": {
+        "type": "object",
+        "required": [
+          "Order"
+        ],
+        "properties": {
+          "Order": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "description": "Status do pedido"
+              },
+              "tracking_code": {
+                "type": "string",
+                "description": "Código de rastreamento"
+              }
+            }
+          }
+        }
+      },
+      "OrderResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do pedido"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensagem de resposta"
+          },
+          "code": {
+            "type": "integer",
+            "description": "Código de resposta"
+          }
+        }
+      },
+      "CustomersList": {
+        "type": "object",
+        "properties": {
+          "customers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomerSummary"
+            }
+          },
+          "paging": {
+            "$ref": "#/components/schemas/Paging"
+          }
+        }
+      },
+      "CustomerSummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do cliente"
+          },
+          "name": {
+            "type": "string",
+            "description": "Nome do cliente"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email do cliente"
+          },
+          "document": {
+            "type": "string",
+            "description": "Documento do cliente (CPF/CNPJ)"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Telefone do cliente"
+          }
+        }
+      },
+      "CustomerDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do cliente"
+          },
+          "name": {
+            "type": "string",
+            "description": "Nome do cliente"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email do cliente"
+          },
+          "document": {
+            "type": "string",
+            "description": "Documento do cliente (CPF/CNPJ)"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Telefone do cliente"
+          },
+          "birth_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Data de nascimento"
+          },
+          "gender": {
+            "type": "string",
+            "description": "Gênero"
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Address"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data de criação do cliente"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data de atualização do cliente"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do endereço"
+          },
+          "name": {
+            "type": "string",
+            "description": "Nome do endereço"
+          },
+          "recipient": {
+            "type": "string",
+            "description": "Nome do destinatário"
+          },
+          "address": {
+            "type": "string",
+            "description": "Logradouro"
+          },
+          "number": {
+            "type": "string",
+            "description": "Número"
+          },
+          "complement": {
+            "type": "string",
+            "description": "Complemento"
+          },
+          "neighborhood": {
+            "type": "string",
+            "description": "Bairro"
+          },
+          "city": {
+            "type": "string",
+            "description": "Cidade"
+          },
+          "state": {
+            "type": "string",
+            "description": "Estado"
+          },
+          "zipcode": {
+            "type": "string",
+            "description": "CEP"
+          },
+          "is_main": {
+            "type": "boolean",
+            "description": "Endereço principal"
+          }
+        }
+      },
+      "CustomerRequest": {
+        "type": "object",
+        "required": [
+          "Customer"
+        ],
+        "properties": {
+          "Customer": {
+            "type": "object",
+            "required": [
+              "name",
+              "email"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Nome do cliente"
+              },
+              "email": {
+                "type": "string",
+                "description": "Email do cliente"
+              },
+              "document": {
+                "type": "string",
+                "description": "Documento do cliente (CPF/CNPJ)"
+              },
+              "phone": {
+                "type": "string",
+                "description": "Telefone do cliente"
+              },
+              "birth_date": {
+                "type": "string",
+                "format": "date",
+                "description": "Data de nascimento"
+              },
+              "gender": {
+                "type": "string",
+                "description": "Gênero"
+              },
+              "password": {
+                "type": "string",
+                "description": "Senha do cliente"
+              }
+            }
+          },
+          "Address": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "type": "string",
+                "description": "Logradouro"
+              },
+              "number": {
+                "type": "string",
+                "description": "Número"
+              },
+              "complement": {
+                "type": "string",
+                "description": "Complemento"
+              },
+              "neighborhood": {
+                "type": "string",
+                "description": "Bairro"
+              },
+              "city": {
+                "type": "string",
+                "description": "Cidade"
+              },
+              "state": {
+                "type": "string",
+                "description": "Estado"
+              },
+              "zipcode": {
+                "type": "string",
+                "description": "CEP"
+              }
+            }
+          }
+        }
+      },
+      "CustomerResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID do cliente"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensagem de resposta"
+          },
+          "code": {
+            "type": "integer",
+            "description": "Código de resposta"
+          }
+        }
+      },
+      "Paging": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Total de registros"
+          },
+          "page": {
+            "type": "integer",
+            "description": "Página atual"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Limite por página"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "Total de páginas"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "PageParam": {
+        "name": "page",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 1
+        },
+        "description": "Número da página"
+      },
+      "LimitParam": {
+        "name": "limit",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "default": 50
+        },
+        "description": "Limite de itens por página"
+      },
+      "SortParam": {
+        "name": "sort",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        },
+        "description": "Campo para ordenação dos resultados"
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
