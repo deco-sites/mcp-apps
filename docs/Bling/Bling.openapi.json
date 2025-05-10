@@ -1,0 +1,1241 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Bling API",
+    "description": "API de integração com o Bling",
+    "version": "3.0.0",
+    "contact": {
+      "name": "Bling",
+      "url": "https://developer.bling.com.br"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.bling.com.br/v3",
+      "description": "Produção"
+    },
+    {
+      "url": "https://api.sandbox.bling.com.br/v3",
+      "description": "Sandbox"
+    }
+  ],
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
+  "paths": {
+    "/borderos": {
+      "get": {
+        "summary": "Obtém borderos",
+        "description": "Retorna lista de borderos",
+        "operationId": "getListBorderos",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "in": "query",
+            "name": "dataInclusaoInicial",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Data inicial de inclusão para filtro"
+          },
+          {
+            "in": "query",
+            "name": "dataInclusaoFinal",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Data final de inclusão para filtro"
+          },
+          {
+            "in": "query",
+            "name": "dataLiquidacaoInicial",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Data inicial de liquidação para filtro"
+          },
+          {
+            "in": "query",
+            "name": "dataLiquidacaoFinal",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Data final de liquidação para filtro"
+          },
+          {
+            "in": "query",
+            "name": "situacao",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Aberto",
+                "Liquidado",
+                "Cancelado"
+              ]
+            },
+            "description": "Situação do bordero"
+          },
+          {
+            "in": "query",
+            "name": "tipo",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Credito",
+                "Debito"
+              ]
+            },
+            "description": "Tipo do bordero"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BorderosPaginados"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cria bordero",
+        "description": "Cria um novo bordero",
+        "operationId": "postBordero",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BorderoPost"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bordero"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/borderos/{idBordero}": {
+      "get": {
+        "summary": "Obtém bordero",
+        "description": "Retorna um bordero específico",
+        "operationId": "getBordero",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idBordero",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID do bordero"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bordero"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Altera bordero",
+        "description": "Altera um bordero existente",
+        "operationId": "putBordero",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idBordero",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID do bordero"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BorderoPut"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Alterado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bordero"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/borderos/{idBordero}/liquidar": {
+      "post": {
+        "summary": "Liquida bordero",
+        "description": "Liquida um bordero existente",
+        "operationId": "liquidaBordero",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idBordero",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID do bordero"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BorderoLiquidar"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Liquidado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bordero"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/borderos/{idBordero}/cancelar": {
+      "post": {
+        "summary": "Cancela bordero",
+        "description": "Cancela um bordero existente",
+        "operationId": "cancelaBordero",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idBordero",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID do bordero"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cancelado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bordero"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categorias-receitas-despesas": {
+      "get": {
+        "summary": "Obtém categorias de receitas e despesas",
+        "description": "Retorna lista de categorias de receitas e despesas",
+        "operationId": "getListCategoriasReceitasDespesas",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "in": "query",
+            "name": "idPai",
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID da categoria pai"
+          },
+          {
+            "in": "query",
+            "name": "tipo",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Receita",
+                "Despesa"
+              ]
+            },
+            "description": "Tipo da categoria"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriasReceitasDespesasPaginadas"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cria categoria de receita e despesa",
+        "description": "Cria uma nova categoria de receita e despesa",
+        "operationId": "postCategoriaReceitaDespesa",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoriaReceitaDespesaPost"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaReceitaDespesa"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categorias-receitas-despesas/{idCategoria}": {
+      "get": {
+        "summary": "Obtém categoria de receita e despesa",
+        "description": "Retorna uma categoria de receita e despesa específica",
+        "operationId": "getCategoriaReceitaDespesa",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idCategoria",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID da categoria"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaReceitaDespesa"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Altera categoria de receita e despesa",
+        "description": "Altera uma categoria de receita e despesa existente",
+        "operationId": "putCategoriaReceitaDespesa",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idCategoria",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID da categoria"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoriaReceitaDespesaPut"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Alterado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaReceitaDespesa"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove categoria de receita e despesa",
+        "description": "Remove uma categoria de receita e despesa",
+        "operationId": "deleteCategoriaReceitaDespesa",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idCategoria",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID da categoria"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Removido com sucesso"
+          }
+        }
+      }
+    },
+    "/categorias-lojas-aplicativos": {
+      "get": {
+        "summary": "Obtém categorias de lojas e aplicativos",
+        "description": "Retorna lista de categorias de lojas e aplicativos",
+        "operationId": "getListCategoriasLojasAplicativos",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriasLojasAplicativosPaginadas"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categorias-lojas-aplicativos/{idCategoria}": {
+      "get": {
+        "summary": "Obtém categoria de loja e aplicativo",
+        "description": "Retorna uma categoria de loja e aplicativo específica",
+        "operationId": "getCategoriaLojaAplicativo",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idCategoria",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID da categoria"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaLojaAplicativo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categorias-produtos": {
+      "get": {
+        "summary": "Obtém categorias de produtos",
+        "description": "Retorna lista de categorias de produtos",
+        "operationId": "getListCategoriasProdutos",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "in": "query",
+            "name": "idPai",
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID da categoria pai"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriasProdutosPaginadas"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cria categoria de produto",
+        "description": "Cria uma nova categoria de produto",
+        "operationId": "postCategoriaProduto",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoriaProdutoPost"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Criado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaProduto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categorias-produtos/{idCategoria}": {
+      "get": {
+        "summary": "Obtém categoria de produto",
+        "description": "Retorna uma categoria de produto específica",
+        "operationId": "getCategoriaProduto",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idCategoria",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID da categoria"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaProduto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Altera categoria de produto",
+        "description": "Altera uma categoria de produto existente",
+        "operationId": "putCategoriaProduto",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idCategoria",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID da categoria"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoriaProdutoPut"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Alterado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoriaProduto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove categoria de produto",
+        "description": "Remove uma categoria de produto",
+        "operationId": "deleteCategoriaProduto",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "idCategoria",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "ID da categoria"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Removido com sucesso"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "parameters": {
+      "page": {
+        "in": "query",
+        "name": "page",
+        "schema": {
+          "type": "integer",
+          "default": 1
+        },
+        "description": "Número da página"
+      },
+      "limit": {
+        "in": "query",
+        "name": "limit",
+        "schema": {
+          "type": "integer",
+          "default": 100
+        },
+        "description": "Quantidade de registros por página"
+      }
+    },
+    "schemas": {
+      "BorderosPaginados": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bordero"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "example": 1
+          },
+          "limit": {
+            "type": "integer",
+            "example": 100
+          },
+          "total": {
+            "type": "integer",
+            "example": 150
+          }
+        }
+      },
+      "Bordero": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "numero": {
+            "type": "integer",
+            "example": 123
+          },
+          "situacao": {
+            "type": "string",
+            "enum": [
+              "Aberto",
+              "Liquidado",
+              "Cancelado"
+            ],
+            "example": "Aberto"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "Credito",
+              "Debito"
+            ],
+            "example": "Credito"
+          },
+          "valorTitulos": {
+            "type": "number",
+            "format": "float",
+            "example": 1000
+          },
+          "valorTarifas": {
+            "type": "number",
+            "format": "float",
+            "example": 10
+          },
+          "valorJuros": {
+            "type": "number",
+            "format": "float",
+            "example": 10
+          },
+          "valorDescontos": {
+            "type": "number",
+            "format": "float",
+            "example": 10
+          },
+          "valorOutros": {
+            "type": "number",
+            "format": "float",
+            "example": 10
+          },
+          "valorLiquido": {
+            "type": "number",
+            "format": "float",
+            "example": 1000
+          },
+          "dataInclusao": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-01"
+          },
+          "dataLiquidacao": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-10"
+          },
+          "idConta": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "descricaoConta": {
+            "type": "string",
+            "example": "Banco do Brasil"
+          },
+          "idContaDestino": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "descricaoContaDestino": {
+            "type": "string",
+            "example": "Conta de Destino"
+          },
+          "idCondicaoPagamento": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "descricaoCondicaoPagamento": {
+            "type": "string",
+            "example": "À vista"
+          },
+          "idFormaPagamento": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "descricaoFormaPagamento": {
+            "type": "string",
+            "example": "Dinheiro"
+          },
+          "idPortador": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "descricaoPortador": {
+            "type": "string",
+            "example": "Banco do Brasil"
+          },
+          "titulos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BorderoTitulo"
+            }
+          }
+        }
+      },
+      "BorderoTitulo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "numero": {
+            "type": "string",
+            "example": "123"
+          },
+          "valor": {
+            "type": "number",
+            "format": "float",
+            "example": 1000
+          },
+          "dataEmissao": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-01"
+          },
+          "dataVencimento": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-10"
+          },
+          "situacao": {
+            "type": "string",
+            "enum": [
+              "Aberto",
+              "Liquidado",
+              "Parcial",
+              "Cancelado",
+              "Negociado",
+              "Outras"
+            ],
+            "example": "Aberto"
+          },
+          "idContato": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "nomeContato": {
+            "type": "string",
+            "example": "Nome do Contato"
+          },
+          "tipoContato": {
+            "type": "string",
+            "enum": [
+              "Fornecedor",
+              "Cliente"
+            ],
+            "example": "Cliente"
+          }
+        }
+      },
+      "BorderoPost": {
+        "type": "object",
+        "required": [
+          "idConta",
+          "tipo",
+          "dataInclusao",
+          "titulos"
+        ],
+        "properties": {
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "Credito",
+              "Debito"
+            ],
+            "example": "Credito"
+          },
+          "dataInclusao": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-01"
+          },
+          "idConta": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "idContaDestino": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "idCondicaoPagamento": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "idFormaPagamento": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "idPortador": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "titulos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BorderoTituloPost"
+            },
+            "minItems": 1
+          }
+        }
+      },
+      "BorderoTituloPost": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "12345678"
+          }
+        }
+      },
+      "BorderoPut": {
+        "type": "object",
+        "properties": {
+          "idConta": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "idContaDestino": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "idCondicaoPagamento": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "idFormaPagamento": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "idPortador": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "dataInclusao": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-01"
+          },
+          "titulos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BorderoTituloPost"
+            },
+            "minItems": 1
+          }
+        }
+      },
+      "BorderoLiquidar": {
+        "type": "object",
+        "required": [
+          "dataLiquidacao"
+        ],
+        "properties": {
+          "dataLiquidacao": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-01-01"
+          },
+          "tarifas": {
+            "type": "number",
+            "format": "float",
+            "example": 10
+          },
+          "juros": {
+            "type": "number",
+            "format": "float",
+            "example": 10
+          },
+          "descontos": {
+            "type": "number",
+            "format": "float",
+            "example": 10
+          },
+          "outros": {
+            "type": "number",
+            "format": "float",
+            "example": 10
+          }
+        }
+      },
+      "CategoriasReceitasDespesasPaginadas": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CategoriaReceitaDespesa"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "example": 1
+          },
+          "limit": {
+            "type": "integer",
+            "example": 100
+          },
+          "total": {
+            "type": "integer",
+            "example": 150
+          }
+        }
+      },
+      "CategoriaReceitaDespesa": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "descricao": {
+            "type": "string",
+            "example": "Água"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "Receita",
+              "Despesa"
+            ],
+            "example": "Despesa"
+          },
+          "idPai": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "descricaoPai": {
+            "type": "string",
+            "example": "Utilidades"
+          },
+          "situacao": {
+            "type": "string",
+            "enum": [
+              "A",
+              "I"
+            ],
+            "example": "A"
+          }
+        }
+      },
+      "CategoriaReceitaDespesaPost": {
+        "type": "object",
+        "required": [
+          "descricao",
+          "tipo",
+          "situacao"
+        ],
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "example": "Água"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "Receita",
+              "Despesa"
+            ],
+            "example": "Despesa"
+          },
+          "idPai": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "situacao": {
+            "type": "string",
+            "enum": [
+              "A",
+              "I"
+            ],
+            "example": "A"
+          }
+        }
+      },
+      "CategoriaReceitaDespesaPut": {
+        "type": "object",
+        "required": [
+          "descricao"
+        ],
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "example": "Água"
+          },
+          "idPai": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "situacao": {
+            "type": "string",
+            "enum": [
+              "A",
+              "I"
+            ],
+            "example": "A"
+          }
+        }
+      },
+      "CategoriasLojasAplicativosPaginadas": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CategoriaLojaAplicativo"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "example": 1
+          },
+          "limit": {
+            "type": "integer",
+            "example": 100
+          },
+          "total": {
+            "type": "integer",
+            "example": 150
+          }
+        }
+      },
+      "CategoriaLojaAplicativo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "descricao": {
+            "type": "string",
+            "example": "Marketplace"
+          }
+        }
+      },
+      "CategoriasProdutosPaginadas": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CategoriaProduto"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "example": 1
+          },
+          "limit": {
+            "type": "integer",
+            "example": 100
+          },
+          "total": {
+            "type": "integer",
+            "example": 150
+          }
+        }
+      },
+      "CategoriaProduto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "descricao": {
+            "type": "string",
+            "example": "Eletrônicos"
+          },
+          "idPai": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "descricaoPai": {
+            "type": "string",
+            "example": "Produtos"
+          }
+        }
+      },
+      "CategoriaProdutoPost": {
+        "type": "object",
+        "required": [
+          "descricao"
+        ],
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "example": "Eletrônicos"
+          },
+          "idPai": {
+            "type": "string",
+            "example": "12345678"
+          }
+        }
+      },
+      "CategoriaProdutoPut": {
+        "type": "object",
+        "required": [
+          "descricao"
+        ],
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "example": "Eletrônicos"
+          },
+          "idPai": {
+            "type": "string",
+            "example": "12345678"
+          }
+        }
+      }
+    }
+  }
+}
