@@ -1,0 +1,551 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Cat as a Service API",
+    "description": "An API for retrieving random cat images, applying filters, and getting cat facts.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://cataas.com"
+    }
+  ],
+  "paths": {
+    "/cat": {
+      "get": {
+        "summary": "Get a random cat",
+        "description": "Returns a random cat image",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "Filter by tag",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter by type (small, medium, square, etc)",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "small",
+                "medium",
+                "square",
+                "original"
+              ]
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Apply image filter",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "blur",
+                "mono",
+                "sepia",
+                "negative",
+                "paint",
+                "pixel"
+              ]
+            }
+          },
+          {
+            "name": "html",
+            "in": "query",
+            "description": "Returns HTML instead of image if set to true",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "json",
+            "in": "query",
+            "description": "Returns JSON response if set to true",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Random cat image",
+            "content": {
+              "image/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cat/{text}": {
+      "get": {
+        "summary": "Get cat with text",
+        "description": "Returns a cat image with custom text",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "path",
+            "required": true,
+            "description": "The text to display on the image",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "description": "Text color (hexadecimal without #)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Text size",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Apply image filter",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "blur",
+                "mono",
+                "sepia",
+                "negative",
+                "paint",
+                "pixel"
+              ]
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter by type",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "small",
+                "medium",
+                "square",
+                "original"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cat image with text",
+            "content": {
+              "image/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cat/says/{text}": {
+      "get": {
+        "summary": "Get cat saying text",
+        "description": "Returns a cat image with speech bubble text",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "path",
+            "required": true,
+            "description": "The text to display in the speech bubble",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Text size",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "description": "Text color (hexadecimal without #)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Apply image filter",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "blur",
+                "mono",
+                "sepia",
+                "negative",
+                "paint",
+                "pixel"
+              ]
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter by type",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "small",
+                "medium",
+                "square",
+                "original"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cat image with speech bubble",
+            "content": {
+              "image/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cat/gif": {
+      "get": {
+        "summary": "Get a random cat GIF",
+        "description": "Returns a random cat GIF",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "Filter by tag",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Apply filter to GIF",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "blur",
+                "mono",
+                "sepia",
+                "negative",
+                "paint",
+                "pixel"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Random cat GIF",
+            "content": {
+              "image/gif": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cat/gif/says/{text}": {
+      "get": {
+        "summary": "Get a cat GIF with text",
+        "description": "Returns a cat GIF with custom text",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "path",
+            "required": true,
+            "description": "The text to display on the GIF",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "description": "Text color (hexadecimal without #)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Text size",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Apply filter to GIF",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "blur",
+                "mono",
+                "sepia",
+                "negative",
+                "paint",
+                "pixel"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cat GIF with text",
+            "content": {
+              "image/gif": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cat/{id}": {
+      "get": {
+        "summary": "Get cat by ID",
+        "description": "Returns a specific cat image by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the cat image",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Apply image filter",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "blur",
+                "mono",
+                "sepia",
+                "negative",
+                "paint",
+                "pixel"
+              ]
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter by type",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "small",
+                "medium",
+                "square",
+                "original"
+              ]
+            }
+          },
+          {
+            "name": "json",
+            "in": "query",
+            "description": "Returns JSON response if set to true",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cat image by ID",
+            "content": {
+              "image/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Cat not found"
+          }
+        }
+      }
+    },
+    "/api/tags": {
+      "get": {
+        "summary": "Get available tags",
+        "description": "Returns a list of all available tags",
+        "responses": {
+          "200": {
+            "description": "List of tags",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cats": {
+      "get": {
+        "summary": "Get all cats",
+        "description": "Returns a list of all cats with pagination",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of records to skip",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of records to return",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Filter by tag(s), comma separated",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of cats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "tags": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
