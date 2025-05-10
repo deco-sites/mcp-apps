@@ -1,0 +1,1395 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Omie API",
+    "description": "API para integração com o sistema Omie",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://app.omie.com.br/api/v1"
+    }
+  ],
+  "paths": {
+    "/geral/clientes/": {
+      "post": {
+        "tags": [
+          "Clientes"
+        ],
+        "summary": "Operações para clientes e fornecedores",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/categorias/": {
+      "post": {
+        "tags": [
+          "Categorias"
+        ],
+        "summary": "Operações para categorias financeiras",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoriaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/departamentos/": {
+      "post": {
+        "tags": [
+          "Departamentos"
+        ],
+        "summary": "Operações para departamentos",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartamentoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/ncm/": {
+      "post": {
+        "tags": [
+          "NCM"
+        ],
+        "summary": "Operações para NCM de produtos",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NCMRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/contacorrente/": {
+      "post": {
+        "tags": [
+          "Conta Corrente"
+        ],
+        "summary": "Operações para contas correntes",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContaCorrenteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/familia/": {
+      "post": {
+        "tags": [
+          "Família"
+        ],
+        "summary": "Operações para famílias de produtos",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FamiliaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/caracteristicas/": {
+      "post": {
+        "tags": [
+          "Características"
+        ],
+        "summary": "Operações para características de produtos",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaracteristicasRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/financas/pesquisartitulos/": {
+      "post": {
+        "tags": [
+          "Financeiro"
+        ],
+        "summary": "Pesquisar títulos a pagar/receber",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PesquisarTitulosRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/financas/contapagar/": {
+      "post": {
+        "tags": [
+          "Financeiro"
+        ],
+        "summary": "Operações para contas a pagar",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContaPagarRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/financas/contareceber/": {
+      "post": {
+        "tags": [
+          "Financeiro"
+        ],
+        "summary": "Operações para contas a receber",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContaReceberRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/financas/mf/": {
+      "post": {
+        "tags": [
+          "Financeiro"
+        ],
+        "summary": "Operações para movimentação financeira",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovimentacaoFinanceiraRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/financas/contacorrentemovconciliar/": {
+      "post": {
+        "tags": [
+          "Financeiro"
+        ],
+        "summary": "Operações para conciliação de movimentos bancários",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConciliacaoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/financas/contacorrentemov/": {
+      "post": {
+        "tags": [
+          "Financeiro"
+        ],
+        "summary": "Operações para movimentos bancários",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovimentoBancarioRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/estoque/local/": {
+      "post": {
+        "tags": [
+          "Estoque"
+        ],
+        "summary": "Operações para locais de estoque",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalEstoqueRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/estoque/movimento/": {
+      "post": {
+        "tags": [
+          "Estoque"
+        ],
+        "summary": "Operações para movimentos de estoque",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovimentoEstoqueRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/pedido/": {
+      "post": {
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Operações para pedidos de venda",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PedidoVendaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/tabelaprecos/": {
+      "post": {
+        "tags": [
+          "Preços"
+        ],
+        "summary": "Operações para tabelas de preço",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TabelaPrecoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/formapagto/": {
+      "post": {
+        "tags": [
+          "Pagamento"
+        ],
+        "summary": "Operações para formas de pagamento",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormaPagamentoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/produto/": {
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "summary": "Operações para produtos",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProdutoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/projetos/": {
+      "post": {
+        "tags": [
+          "Projetos"
+        ],
+        "summary": "Operações para projetos",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjetoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/servicos/": {
+      "post": {
+        "tags": [
+          "Serviços"
+        ],
+        "summary": "Operações para serviços",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServicoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/servicosestoque/os/": {
+      "post": {
+        "tags": [
+          "Ordens de Serviço"
+        ],
+        "summary": "Operações para ordens de serviço",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdemServicoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/contador/": {
+      "post": {
+        "tags": [
+          "Contador"
+        ],
+        "summary": "Operações para contadores",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContadorRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/pedidocompra/": {
+      "post": {
+        "tags": [
+          "Compras"
+        ],
+        "summary": "Operações para pedidos de compra",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PedidoCompraRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/crm/clientes/": {
+      "post": {
+        "tags": [
+          "CRM"
+        ],
+        "summary": "Operações para clientes no CRM",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CRMClienteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/crm/oportunidades/": {
+      "post": {
+        "tags": [
+          "CRM"
+        ],
+        "summary": "Operações para oportunidades no CRM",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CRMOportunidadeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/crm/tarefas/": {
+      "post": {
+        "tags": [
+          "CRM"
+        ],
+        "summary": "Operações para tarefas no CRM",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CRMTarefaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/geral/cidades/": {
+      "post": {
+        "tags": [
+          "Cidades"
+        ],
+        "summary": "Operações para cidades",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CidadeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/distribuicao/pedresumo/": {
+      "post": {
+        "tags": [
+          "Pedidos de Venda"
+        ],
+        "summary": "Operações para resumo de pedidos",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PedidoResumoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/consulta/nfe/": {
+      "post": {
+        "tags": [
+          "Nota Fiscal"
+        ],
+        "summary": "Operações para consulta de NFe",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NFEConsultaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/nfconsultar/": {
+      "post": {
+        "tags": [
+          "Nota Fiscal"
+        ],
+        "summary": "Operações para consultar notas fiscais",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NFConsultarRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    },
+    "/produtos/nfeconsultar/": {
+      "post": {
+        "tags": [
+          "Nota Fiscal"
+        ],
+        "summary": "Operações para consultar notas fiscais eletrônicas",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NFEConsultarRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ClienteRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "CategoriaRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "DepartamentoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "NCMRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ContaCorrenteRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "FamiliaRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "CaracteristicasRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "PesquisarTitulosRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ContaPagarRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ContaReceberRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "MovimentacaoFinanceiraRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ConciliacaoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "MovimentoBancarioRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "LocalEstoqueRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "MovimentoEstoqueRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "PedidoVendaRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "TabelaPrecoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "FormaPagamentoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ProdutoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ProjetoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ServicoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "OrdemServicoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ContadorRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "PedidoCompraRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "CRMClienteRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "CRMOportunidadeRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "CRMTarefaRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "CidadeRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "PedidoResumoRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "NFEConsultaRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "NFConsultarRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "NFEConsultarRequest": {
+        "type": "object",
+        "properties": {
+          "call": {
+            "type": "string"
+          },
+          "app_key": {
+            "type": "string"
+          },
+          "app_secret": {
+            "type": "string"
+          },
+          "param": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}
