@@ -1,0 +1,171 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "NFe.io API - Consulta de CPF",
+    "description": "API para consulta de CPF na plataforma NFe.io",
+    "version": "1.0.0",
+    "contact": {
+      "email": "suporte@nfe.io"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.nfe.io",
+      "description": "Produção"
+    }
+  ],
+  "paths": {
+    "/v1/pessoa/{cpf}": {
+      "get": {
+        "summary": "Consulta de CPF",
+        "description": "Consulta os dados de uma pessoa física pelo CPF",
+        "operationId": "consultarCpf",
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "description": "CPF da pessoa a ser consultada (apenas números)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{11}$"
+            }
+          },
+          {
+            "name": "X-API-KEY",
+            "in": "header",
+            "description": "Chave de API",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dados do CPF consultado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PessoaFisica"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "CPF inválido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "CPF não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PessoaFisica": {
+        "type": "object",
+        "properties": {
+          "cpf": {
+            "type": "string",
+            "description": "CPF da pessoa física (apenas números)",
+            "example": "12345678901"
+          },
+          "nome": {
+            "type": "string",
+            "description": "Nome completo da pessoa física",
+            "example": "João da Silva"
+          },
+          "situacao_cadastral": {
+            "type": "string",
+            "enum": [
+              "regular",
+              "pendente",
+              "suspensa",
+              "cancelada",
+              "nula"
+            ],
+            "description": "Situação cadastral do CPF",
+            "example": "regular"
+          },
+          "data_consulta": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data e hora da consulta",
+            "example": "2021-01-01T12:00:00Z"
+          }
+        },
+        "required": [
+          "cpf",
+          "nome",
+          "situacao_cadastral",
+          "data_consulta"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Código de erro"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mensagem de erro"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "ApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKey": []
+    }
+  ]
+}
