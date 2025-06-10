@@ -1,0 +1,285 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SuperFrete API",
+    "description": "API para cotação de frete e integração com o SuperFrete",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.superfrete.com"
+    }
+  ],
+  "paths": {
+    "/api/v0/quote": {
+      "post": {
+        "summary": "Cotação de Frete",
+        "description": "Endpoint para cotação de frete",
+        "tags": [
+          "Cotação"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuoteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cotação realizada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na requisição",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "QuoteRequest": {
+        "type": "object",
+        "required": [
+          "origin",
+          "destination",
+          "cargo"
+        ],
+        "properties": {
+          "origin": {
+            "type": "object",
+            "required": [
+              "postalCode"
+            ],
+            "properties": {
+              "postalCode": {
+                "type": "string",
+                "description": "CEP de origem",
+                "example": "01310-100"
+              }
+            }
+          },
+          "destination": {
+            "type": "object",
+            "required": [
+              "postalCode"
+            ],
+            "properties": {
+              "postalCode": {
+                "type": "string",
+                "description": "CEP de destino",
+                "example": "04711-130"
+              }
+            }
+          },
+          "cargo": {
+            "type": "object",
+            "required": [
+              "totalPrice",
+              "packages"
+            ],
+            "properties": {
+              "totalPrice": {
+                "type": "number",
+                "description": "Valor total da mercadoria",
+                "example": 1000.5
+              },
+              "packages": {
+                "type": "array",
+                "description": "Lista de volumes",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "amount",
+                    "weight",
+                    "height",
+                    "width",
+                    "length"
+                  ],
+                  "properties": {
+                    "amount": {
+                      "type": "integer",
+                      "description": "Quantidade de volumes",
+                      "example": 2
+                    },
+                    "weight": {
+                      "type": "number",
+                      "description": "Peso (kg)",
+                      "example": 5.5
+                    },
+                    "height": {
+                      "type": "number",
+                      "description": "Altura (cm)",
+                      "example": 20
+                    },
+                    "width": {
+                      "type": "number",
+                      "description": "Largura (cm)",
+                      "example": 30
+                    },
+                    "length": {
+                      "type": "number",
+                      "description": "Comprimento (cm)",
+                      "example": 40
+                    },
+                    "category": {
+                      "type": "string",
+                      "description": "Categoria do produto",
+                      "example": "eletronicos"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "options": {
+            "type": "object",
+            "properties": {
+              "receipt": {
+                "type": "boolean",
+                "description": "Aviso de recebimento",
+                "example": true
+              },
+              "ownHand": {
+                "type": "boolean",
+                "description": "Mãos próprias",
+                "example": true
+              },
+              "declaredValue": {
+                "type": "boolean",
+                "description": "Valor declarado",
+                "example": true
+              }
+            }
+          },
+          "services": {
+            "type": "array",
+            "description": "Serviços específicos solicitados",
+            "items": {
+              "type": "string",
+              "example": "PAC"
+            }
+          }
+        }
+      },
+      "QuoteResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "carrier": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "CORREIOS"
+                    },
+                    "picture": {
+                      "type": "string",
+                      "example": "https://s3.amazonaws.com/public.prod.freterapido.uploads/transportadora/foto-perfil/correios.jpg"
+                    },
+                    "reference": {
+                      "type": "integer",
+                      "example": 52
+                    }
+                  }
+                },
+                "service": {
+                  "type": "string",
+                  "example": "PAC"
+                },
+                "deadline": {
+                  "type": "object",
+                  "properties": {
+                    "days": {
+                      "type": "integer",
+                      "example": 7
+                    },
+                    "estimated_date": {
+                      "type": "string",
+                      "example": "2023-10-10"
+                    }
+                  }
+                },
+                "price": {
+                  "type": "object",
+                  "properties": {
+                    "freight": {
+                      "type": "number",
+                      "example": 25.9
+                    },
+                    "additional": {
+                      "type": "number",
+                      "example": 0
+                    },
+                    "total": {
+                      "type": "number",
+                      "example": 25.9
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "Mensagem de erro"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    }
+  }
+}
